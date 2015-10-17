@@ -1,0 +1,53 @@
+<div ng-repeat="group in tabledata.groups">
+	<h4>
+		<span class="label label-default">New{{group.name}} <i
+			class="glyphicon glyphicon-remove" ng-click="unselectGroup(group._id)"></i></span>
+	</h4>
+	
+	<table class="table table-striped table-condensed">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Lider</th>
+				<th>Osoba</th>
+				<th>Zalogowanie</th>
+				<th>Wylogowanie</th>
+				<th>Czas zalogowania</th>
+				<th>Przerwa</th>
+				<th>Bezczynność</th>
+				<th>Aplikacje</th>
+				<th>Aplikacje prod.</th>
+				<th>Aplikacje nieprod.</th>
+				<th>Wydruki</th>
+				<th>Dane pakietowe</th>
+				<th>Status 1</th>
+				<th>Status 2</th>
+				<th>Stanowisko</th>
+				<th>Efektywność</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="row in group.data">
+				<td>{{$index}}</td>
+				<td>{{row.leader_name}}</td>
+				<td>{{row.worker_name}}</td>
+				<td>{{row.login_datetime | date: 'HH:mm'}}</td>
+				<td>{{row.logout_datetime | date: 'HH:mm'}}</td>
+				<td>{{row.total_logged_time | secondsToDateTime | date: 'HH:mm:ss'}}</td>
+				<td>{{row.total_break_time | secondsToDateTime | date: 'HH:mm:ss'}}</td>
+				<td>{{row.total_idle_time | secondsToDateTime | date: 'HH:mm:ss'}}</td>
+				<td>{{row.current_app.image_fs_name}} <i class="glyphicon glyphicon-zoom-in pull-right" mypopover="$compile()" templatePath="js/src/common/app_usage_pop_template.html"></i></td>
+				<td>{{row.total_pro_apps_time | secondsToDateTime | date: 'HH:mm:ss' }}</td>
+				<td>{{row.total_nonpro_apps_time| secondsToDateTime | date: 'HH:mm:ss'}}</td>
+				<td>{{row.print_qty}}</td>
+				<td>{{row.total_downloads_size | inkb}}</td>
+				<td>{{row.status1 | chkEmpty }}</td>
+				<td>{{row.status2 | chkEmpty }}</td>
+				<td>{{row.workstation}}</td>
+				<td>{{row.effectiveness}}</td>
+			</tr>
+
+		</tbody>
+	</table>
+</div>
+

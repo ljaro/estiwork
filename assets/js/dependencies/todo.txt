@@ -1,0 +1,1 @@
+nowa wersja dla checklist-model.js

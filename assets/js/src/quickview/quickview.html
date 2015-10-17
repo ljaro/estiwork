@@ -1,0 +1,31 @@
+
+<div class="row">
+	<div class="col-sm-5">
+	<!--
+		<div ng-controller="checklistController" class="" style="max-width: 200px; padding: 15px;">
+			<my-check-list data="groups" model="groupSelections"></my-check-list>
+			<button class="btn btn-default" ng-click="loadData(groupSelections)">Refresh</button>
+		</div>
+		 -->
+			<div multi-select input-model="flatGroups" output-model="groupSelections" button-label="name" item-label="name" selection-mode="multiple"
+				group-property="multiSelectGroup" tick-property="ticked" orientation="horizontal" on-item-click="getSelected(data)" helper-elements=""></div>
+
+
+	</div>
+	<div class="col-sm-7">
+			<button class="btn btn-primary" ng-click="loadData(groupSelections)">Refresh</button>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div ng-include="'js/src/quickview/table.html'"></div>
+	</div>
+</div>
+
+<!--
+SCROLLBAR
+https://github.com/twbs/bootstrap/issues/10711
+
+-->
+

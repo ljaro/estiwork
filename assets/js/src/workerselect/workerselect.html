@@ -1,0 +1,18 @@
+
+
+<div ng-controller="workerselectController" class="container-fixed" >
+	<ul ng-repeat="group in groups" class="nav nav-pills nav-stacked" id="accordion">
+		<li class="active"><a data-toggle="collapse"
+			data-parent="#accordion" data-target="#collapseOne{{group.id}}">{{group.name}}  <span class="badge">{{group.members.length}}</span></a>
+			
+			<div id="collapseOne{{group.id}}" class="collapse">
+			<ul ng-repeat="worker in group.members" class="nav nav-pills nav-stacked">
+				<li><a href="#">{{worker.name}}</a></li>			
+			</ul>
+			</div>
+		</li>
+	</ul>
+</div>
+
+
+<!-- <i class="glyphicon glyphicon-ok pull-right"></i> -->

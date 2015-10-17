@@ -1,0 +1,26 @@
+
+
+<div class="row">
+	<div class="col-sm-6">
+		<my-calendar></my-calendar>
+	</div>
+	
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+				<div class="panel-body">
+					
+					<div class="" style="max-width: 200px; padding: 15px;">
+						<my-check-list data="report_templates" model="reportSelected"></my-check-list>
+						<button class="btn btn-default" ng-click="loadData(reportSelected)">Refresh</button>
+					</div>
+				</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div ng-include="report_templates[reportSelected[0]].tpl_url"></div>
+	</div>
+</div>
+
