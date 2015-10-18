@@ -14,11 +14,12 @@
 //
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
-var cssFilesToInject = [  
+var cssFilesToInject = [
   'bower_components/**/dist/css/bootstrap.css',
   'bower_components/**/ui-grid.css',
   'js/dependencies/bootstrap-datepicker-release/css/datepicker3.css',
-  'js/dependencies/angular-multi-select/angular-multi-select.css',
+  //'js/dependencies/angular-multi-select/angular-multi-select.css',
+  'bower_components/**/isteven-multi-select.css',
   'styles/**/*.css'
 ];
 
@@ -48,7 +49,8 @@ var jsFilesToInject = [
 
   'js/dependencies/bootstrap-datepicker-release/js/bootstrap-datepicker.js',
   'js/dependencies/bootstrap-datepicker-release/js/locales/bootstrap-datepicker.pl.js',
-  'js/dependencies/angular-multi-select/angular-multi-select.js',
+  //'js/dependencies/angular-multi-select/angular-multi-select.js',
+  'bower_components/**/isteven-multi-select.js',
 
   'js/dependencies/*.js',
   // All of the rest of your client-side js files
@@ -75,13 +77,13 @@ var templateFilesToInject = [
 
 addPathPrefix = function(prefix, path){
 	if(path.substring(0,1) == '!')
-	{			
+	{
 		return '!' + prefix + path.substring(1,path.length);
 	}
 	else
 	{
 		return prefix + path;
-	}			
+	}
 }
 // Prefix relative paths to source files so they point to the proper locations
 // (i.e. where the other Grunt tasks spit them out, or in some cases, where

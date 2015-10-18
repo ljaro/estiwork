@@ -10,7 +10,8 @@
     "moment": "~2.10.3",
     "angular-bootstrap": "~0.13.0",
     "angular-ui-router": "~0.2.15",
-    "angular-route": "~1.4.2"
+    "angular-route": "~1.4.2",
+    "angular-multi-select": "~4.0.0"
   },
   "resolutions": {
     "angular": "1.4.4"
