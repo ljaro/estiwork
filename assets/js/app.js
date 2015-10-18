@@ -24,7 +24,7 @@ angular.module('myApp', [
                          'ui.grid.resizeColumns',
                          'ui.grid.edit',
                          'ui.grid.cellNav',
-                         'isteven-multi-select',
+                         'multi-select',
                         // 'ui.bootstrap.datetimepicker',
                          'ngResource'])
 
