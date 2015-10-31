@@ -58,6 +58,15 @@ th {
 }
 
 .table-light thead > tr > th {
-  border-bottom: none !important;
-  border-top: none !important;
+  border-bottom: none;
+  border-top: none;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.table-bottom-border {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
 }

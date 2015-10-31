@@ -44,8 +44,7 @@ angular.module('myApp.historyview',
 					tmp.setHours(23,59,59,999);
 					return tmp;
 				}
-
-
+        
 				var end_of_day = endOfDay($scope.data2);
 
 				var Groups = $resource('/historyview/group/:id/range/:from,:to');
