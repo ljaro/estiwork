@@ -15,8 +15,8 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'bower_components/**/dist/css/bootstrap.css',
-  'bower_components/**/ui-grid.css',
+  'bower_components/bootstrap/dist/css/bootstrap.css',
+  'bower_components/angular-ui-grid/ui-grid.css',
   'js/dependencies/bootstrap-datepicker-release/css/datepicker3.css',
   'bower_components/**/isteven-multi-select.css',
   'styles/**/*.css'
@@ -33,18 +33,23 @@ var jsFilesToInject = [
 
   // Dependencies like jQuery, or Angular are brought in here
 
-  'bower_components/**/jquery.min.js',
+  'bower_components/jquery/dist/jquery.min.js',
   'bower_components/moment/min/moment-with-locales.js',
-  'bower_components/**/dist/js/bootstrap.js',
-  'bower_components/**/angular.js',
-  'bower_components/**/angular-mocks.js',
-  'bower_components/**/angular-route.js',
-  'bower_components/**/angular-ui-router.js',
-  'bower_components/**/angular-resource.js',
+
+  //TODO: check if on master branch of moment
+  'bower_components/moment-duration-format/lib/moment-duration-format.js',
+
+  'bower_components/bootstrap/dist/js/bootstrap.js',
+  'bower_components/angular/angular.js',
+  'bower_components/angular-mocks/angular-mocks.js',
+  'bower_components/angular-route/angular-route.js',
+  'bower_components/angular-ui-router/release/angular-ui-router.js',
+  'bower_components/angular-resource/angular-resource.js',
 
   'bower_components/**/ui-bootstrap-tpls.js',
 
-  'bower_components/**/ui-grid.js',
+  'bower_components/angular-ui-grid/ui-grid.js',
+  'bower_components/angular-smart-table/dist/smart-table.js',
 
   'js/dependencies/bootstrap-datepicker-release/js/bootstrap-datepicker.js',
   'js/dependencies/bootstrap-datepicker-release/js/locales/bootstrap-datepicker.pl.js',

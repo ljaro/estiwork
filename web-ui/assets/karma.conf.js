@@ -1,3 +1,5 @@
+//TODO commonalize options with sails pipeline.js
+
 module.exports = function(config){
   config.set({
 
@@ -9,8 +11,10 @@ module.exports = function(config){
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/**/angular-resource.js',
       'bower_components/**/ui-grid.js',
-	  'bower_components/**/moment-with-locales.js',
-	  'js/src/**/*.js',
+	    'bower_components/**/moment-with-locales.js',
+      //TODO: check if on master branch of moment
+      'bower_components/moment-duration-format/lib/moment-duration-format.js',
+	    'js/src/**/*.js',
       'js/app.js'
     ],
 
@@ -19,7 +23,7 @@ module.exports = function(config){
     frameworks: ['jasmine'],
 
     browsers : ['Chrome'],
-	
+
 	reporters: ['spec'],
 
     plugins : [

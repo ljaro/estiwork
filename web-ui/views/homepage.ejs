@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" href="/bower_components/angular-ui-grid/ui-grid.css">
 <link rel="stylesheet" href="/js/dependencies/bootstrap-datepicker-release/css/datepicker3.css">
+<link rel="stylesheet" href="/bower_components/angular-multi-select/isteven-multi-select.css">
 <link rel="stylesheet" href="/styles/importer.css">
 <link rel="stylesheet" href="/styles/junk.css">
 <!--STYLES END-->
@@ -20,62 +21,67 @@
 
 
 
-	<div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <div ng-include="'js/src/navbar/navbar.html'"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div ng-include="'js/src/navbar/navbar.html'"></div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        <div ui-view></div>
       </div>
     </div>
+  </div>
 
-
-		<div class="row">
-			<div class="col-md-12">
-				<div class="page">
-					<div ui-view></div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12" style="margin-top: 25px;"></div>
-		</div>
+  <!--<div class="row">-->
+  <!--<div class="col-md-12" style="margin-top: 25px;"></div>-->
+  <!--</div>-->
 
 
 
-		<div class="row">
-			<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-12">
 
 
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="col-md-10">
-							<div class="form-group">
-								<from role="form"> <textarea class="form-control" rows="3"
-									placeholder="Nieustannie pracujemy nad ulepszeniem funkcjonalnści programu,
+      <div class="page page-white panel panel-default">
+        <div class="panel-body">
+          <div class="col-md-10">
+            <div class="form-group">
+              <from role="form"> <textarea class="form-control" rows="3"
+                                           placeholder="Nieustannie pracujemy nad ulepszeniem funkcjonalnści programu,
 dlatego jeśli masz jakieś sugestie lub spostrzeżenia, wyslij do nas wiadomość."></textarea>
-								</from>
-							</div>
-						</div>
+              </from>
+            </div>
+          </div>
 
-						<div class="col-md-2">
-							<button type="button" class="btn btn-primary">Wyslij sugestie</button>
-							<div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Sugestie wysyłane są
-								anonimowo.</div>
-						</div>
-					</div>
-				</div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-primary">Wyslij sugestie</button>
+            <div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Sugestie wysyłane są
+              anonimowo.</div>
+          </div>
+        </div>
+      </div>
 
-				<div class="well well-sm">
-					<h3>estiwork</h3>
-					<h6>Copyright © 2015</h6>
-				</div>
-			</div>
-		</div>
-	</div>
+      <div class="page page-white well well-sm">
+        <div style="margin-left: 30px;">
+          <h3>estiwork</h3>
+          <h6>Copyright © 2015</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+  <!-- zzs -->
 	<!--SCRIPTS-->
 	<script src="/js/dependencies/sails.io.js"></script>
 	<script src="/bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="/bower_components/moment/min/moment-with-locales.js"></script>
+	<script src="/bower_components/moment-duration-format/lib/moment-duration-format.js"></script>
 	<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 	<script src="/bower_components/angular/angular.js"></script>
 	<script src="/bower_components/angular-mocks/angular-mocks.js"></script>
@@ -84,8 +90,10 @@ dlatego jeśli masz jakieś sugestie lub spostrzeżenia, wyslij do nas wiadomoś
 	<script src="/bower_components/angular-resource/angular-resource.js"></script>
 	<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 	<script src="/bower_components/angular-ui-grid/ui-grid.js"></script>
+	<script src="/bower_components/angular-smart-table/dist/smart-table.js"></script>
 	<script src="/js/dependencies/bootstrap-datepicker-release/js/bootstrap-datepicker.js"></script>
 	<script src="/js/dependencies/bootstrap-datepicker-release/js/locales/bootstrap-datepicker.pl.js"></script>
+	<script src="/bower_components/angular-multi-select/isteven-multi-select.js"></script>
 	<script src="/js/dependencies/checklist-model.js"></script>
 	<script src="/js/app.js"></script>
 	<script src="/js/src/checklist/checklist.js"></script>

@@ -5,7 +5,9 @@
 angular.module('myApp.workerview',
   ['myApp.workerselect',
    'myApp.commonservices',
-   'myApp.checklistModule'
+   'myApp.checklistModule',
+    'smart-table',
+    'ngResource'
   ]
 ).controller('workerviewController',
   ['$scope', '$http', '$resource', 'checklistSelected','GroupsService','WorkersService' ,
@@ -14,6 +16,7 @@ angular.module('myApp.workerview',
     $scope.data1 = new Date();
     $scope.data2 = new Date();
     $scope.groupSelections = {};
+
 
     var flatFun = function(data) {
       // translate groups to flat json
@@ -57,6 +60,7 @@ angular.module('myApp.workerview',
             return newItm;
           });
 
+          $scope.gridOptions.data = $scope.table;
         }
         else
         {

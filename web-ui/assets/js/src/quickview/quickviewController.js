@@ -1,10 +1,10 @@
 /**
  *
  */
-angular.module('myApp.quickview')
+angular.module('myApp.quickview', ['ngResource', 'ui.grid'])
 
   .controller('quickViewController',
-  ['$scope', '$http', '$resource', 'checklistSelected', 'GroupsService', function ($scope, $http, $resource, checklistSelected, GroupsService){
+  ['$scope', '$http', '$resource', 'checklistSelected', 'GroupsService', 'uiGridConstants', function ($scope, $http, $resource, checklistSelected, GroupsService, uiGridConstants){
 
 
     $scope.flatGroups = [];
@@ -30,8 +30,6 @@ angular.module('myApp.quickview')
 
 
 
-
-
     $scope.loadData = function(array_of_groups) {
 
       console.log("load data:"+array_of_groups);
@@ -51,7 +49,7 @@ angular.module('myApp.quickview')
       }
 
       var Groups = $resource('/quickview/group/:id');
-      var user = Groups.query({id:true_array}, function(data) {
+      Groups.query({id:true_array}, function(data) {
         $scope.tabledata = {groups:[]};
         $scope.tabledata.groups = data;
       });

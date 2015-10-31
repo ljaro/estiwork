@@ -14,19 +14,27 @@
  */
 module.exports = function(grunt) {
 
+
 	grunt.config.set('watch', {
 		api: {
 
 			// API files to watch:
-			files: ['api/**/*', '!**/node_modules/**']
+			files: ['api/**/*', '!**/node_modules/**'],
+      options: {
+        interval: 1000
+      }
 		},
 		assets: {
 
 			// Assets to watch:
-			files: ['assets/**/*', 'tasks/pipeline.js', '!**/node_modules/**'],
+			files: ['assets/**/*', 'tasks/pipeline.js', '!**/node_modules/**', '!**/bower_components/**'],
 
 			// When assets are changed:
-			tasks: ['syncAssets' , 'linkAssets']
+			tasks: ['syncAssets' , 'linkAssets', 'beep'],
+
+      options: {
+        interval: 1000
+      }
 		}
 	});
 
@@ -34,5 +42,6 @@ module.exports = function(grunt) {
 		grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
 	});
 
+  grunt.loadNpmTasks('grunt-beep');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 };

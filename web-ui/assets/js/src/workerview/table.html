@@ -1,6 +1,6 @@
 <div >
 
-	<table class="table table-striped table-condensed table-mycolor">
+	<table st-table="table" class="table table-striped table-condensed table-mycolor">
 		<thead>
 			<tr>
 				<th>#</th>
@@ -24,7 +24,7 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="row in table">
-					<td>{{$index}}</td>
+					<td></td>
 					<td>{{row.date | dateAggregator: '0'}}</td>
 					<td>{{row.login_datetime| date: 'HH:mm' }}</td>
 					<td>{{row.logout_datetime | date: 'HH:mm' }}</td>
