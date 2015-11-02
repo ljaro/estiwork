@@ -13,7 +13,8 @@
     "angular-route": "~1.4.2",
     "angular-multi-select": "~4.0.0",
     "moment-duration-format": "~1.3.0",
-    "angular-smart-table": "~2.1.4"
+    "angular-smart-table": "~2.1.4",
+    "bootswatch": "~3.3.5+4"
   },
   "resolutions": {
     "angular": "1.4.4"

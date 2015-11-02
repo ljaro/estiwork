@@ -33,7 +33,7 @@ angular.module('myApp', [
   .config(function($stateProvider, $urlRouterProvider) {
     //
     // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise("/quickview");
+    //$urlRouterProvider.otherwise("/quickview");
     //
     console.log('Route start config');
     // Now set up the states

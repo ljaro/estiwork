@@ -7,36 +7,51 @@
 <div class="row" style="margin-bottom: 20px;">
 
   <div class="col-md-12">
-    <div class="page page-white">
-      <div class="row">
-        <div class="col-sm-6">
-          <my-calendar first="data1" second="data2"></my-calendar>
-        </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <!--<div class="page page-white">-->
+        <div class="row">
+          <div class="col-sm-6">
+            <my-calendar first="data1" second="data2"></my-calendar>
+          </div>
 
-        <div class="col-sm-2">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div ng-controller="checklistController" class="" style="max-width: 200px; padding: 15px;">
-                <my-check-list data="groups" model="groupSelections"></my-check-list>
-                <button class="btn btn-default" ng-click="loadData(groupSelections)">Refresh</button>
-              </div>
+          <div class="col-sm-2">
+            <!--<div class="panel panel-default">-->
+            <!--<div class="panel-body">-->
+            <div ng-controller="checklistController" class="" style="max-width: 200px; padding: 15px;">
+              <my-check-list data="groups" model="groupSelections"></my-check-list>
+              <button class="btn btn-default" ng-click="loadData(groupSelections)">Refresh</button>
+              <!--</div>-->
+              <!--</div>-->
             </div>
           </div>
-        </div>
 
-        <div class="col-sm-4 col-md-offset-4"></div>
+          <div class="col-sm-4 col-md-offset-4"></div>
+        </div>
       </div>
     </div>
+    <!--</div>-->
   </div>
 </div>
 
 <div class="row" style="margin-bottom: 20px;">
-	<div class="col-md-12">
+  <div class="col-md-12">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation"><a href="#all" aria-controls="home" role="tab" data-toggle="tab">Wszystkie</a></li>
+      <li role="presentation" class="active"><a href="#activity" aria-controls="profile" role="tab" data-toggle="tab">Aktywnosc</a></li>
+      <li role="presentation"><a href="#others" aria-controls="messages" role="tab" data-toggle="tab">Inne</a></li>
+    </ul>
     <div class="page page-white">
-    <div class="panel-heading"></div>
-		<div ng-include="'js/src/historyview/table.html'"></div>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane" id="all"><div ng-include="'js/src/historyview/all.html'"></div></div>
+        <div role="tabpanel" class="tab-pane active" id="activity"><div ng-include="'js/src/historyview/activities.html'"></div></div>
+        <div role="tabpanel" class="tab-pane" id="others"><div ng-include="'js/src/historyview/others.html'"></div></div>
+      </div>
     </div>
-	</div>
+  </div>
 
 
 

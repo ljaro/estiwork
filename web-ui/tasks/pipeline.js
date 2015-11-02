@@ -15,11 +15,13 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'bower_components/bootstrap/dist/css/bootstrap.css',
+  //'bower_components/bootstrap/dist/css/bootstrap.css',
+  //'bower_components/bootswatch/paper/bootstrap.css',
   'bower_components/angular-ui-grid/ui-grid.css',
   'js/dependencies/bootstrap-datepicker-release/css/datepicker3.css',
   'bower_components/**/isteven-multi-select.css',
-  'styles/**/*.css'
+  'styles/**/importer.css',
+  'styles/**/junk.css'
 ];
 
 

@@ -1,0 +1,107 @@
+.mybody {
+	background: #ffffff url(../images/background-wallpaper.png);
+}
+
+.show-grid {
+	margin-bottom: 15px;
+}
+
+.show-grid [class^="col-"] {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #eee;
+	border: 1px solid #ddd;
+	background-color: rgba(86, 61, 124, .15);
+	border: 1px solid rgba(86, 61, 124, .2);
+}
+
+.nav, .pagination, .carousel, .panel-title a {
+	cursor: pointer;
+}
+
+.container-fixed {
+	max-width: 165px;
+	padding: 0px;
+}
+
+.nice-pad {
+	padding: 2px 0px 0px 0px;
+	padding-left: 0px;
+}
+
+.page {
+	background: #fff;
+  padding-left: 0px;
+  padding-right: 0px;
+	border: 1px solid #ccc;
+	border-width: 0 1px 4px 1px;
+}
+
+.page.page-white {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+
+.icon-options {
+	background-image: url("images/glyphicons/png/glyphicons_136_cogwheel.png");
+	background-position: center center;
+	  height: 24px;
+  width: 24px;
+}
+
+th {
+  text-align: right;
+}
+
+.table thead > tr > th {
+  padding: 12px;
+}
+
+.table-light thead > tr > th {
+  border-bottom: none;
+  border-top: none;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.table tbody > tr > td {
+  height: 40px;
+}
+
+.table-bottom-border tbody > tr > td {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  vertical-align: bottom;
+  border-bottom: none;
+}
+
+.borderless tbody > tr > td {
+  border: none;
+}
+
+.cos1 {
+  padding: 12px 10px;
+}
+
+#box {
+  width:50%;
+  display:table;
+  white-space: pre-wrap; /* css-3 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+.nav-tabs-toplevel>li>a {
+  margin-top: 6px;
+  font-size: 14px;
+  margin-right: 3px;
+  background: #868686;
+  border-color: #cdcdcd;
+  color: #333;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+

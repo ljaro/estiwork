@@ -1,5 +1,5 @@
 .mybody {
-	background: #ffffff url(../images/background-wallpaper.png);
+	background: #ffffff url(../images/background-wallpaper2.png);
 }
 
 .show-grid {
@@ -24,25 +24,17 @@
 	padding: 0px;
 }
 
-.nice-pad {
-	padding: 2px 0px 0px 0px;
-	padding-left: 0px;
-}
-
 .page {
 	background: #fff;
-	padding: 10px;
   padding-left: 0px;
   padding-right: 0px;
 	border: 1px solid #ccc;
 	border-width: 0 1px 4px 1px;
-	border-top: 3px solid #222;
 }
 
 .page.page-white {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  border-top: 0;
 }
 
 
@@ -51,22 +43,4 @@
 	background-position: center center;
 	  height: 24px;
   width: 24px;
-}
-
-th {
-  text-align: right;
-}
-
-.table-light thead > tr > th {
-  border-bottom: none;
-  border-top: none;
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-.table-bottom-border {
-  padding-top: 0px;
-  padding-bottom: 0px;
-  vertical-align: bottom;
-  border-bottom: 2px solid #ddd;
 }
