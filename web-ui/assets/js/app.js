@@ -4,6 +4,7 @@
 
 angular.module('myApp', [
   'mypopover',
+  'myApp.utils',
   'myApp.test',
   'myApp.commonservices',
   'myApp.workerselect',

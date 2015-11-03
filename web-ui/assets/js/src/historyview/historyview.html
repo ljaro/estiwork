@@ -7,22 +7,37 @@
 <div class="row" style="margin-bottom: 20px;">
 
   <div class="col-md-12">
+
+    <ul class="nav nav-tabs" role="tablist" ng-show="naviTabShow">
+      <li role="presentation" style="margin-left: 15px;">
+        <div class="checkbox"><label><input type="checkbox" ng-model="varShowCalendar"> Duzy kalendarz</label></div>
+      </li>
+      <li role="presentation" style="margin-left: 15px;">
+        <div class="checkbox"><label><input type="checkbox" ng-model="varShowSmallCalendar"> Maly kalendarz</label></div>
+      </li>
+    </ul>
+
     <div class="panel panel-default">
+
+      <div class="pull-right halfhidden">
+        <span aria-hidden="true" ng-click="naviTabShow=!naviTabShow">+</span>
+      </div>
+
       <div class="panel-body">
-        <!--<div class="page page-white">-->
         <div class="row">
           <div class="col-sm-6">
-            <my-calendar first="data1" second="data2"></my-calendar>
+            <div ng-show="varShowCalendar">
+              <my-calendar first="data1" second="data2"></my-calendar>
+            </div>
+
+            <input type="text" name="daterange" value="01/01/2015 - 01/31/2015" />
           </div>
 
           <div class="col-sm-2">
-            <!--<div class="panel panel-default">-->
-            <!--<div class="panel-body">-->
+
             <div ng-controller="checklistController" class="" style="max-width: 200px; padding: 15px;">
               <my-check-list data="groups" model="groupSelections"></my-check-list>
               <button class="btn btn-default" ng-click="loadData(groupSelections)">Refresh</button>
-              <!--</div>-->
-              <!--</div>-->
             </div>
           </div>
 
@@ -30,7 +45,6 @@
         </div>
       </div>
     </div>
-    <!--</div>-->
   </div>
 </div>
 

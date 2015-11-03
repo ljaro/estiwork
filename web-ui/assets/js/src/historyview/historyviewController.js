@@ -6,7 +6,8 @@ angular.module('myApp.historyview',
   [
     'ngResource',
     'myApp.checklistModule',
-    'smart-table'
+    'smart-table',
+    'myApp.utils'
   ])
 
 .controller('historyviewController',
@@ -15,6 +16,7 @@ angular.module('myApp.historyview',
 			var now = new Date();
 			now.setHours(0,0,0,0);
 
+      $scope.varShowCalendar = true;
 			$scope.data1 = now;
 			$scope.data2 = now;
 			$scope.groupSelections = [];
@@ -44,7 +46,7 @@ angular.module('myApp.historyview',
 					tmp.setHours(23,59,59,999);
 					return tmp;
 				}
-        
+
 				var end_of_day = endOfDay($scope.data2);
 
 				var Groups = $resource('/historyview/group/:id/range/:from,:to');

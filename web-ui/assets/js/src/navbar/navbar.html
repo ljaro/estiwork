@@ -1,59 +1,42 @@
 
 
-<style>
-<!--
-
--->
-.navbar-font {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 13px;
-	font-stretch: normal;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: bold;
-}
-
-</style>
 
 <div class="navbar navbar-default navbar-static-top" role="navigation">
-	<div class="container">
+  <div class="container-fluid">
 
-		<ul class="nav navbar-nav">
-			<li ui-sref-active="active"><a ui-sref="quickview"><div class="navbar-font">PODGLĄD</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">W tej chwili</div></a></li>
-			<li ui-sref-active="active"><a ui-sref="history"><div class="navbar-font">HISTORIA</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Zobaczmy co było</div></a></li>
-			<li ui-sref-active="active"><a ui-sref="reports"><div class="navbar-font">RAPORT</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Zaprezentuj wyniki</div></a></li>
-			<li ui-sref-active="active"><a ui-sref="worker"><div class="navbar-font">PRACOWNICY</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Profile osobowe</div></a></li>
-			<li ui-sref-active="active"><a ui-sref="configuration"><div class="navbar-font">OPCJE</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Konfiguracja programu</div></a></li>
-		</ul>
-
-
-
-		<ul class="nav navbar-nav navbar-right">
-
-
-			<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-				<img src="http://www.gravatar.com/avatar/3293f2350e18db0068c30b527edda33b?d=identicon&f=y&s=30"  border: 1px solid #ccc; border-radius: 2px; position: absolute; top: 12px; left: 15px">
-				<span style="margin-left:10px;">tomaszolczak@gmail.com</span>
-				<span class="caret"></span>
-			</a>
-				<ul class="dropdown-menu" role="menu">
-					<li><a href="#">Profile</a></li>
-					<li><a href="#">Log out</a></li>
-				</ul>
-			</li>
+    <ul class="nav navbar-nav">
+      <li ui-sref-active="active"><a ui-sref="quickview"><div class="navbar-font">PODGLĄD</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">W tej chwili</div></a></li>
+      <li ui-sref-active="active"><a ui-sref="history"><div class="navbar-font">HISTORIA</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Zobaczmy co było</div></a></li>
+      <li ui-sref-active="active"><a ui-sref="reports"><div class="navbar-font">RAPORT</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Zaprezentuj wyniki</div></a></li>
+      <li ui-sref-active="active"><a ui-sref="worker"><div class="navbar-font">PRACOWNICY</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Profile osobowe</div></a></li>
+      <li ui-sref-active="active"><a ui-sref="configuration"><div class="navbar-font">OPCJE</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Konfiguracja programu</div></a></li>
+    </ul>
 
 
 
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+          <img src="http://www.gravatar.com/avatar/3293f2350e18db0068c30b527edda33b?d=identicon&f=y&s=30"  border: 1px solid #ccc; border-radius: 2px; position: absolute; top: 12px; left: 15px">
+          <span style="margin-left:10px;">tomaszolczak@gmail.com</span>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Log out</a></li>
+        </ul>
+      </li>
 
-			<li><a ui-sref="quickview"><i class="glyphicon icon-options" aria-hidden="true"></i></a></li>
-		</ul>
-	</div>
-	<!-- /container -->
+      <li>
+        <a ui-sref="quickview"><i class="glyphicon icon-options" aria-hidden="true"></i></a>
+      </li>
+    </ul>
+  </div>
+  <!-- /container -->
 </div>
 
 
-<!-- 
+<!--
 
 <h2>
 					Natalis <small>program do zarządzania efektywnością</small>

@@ -19,6 +19,7 @@ var cssFilesToInject = [
   //'bower_components/bootswatch/paper/bootstrap.css',
   'bower_components/angular-ui-grid/ui-grid.css',
   'js/dependencies/bootstrap-datepicker-release/css/datepicker3.css',
+  'bower_components/bootstrap-daterangepicker/daterangepicker.css',
   'bower_components/**/isteven-multi-select.css',
   'styles/**/importer.css',
   'styles/**/junk.css'
@@ -55,6 +56,7 @@ var jsFilesToInject = [
 
   'js/dependencies/bootstrap-datepicker-release/js/bootstrap-datepicker.js',
   'js/dependencies/bootstrap-datepicker-release/js/locales/bootstrap-datepicker.pl.js',
+  'bower_components/bootstrap-daterangepicker/daterangepicker.js',
 
   'bower_components/**/isteven-multi-select.js',
 
