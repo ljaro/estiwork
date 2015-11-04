@@ -17,6 +17,7 @@ angular.module('myApp.historyview',
       $scope.varShowSmallCalendar = false;
       $scope.datePicker = {date: {startDate:moment(), endDate:moment()} };
 			$scope.groupSelections = [];
+      $scope.minViewMode = 0;
 
       $scope.datePicker.options = {
         "autoApply": false,
@@ -148,4 +149,18 @@ angular.module('myApp.historyview',
         $scope.datePicker.date.endDate = moment().endOf('day');
       }
 
+      //TODO: zrobic inline w szablonie
+      $scope.calendarModeDays = function(){
+        $scope.minViewMode = 0;
+      }
+
+      //TODO: zrobic inline w szablonie
+      $scope.calendarModeMonths = function(){
+        $scope.minViewMode = 1;
+      }
+
+      //TODO: zrobic inline w szablonie
+      $scope.calendarModeYears = function(){
+        $scope.minViewMode = 2;
+      }
 }]);
