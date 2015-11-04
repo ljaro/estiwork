@@ -5,8 +5,8 @@
 angular.module('myApp.calendarModule')
 .controller('calendarController', ['$scope', '$resource', 	function($scope, $resource){
 
-	$scope.first = new Date(2015,05,11);
-	$scope.second = new Date(2015,05,14);
+	$scope.first = moment();
+	$scope.second = moment();
 
 }]).directive('myCalendar', ['$document', function(scope, element, attr) {
 
@@ -14,8 +14,8 @@ angular.module('myApp.calendarModule')
 		restrict: 'E',
 		templateUrl: 'js/src/components/calendar/calendar.html',
 		scope: {
-			first: '=first',
-			second: '=second'
+			first: '=',
+			second: '='
 		},
 		link: function(scope, elem, attrs) {
 
@@ -62,31 +62,37 @@ angular.module('myApp.calendarModule')
 
 				scope.$watch('first', function(){
 					updateToScopeEnabled = false;
-					angular.element('#cal1').datepicker('setDate', beginOfDay(scope.first));
+
+          var moment = scope.first.startOf('day');
+          var d = moment.toDate();
+					angular.element('#cal1').datepicker('setDate', d);
 					//console.log(beginOfDay(scope.first));
 					updateToScopeEnabled = true;
-					});
+        });
+
 				scope.$watch('second', function(){
 					updateToScopeEnabled = false;
-					angular.element('#cal2').datepicker('setDate', beginOfDay(scope.second));
+          var moment = scope.second.startOf('day');
+          var d = moment.toDate();
+					angular.element('#cal2').datepicker('setDate', d);
 					console.log(scope.second);
 					updateToScopeEnabled = true;
-					});
+        });
 
-				//TODO: pomyslec czy now()-jeden dzien dziala zawsze poprawnie np. now()==23:00  - jeden dzien czyli 24 h = na prawde poprzedni dzien
-				scope.yesterday = function(){
-					console.log('yesterday');
-					var result = moment().subtract(1, 'days').utc().toDate();
-					angular.element('#cal1').datepicker('setDate', beginOfDay(result));
-					angular.element('#cal2').datepicker('setDate', beginOfDay(result));
-				}
-
-				scope.last7days = function(){
-					console.log('yesterday');
-					var result = moment().firstDatOfWeek.utc().toDate();
-					angular.element('#cal1').datepicker('setDate', beginOfDay(result));
-					angular.element('#cal2').datepicker('setDate', beginOfDay(result));
-				}
+				//TODO: pomyslec czy now()-jeden dzien dziala zawsze poprawnie np. now()==23:00  - jeden dzien czyli 24 h = na prawde poprzedni dzien(do wykomentowanego kodu ale sprawdzic czy dotyczy nadal)
+				//scope.yesterday = function(){
+				//	console.log('yesterday');
+				//	var result = moment().subtract(1, 'days').utc().toDate();
+				//	angular.element('#cal1').datepicker('setDate', beginOfDay(result));
+				//	angular.element('#cal2').datepicker('setDate', beginOfDay(result));
+				//}
+                //
+				//scope.last7days = function(){
+				//	console.log('yesterday');
+				//	var result = moment().firstDatOfWeek.utc().toDate();
+				//	angular.element('#cal1').datepicker('setDate', beginOfDay(result));
+				//	angular.element('#cal2').datepicker('setDate', beginOfDay(result));
+				//}
 
 			}
 		}

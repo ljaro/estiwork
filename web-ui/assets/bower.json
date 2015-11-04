@@ -15,7 +15,8 @@
     "moment-duration-format": "~1.3.0",
     "angular-smart-table": "~2.1.4",
     "bootswatch": "~3.3.5+4",
-    "bootstrap-daterangepicker": "~2.1.13"
+    "bootstrap-daterangepicker": "~2.1.13",
+    "angular-daterangepicker": "~0.2.0"
   },
   "resolutions": {
     "angular": "1.4.4"

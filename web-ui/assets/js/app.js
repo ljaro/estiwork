@@ -25,6 +25,7 @@ angular.module('myApp', [
   'ui.grid.resizeColumns',
   'ui.grid.edit',
   'ui.grid.cellNav',
+  'daterangepicker',
   'isteven-multi-select',
   'smart-table',
   // 'ui.bootstrap.datetimepicker',

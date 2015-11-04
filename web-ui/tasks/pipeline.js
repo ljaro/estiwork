@@ -57,6 +57,7 @@ var jsFilesToInject = [
   'js/dependencies/bootstrap-datepicker-release/js/bootstrap-datepicker.js',
   'js/dependencies/bootstrap-datepicker-release/js/locales/bootstrap-datepicker.pl.js',
   'bower_components/bootstrap-daterangepicker/daterangepicker.js',
+  'bower_components/angular-daterangepicker/js/angular-daterangepicker.js',
 
   'bower_components/**/isteven-multi-select.js',
 
