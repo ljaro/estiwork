@@ -58,54 +58,46 @@ angular.module('myApp.calendarModule')
           });
         }
 
-        var domElem = elem.find('.input-daterange').datepicker({});
-
-        //var domElem = angular.element('.input-daterange').datepicker({
+        //var domElem = elem.find('.input-daterange').datepicker({
         //  language : 'pl'
         //});
-
+        //
         //bindChangeDate(domElem);
 
 
-        //scope.$watch('first', function(){
-        //  updateToScopeEnabled = false;
-        //
-        //  console.log('watch first');
-        //
-        //  var moment = scope.first.startOf('day');
-        //  var d = moment.toDate();
-        //  angular.element('#cal1').datepicker('setDate', d);
-        //
-        //  updateToScopeEnabled = true;
-        //});
-        //
-        //scope.$watch('second', function(){
-        //  updateToScopeEnabled = false;
-        //  console.log('second');
-        //  var moment = scope.second.startOf('day');
-        //  var d = moment.toDate();
-        //  angular.element('#cal2').datepicker('setDate', d);
-        //
-        //  updateToScopeEnabled = true;
-        //});
+        scope.$watch('first', function(){
+          updateToScopeEnabled = false;
+
+          console.log('watch first');
+
+          var moment = scope.first.startOf('day');
+          var d = moment.toDate();
+          angular.element('#cal1').datepicker('setDate', d);
+
+          updateToScopeEnabled = true;
+        });
+
+        scope.$watch('second', function(){
+          updateToScopeEnabled = false;
+          console.log('second');
+          var moment = scope.second.startOf('day');
+          var d = moment.toDate();
+          angular.element('#cal2').datepicker('setDate', d);
+
+          updateToScopeEnabled = true;
+        });
 
         scope.$watch('minViewMode', function(){
           console.log('watch minViewMode');
 
           elem.find('.input-daterange').datepicker('remove');
-          //angular.element('.input-daterange').remove(domElem);
+
           elem.find('.input-daterange').datepicker({
               language : 'pl',
               minViewMode : scope.minViewMode
           });
-          //domElem.datepicker('remove');
-          //
-          //domElem = angular.element('.input-daterange').datepicker({
-          //  language : 'pl',
-          //  minViewMode : scope.minViewMode
-          //});
 
-          //bindChangeDate(domElem);
+          bindChangeDate(domElem);
 
         });
 

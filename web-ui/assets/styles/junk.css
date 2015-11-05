@@ -89,3 +89,7 @@
 .halfhidden > div:hover {
   opacity: 1;
 }
+
+.datepicker-inline {
+  width: auto;
+}
