@@ -16,7 +16,8 @@
     "angular-smart-table": "~2.1.4",
     "bootswatch": "~3.3.5+4",
     "bootstrap-daterangepicker": "~2.1.13",
-    "angular-daterangepicker": "~0.2.0"
+    "angular-daterangepicker": "~0.2.0",
+    "bootstrap-datepicker": "https://github.com/zer0m/bootstrap-datepicker.git#~1.5.0"
   },
   "resolutions": {
     "angular": "1.4.4"

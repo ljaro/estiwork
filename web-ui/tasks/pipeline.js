@@ -18,7 +18,8 @@ var cssFilesToInject = [
   //'bower_components/bootstrap/dist/css/bootstrap.css',
   //'bower_components/bootswatch/paper/bootstrap.css',
   'bower_components/angular-ui-grid/ui-grid.css',
-  'js/dependencies/bootstrap-datepicker-release/css/datepicker3.css',
+  //'js/dependencies/bootstrap-datepicker-release/css/datepicker3.css',
+  'bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
   'bower_components/bootstrap-daterangepicker/daterangepicker.css',
   'bower_components/**/isteven-multi-select.css',
   'styles/**/importer.css',
@@ -54,12 +55,13 @@ var jsFilesToInject = [
   'bower_components/angular-ui-grid/ui-grid.js',
   'bower_components/angular-smart-table/dist/smart-table.js',
 
-  'js/dependencies/bootstrap-datepicker-release/js/bootstrap-datepicker.js',
-  'js/dependencies/bootstrap-datepicker-release/js/locales/bootstrap-datepicker.pl.js',
+  'bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+  'bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.pl.js',
+
   'bower_components/bootstrap-daterangepicker/daterangepicker.js',
   'bower_components/angular-daterangepicker/js/angular-daterangepicker.js',
 
-  'bower_components/**/isteven-multi-select.js',
+  'bower_components/angular-multi-select/isteven-multi-select.js',
 
   'js/dependencies/*.js',
   // All of the rest of your client-side js files
