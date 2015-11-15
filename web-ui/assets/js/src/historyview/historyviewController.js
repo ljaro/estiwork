@@ -149,18 +149,30 @@ angular.module('myApp.historyview',
         $scope.datePicker.date.endDate = moment().endOf('day');
       }
 
+
       //TODO: zrobic inline w szablonie
       $scope.calendarModeDays = function(){
         $scope.minViewMode = 0;
+        $scope.interval = 'days';
+      }
+
+      //TODO: zrobic inline w szablonie
+      $scope.calendarModeWeeks = function(){
+        $scope.minViewMode = 0;
+        $scope.interval = 'weeks';
       }
 
       //TODO: zrobic inline w szablonie
       $scope.calendarModeMonths = function(){
         $scope.minViewMode = 1;
+        $scope.interval = 'months';
       }
 
       //TODO: zrobic inline w szablonie
       $scope.calendarModeYears = function(){
         $scope.minViewMode = 2;
+        $scope.interval = 'years';
       }
+
+
 }]);

@@ -6,5 +6,6 @@ angular.module('myApp.feedback', ['ngResource'])
   ['$scope', '$resource', function ($scope, $resource){
 
 
-  }
+  }]);
+
 

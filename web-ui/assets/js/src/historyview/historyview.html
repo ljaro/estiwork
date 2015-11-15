@@ -31,15 +31,14 @@
               <table class="table-condensed">
                 <tr>
                   <td>
-                    {{datePicker.date.startDate}}-{{datePicker.date.endDate}}
                     <my-calendar first="datePicker.date.startDate" second="datePicker.date.endDate" min-view-mode="minViewMode"></my-calendar>
                   </td>
 
                   <td>
                     <div class="btn-group-vertical nice-pad btn-block">
-                      <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeDays()">Dni</button>
-                      <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeMonths()">Miesiące</button>
-                      <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeYears()">Lata</button>
+                      <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeDays()" ng-class="{'active': interval == 'days'}">Dni</button>
+                      <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeMonths()" ng-class="{'active': interval == 'months'}">Miesiące</button>
+                      <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeYears()" ng-class="{'active': interval == 'years'}">Lata</button>
                     </div>
 
                     <div class="btn-group-vertical nice-pad btn-block">

@@ -5,8 +5,7 @@
 angular.module('myApp.calendarModule')
   .controller('calendarController', ['$scope', '$resource', 	function($scope, $resource){
 
-    $scope.first = moment();
-    $scope.second = moment();
+
     $scope.minViewMode = 1;
 
   }]).directive('myCalendar', ['$document', function(scope, element, attr) {
@@ -45,10 +44,13 @@ angular.module('myApp.calendarModule')
               scope.$evalAsync(function(){
 
                 if(e.target.id == 'cal1') {
-                  scope.first = beginOfDay(e.date);
+                  // cause calendar component store date in Date format...we want moment as output
+                  var momentDate = moment(e.date);
+                  scope.first = momentDate.startOf('day');
                 }
                 else if(e.target.id == 'cal2') {
-                  scope.second = beginOfDay(e.date);
+                  var momentDate = moment(e.date);
+                  scope.second = momentDate.startOf('day');
                 }
                 else {
                   console.log('myCalendar event clicn err')
@@ -68,23 +70,26 @@ angular.module('myApp.calendarModule')
         scope.$watch('first', function(){
           updateToScopeEnabled = false;
 
-          console.log('watch first');
-
-          var moment = scope.first.startOf('day');
-          var d = moment.toDate();
-          angular.element('#cal1').datepicker('setDate', d);
-
-          updateToScopeEnabled = true;
+          try{
+            var moment = scope.first.startOf('day');
+            var d = moment.toDate();
+            angular.element('#cal1').datepicker('setDate', d);
+          }finally{
+            updateToScopeEnabled = true;
+          }
         });
 
         scope.$watch('second', function(){
-          updateToScopeEnabled = false;
-          console.log('second');
-          var moment = scope.second.startOf('day');
-          var d = moment.toDate();
-          angular.element('#cal2').datepicker('setDate', d);
 
-          updateToScopeEnabled = true;
+          try {
+            updateToScopeEnabled = false;
+            console.log('second');
+            var moment = scope.second.startOf('day');
+            var d = moment.toDate();
+            angular.element('#cal2').datepicker('setDate', d);
+          }finally {
+            updateToScopeEnabled = true;
+          }
         });
 
         scope.$watch('minViewMode', function(){
@@ -92,7 +97,7 @@ angular.module('myApp.calendarModule')
 
           elem.find('.input-daterange').datepicker('remove');
 
-          elem.find('.input-daterange').datepicker({
+          var domElem = elem.find('.input-daterange').datepicker({
               language : 'pl',
               minViewMode : scope.minViewMode
           });

@@ -1,78 +1,100 @@
 <div class="row" style="margin-bottom: 20px;">
   <div class="col-sm-12">
-    <div class="page page-white">
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="">
-            <my-calendar first="data1" second="data2"></my-calendar>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <table class="table-condensed">
+              <tr>
+                <td>
+                  <my-calendar first="datePicker.date.startDate" second="datePicker.date.endDate" min-view-mode="minViewMode"></my-calendar>
+                </td>
+
+                <td>
+                  <div class="btn-group-vertical nice-pad btn-block">
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeDays()"  ng-class="{'active': interval == 'days'}">Dni</button>
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeWeeks()" ng-class="{'active': interval == 'weeks'}">Tygodnie</button>
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeMonths()" ng-class="{'active': interval == 'months'}">Miesiące</button>
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeYears()" ng-class="{'active': interval == 'years'}">Lata</button>
+                  </div>
+
+                  <div class="btn-group-vertical nice-pad btn-block">
+                    <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetToday()">Dziś</button>
+                    <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetYesterday()">Wczoraj</button>
+                    <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetLast7days()">Ostatnie 7 dni</button>
+                    <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetLast30days()">Ostatnie 30 dni</button>
+                  </div>
+                </td>
+              </tr>
+            </table>
           </div>
-        </div>
 
 
-        <div class="col-sm-5">
-          <div class="panel panel-default">
-            <div class="panel-body">
+          <div class="col-sm-5">
+            <div class="panel panel-default">
+              <div class="panel-body">
 
-              <div class="row">
+                <div class="row">
 
 
-                <div class="col-sm-4">
-                  <img src="js/src/workerview/pobrane.svg" alt="..." class="img-thumbnail">
+                  <div class="col-sm-4">
+                    <img src="js/src/workerview/pobrane.svg" alt="..." class="img-thumbnail">
+                    <div isteven-multi-select input-model="flatGroups" output-model="groupSelections" button-label="name"
+                         item-label="name" selection-mode="single" group-property="multiSelectGroup" tick-property="ticked"
+                         orientation="horizontal">
+                    </div>
+                  </div>
+                  <div class="col-sm-8">
+                    <table class="table table-condensed">
+                      <tbody style="font-size: 11px;">
+                      <tr>
+                        <td class="col-sm-4"><label class="control-label">Imię</label></td>
+                        <td>{{worker_info.first_name}}</td>
+                      </tr>
+
+                      <tr>
+                        <td class="col-sm-4"><label class="control-label">Nazwisko</label></td>
+                        <td>{{worker_info.second_name}}</td>
+                      </tr>
+
+                      <tr>
+                        <td class="col-sm-4"><label class="control-label">Lider</label></td>
+                        <td>{{worker_info.leader_name}}</td>
+                      </tr>
+
+                      <tr>
+                        <td class="col-sm-4"><label class="control-label">Stanowisko</label></td>
+                        <td>{{worker_info.position_name}}</td>
+                      </tr>
+
+                      <tr>
+                        <td class="col-sm-4"><label class="control-label">Numer kontaktowy</label></td>
+                        <td>{{worker_info.phone}}</td>
+                      </tr>
+
+                      </tbody>
+
+                    </table>
+                  </div>
+
                 </div>
-                <div class="col-sm-8">
-                  <table class="table table-condensed">
-                    <tbody style="font-size: 11px;">
-                    <tr>
-                      <td class="col-sm-4"><label class="control-label">Imię</label></td>
-                      <td>{{worker_info.first_name}}</td>
-                    </tr>
 
-                    <tr>
-                      <td class="col-sm-4"><label class="control-label">Nazwisko</label></td>
-                      <td>{{worker_info.second_name}}</td>
-                    </tr>
-
-                    <tr>
-                      <td class="col-sm-4"><label class="control-label">Lider</label></td>
-                      <td>{{worker_info.leader_name}}</td>
-                    </tr>
-
-                    <tr>
-                      <td class="col-sm-4"><label class="control-label">Stanowisko</label></td>
-                      <td>{{worker_info.position_name}}</td>
-                    </tr>
-
-                    <tr>
-                      <td class="col-sm-4"><label class="control-label">Numer kontaktowy</label></td>
-                      <td>{{worker_info.phone}}</td>
-                    </tr>
-
-                    </tbody>
-
-                  </table>
-                </div>
-
-              </div>
-
-              <div class="row">
-                <div class="col-sm-4 ">
-                  <div isteven-multi-select input-model="flatGroups" output-model="groupSelections" button-label="name"
-                       item-label="name" selection-mode="single" group-property="multiSelectGroup" tick-property="ticked"
-                       orientation="horizontal">
+                <div class="row">
+                  <div class="col-sm-4 ">
 
                   </div>
-                </div>
-                <div class="col-sm-8">
-                  <button class="btn btn-default" ng-click="loadData(groupSelections[0].id, 0, data1, data2)">Refresh
-                  </button>
+                  <div class="col-sm-8">
+                    <button class="btn btn-default" ng-click="loadData(groupSelections[0].id, interval, datePicker.date.startDate, datePicker.date.endDate)">Refresh
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+
+          <div class="col-sm-1"></div>
         </div>
-
-
-        <div class="col-sm-1"></div>
       </div>
     </div>
   </div>

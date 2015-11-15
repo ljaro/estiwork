@@ -25,7 +25,7 @@
 		<tbody>
 			<tr ng-repeat="row in table">
 					<td></td>
-					<td>{{row.date | dateAggregator: '0'}}</td>
+					<td>{{row.date | dateAggregator2: interval}}</td>
 					<td>{{row.login_datetime| date: 'HH:mm' }}</td>
 					<td>{{row.logout_datetime | date: 'HH:mm' }}</td>
 					<td>{{row.total_logged_time | secondsToDateTime | date: 'HH:mm:ss'}}</td>
