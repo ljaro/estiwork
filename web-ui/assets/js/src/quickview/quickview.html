@@ -11,13 +11,15 @@
                 <button class="btn btn-default" ng-click="loadData(groupSelections)">Refresh</button>
               </div>
                -->
+            <span>
             <div isteven-multi-select input-model="flatGroups" output-model="groupSelections" button-label="name" item-label="name" selection-mode="multiple"
                  group-property="multiSelectGroup" tick-property="ticked" orientation="horizontal" on-item-click="getSelected(data)" helper-elements=""></div>
-
+            <button class="btn btn-primary" ng-click="loadData(groupSelections)">Refresh</button>
+            </span>
 
           </div>
           <div class="col-sm-7">
-            <button class="btn btn-primary" ng-click="loadData(groupSelections)">Refresh</button>
+
           </div>
         </div>
       </div>
