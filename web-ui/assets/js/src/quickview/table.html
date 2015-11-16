@@ -1,8 +1,8 @@
 <div ng-repeat="group in tabledata.groups">
-	<h4>
+	<h5>
 		<span class="label label-default">New{{group.name}} <i
 			class="glyphicon glyphicon-remove" ng-click="unselectGroup(group._id)"></i></span>
-	</h4>
+	</h5>
 
 	<table st-table="group.data" class="table table-striped table-condensed">
 		<thead>
@@ -34,7 +34,7 @@
 				<td>{{row.total_logged_time | secondsToDateTime | date: 'HH:mm:ss'}}</td>
 				<td>{{row.total_break_time | secondsToDateTime | date: 'HH:mm:ss'}}</td>
 				<td>{{row.total_idle_time | secondsToDateTime | date: 'HH:mm:ss'}}</td>
-				<td>{{row.current_app.image_fs_name}} <i class="glyphicon glyphicon-zoom-in pull-right" mypopover="$compile()" templatePath="js/src/common/app_usage_pop_template.html"></i></td>
+				<td style="white-space: nowrap; text-align: right"><a href="#" uib-tooltip-template="'js/src/common/app_usage_pop_template.html'" tooltip-placement="right">{{row.current_app.image_fs_name}}</a></td>
 				<td>{{row.total_pro_apps_time | secondsToDateTime | date: 'HH:mm:ss' }}</td>
 				<td>{{row.total_nonpro_apps_time| secondsToDateTime | date: 'HH:mm:ss'}}</td>
 				<td>{{row.print_qty}}</td>
@@ -48,4 +48,6 @@
 		</tbody>
 	</table>
 </div>
-
+<script type="text/ng-template" id="myTooltipTemplate.html">
+  <span>Special Tooltip with <strong>markup</strong> and {{ dynamicTooltipText }}</span>
+</script>

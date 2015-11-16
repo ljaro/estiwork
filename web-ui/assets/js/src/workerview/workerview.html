@@ -31,30 +31,20 @@
 
 
           <div class="col-sm-5">
-            <div class="panel panel-default">
-              <div class="panel-body">
+
 
                 <div class="row">
 
 
                   <div class="col-sm-4">
                     <img src="js/src/workerview/pobrane.svg" alt="..." class="img-thumbnail">
-                    <div isteven-multi-select input-model="flatGroups" output-model="groupSelections" button-label="name"
-                         item-label="name" selection-mode="single" group-property="multiSelectGroup" tick-property="ticked"
-                         orientation="horizontal">
-                    </div>
                   </div>
                   <div class="col-sm-8">
                     <table class="table table-condensed">
                       <tbody style="font-size: 11px;">
                       <tr>
-                        <td class="col-sm-4"><label class="control-label">Imię</label></td>
-                        <td>{{worker_info.first_name}}</td>
-                      </tr>
-
-                      <tr>
-                        <td class="col-sm-4"><label class="control-label">Nazwisko</label></td>
-                        <td>{{worker_info.second_name}}</td>
+                        <td class="col-sm-4"><label class="control-label">Imię i Nazwisko</label></td>
+                        <td>{{worker_info.first_name}} {{worker_info.second_name}}</td>
                       </tr>
 
                       <tr>
@@ -68,7 +58,7 @@
                       </tr>
 
                       <tr>
-                        <td class="col-sm-4"><label class="control-label">Numer kontaktowy</label></td>
+                        <td class="col-sm-4"><label class="control-label">Numer tel.</label></td>
                         <td>{{worker_info.phone}}</td>
                       </tr>
 
@@ -81,15 +71,16 @@
 
                 <div class="row">
                   <div class="col-sm-4 ">
-
+                    <div isteven-multi-select input-model="flatGroups" output-model="groupSelections" button-label="name"
+                         item-label="name" selection-mode="single" group-property="multiSelectGroup" tick-property="ticked"
+                         orientation="horizontal" on-close="loadData(groupSelections[0].id, interval, datePicker.date.startDate, datePicker.date.endDate)">
+                    </div>
                   </div>
                   <div class="col-sm-8">
-                    <button class="btn btn-default" ng-click="loadData(groupSelections[0].id, interval, datePicker.date.startDate, datePicker.date.endDate)">Refresh
-                    </button>
+
                   </div>
                 </div>
-              </div>
-            </div>
+
           </div>
 
 

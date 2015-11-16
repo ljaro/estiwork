@@ -1,34 +1,29 @@
 
-<style>
-.checklist.nav>li>a {
-	position: relative;
-	display: block;
-	padding: 4px 15px 4px 15px;
-}
-
-.checklist.radio, .checkbox {
-	position: relative;
-	display: block;
-	min-height: 15px;
-	margin-top: 4px;
-	margin-bottom: 5px;
-}
-</style>
 
 
-	<ul id="myNav" class="checklist nav nav-pills nav-stacked">
-		
-		<li ng-repeat="itm in data">
-			<a href="javascript:void(0);">
-				<label class="checkbox" >
-					<input type="checkbox" checklist-model="groupSelections" checklist-value="$index">{{itm.name}}
-				</label>
-			</a>
-		</li>		
-	</ul>
+<ul id="myNav" class="checklist nav nav-pills nav-stacked">
+  <li ng-repeat="itm in data">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"> {{itm.name}}
+      </label>
+    </div>
+  </li>
+</ul>
 
-	
-	
-	
-	<!-- <pre ng-bind="groupSelections | json"></pre>  --> 
+<!--<ul id="myNav" class="checklist nav nav-pills nav-stacked">-->
+<!-- -->
+<!--<li ng-repeat="itm in data">-->
+<!--<a href="javascript:void(0);">-->
+<!--<label class="checkbox" >-->
+<!--<input type="checkbox" checklist-model="groupSelections" checklist-value="$index">{{itm.name}}-->
+<!--</label>-->
+<!--</a>-->
+<!--</li>		-->
+<!--</ul>-->
+
+
+
+
+<!-- <pre ng-bind="groupSelections | json"></pre>  -->
 

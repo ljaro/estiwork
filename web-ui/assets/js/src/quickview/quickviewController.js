@@ -1,7 +1,7 @@
 /**
  *
  */
-angular.module('myApp.quickview', ['ngResource', 'ui.grid'])
+angular.module('myApp.quickview', ['ngResource', 'ui.grid','ui.bootstrap'])
 
   .controller('quickViewController',
   ['$scope', '$http', '$resource', 'checklistSelected', 'GroupsService', 'uiGridConstants', function ($scope, $http, $resource, checklistSelected, GroupsService, uiGridConstants){
