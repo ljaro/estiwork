@@ -8,7 +8,7 @@ angular.module('myApp.calendarModule')
 
     $scope.minViewMode = 1;
 
-  }]).directive('myCalendar', ['$document', function(scope, element, attr) {
+  }]).directive('myCalendar', ['$document', function(scope, element, attr, $compile) {
 
     return {
       restrict: 'E',
@@ -18,22 +18,22 @@ angular.module('myApp.calendarModule')
         second: '=',
         minViewMode: '='
       },
-      link: function(scope, elem, attrs) {
+      link: function(scope, elem, attrs, $compile) {
 
 
         var updateToScopeEnabled = true;
 
-        var beginOfDay = function(date){
-          var tmp = date;
-          tmp.setHours(0,0,0,0);
-          return tmp;
-        }
-
-        var endOfDay = function(date){
-          var tmp = date;
-          tmp.setHours(23,59,59,999);
-          return tmp;
-        }
+        //var beginOfDay = function(date){
+        //  var tmp = date;
+        //  tmp.setHours(0,0,0,0);
+        //  return tmp;
+        //}
+        //
+        //var endOfDay = function(date){
+        //  var tmp = date;
+        //  tmp.setHours(23,59,59,999);
+        //  return tmp;
+        //}
 
 
         var bindChangeDate = function(elem2){
@@ -59,13 +59,6 @@ angular.module('myApp.calendarModule')
             }
           });
         }
-
-        //var domElem = elem.find('.input-daterange').datepicker({
-        //  language : 'pl'
-        //});
-        //
-        //bindChangeDate(domElem);
-
 
         scope.$watch('first', function(){
           updateToScopeEnabled = false;
@@ -93,9 +86,10 @@ angular.module('myApp.calendarModule')
         });
 
         scope.$watch('minViewMode', function(){
-          console.log('watch minViewMode');
 
           elem.find('.input-daterange').datepicker('remove');
+          elem.find('.input-daterange').remove();
+          elem.append('<div class="input-daterange" style="line-height: 1.3;"><table> <tr> <td style="padding-right: 15px;"><div id="cal1" value="2012-04-05"></div></td> <td style="padding-right: 15px;"><div id="cal2" value="2012-04-07"></div></td> </tr> </table></div>');
 
           var domElem = elem.find('.input-daterange').datepicker({
               language : 'pl',
@@ -103,8 +97,9 @@ angular.module('myApp.calendarModule')
           });
 
           bindChangeDate(domElem);
-
         });
+
+
 
         //TODO: pomyslec czy now()-jeden dzien dziala zawsze poprawnie np. now()==23:00  - jeden dzien czyli 24 h = na prawde poprzedni dzien(do wykomentowanego kodu ale sprawdzic czy dotyczy nadal)
         //scope.yesterday = function(){
