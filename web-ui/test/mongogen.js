@@ -7,32 +7,28 @@ var module = {};
 load("../assets/node_modules/numeral/numeral.js");
 load("../assets/node_modules/chance/chance.js");
 load("../assets/node_modules/moment/moment.js");
+load("./gendata1.js");
 
-
+function deepCopy(oldObj) {
+  var newObj = oldObj;
+  if (oldObj && typeof oldObj === 'object') {
+    newObj = Object.prototype.toString.call(oldObj) === "[object Array]" ? [] : {};
+    for (var i in oldObj) {
+      newObj[i] = deepCopy(oldObj[i]);
+    }
+  }
+  return newObj;
+}
 
 print('Script Mongo test start');
-
-
-var sets = Array.apply(0, Array(3)).map(function(x,y){
-  var period = [
-    {duration: {h:2}, work_mode:'work' },
-    {duration: {h:2}, work_mode:'work' }
-  ];
-  return period;
-});
-
-
 
 
 var groups = Array.apply(0, Array(10)).map(function (x, y) {
 
   var template = {
-    "_id" : 'ObjectId(' +chance.guid()+')',
+    "_id" : ObjectId(),
     "name" : 'Group'+y,
   };
-
-  //printjson(template);
-
   return template;
 });
 
@@ -44,13 +40,12 @@ var leaders = Array.apply(0, Array(10)).map(function (x, y) {
   var login = name.split(" ")[1].toLowerCase();
 
   var template = {
-    "_id" : 'ObjectId(' +chance.guid()+')',
+    "_id" : ObjectId(),
     "login" : login,
     "fullname" : name,
     "leader" : null,
     "group" : groups[y]._id,
   };
-  //printjson(template);
   return template;
 });
 
@@ -60,14 +55,12 @@ var workers = Array.apply(0, Array(50)).map(function (x, y) {
   var leader = chance.pick(leaders);
   var group_id  = leader.group;
   var template = {
-    "_id" : 'ObjectId(' +chance.guid()+')',
+    "_id" : ObjectId(),
     "login" : chance.last(),
     "fullname" : chance.name(),
     "leader" : leader._id,
     "group" : group_id,
   };
-  //printjson(template);
-
   return template;
 });
 
@@ -93,16 +86,15 @@ sets.map(function (xxx, yyy){
     print('    period '+yy);
 
     var worker = chance.pick(workers);
+    var worker_id = worker._id.str;
     var leader_name =  all_workers.filter(function(x){return x._id === worker.leader})[0].fullname;
 
     var template =  {
-      "_id" : 'ObjectId(' +chance.guid()+')',
-      "worker_id" : worker._id,
+      "_id" : ObjectId(),
+      "worker_id" : ObjectId(worker_id),
       "duration" : 3600,
       "app_category" : "productive",
-
       "leader_name" : leader_name,
-
       "print_qty" : 3,
       "total_downloads_size" : 2145,
       "workstation" : chance.country({ full: true }).toUpperCase(),
@@ -119,18 +111,18 @@ sets.map(function (xxx, yyy){
       "user" : {
         "presence" : "active",
         "work_mode" : "work",
-        "user_sid" : 'ObjectId(' +chance.guid()+')', // probably windows user sid
+        "user_sid" : chance.guid(), // probably windows user sid
         "user_login" : worker.login
       },
     };
-
-    var tmp = template;//JSON.parse(JSON.stringify(template));
 
     var event_n = moment.duration(xx.duration).asSeconds();
 
     Array.apply(0, Array(event_n)).map(function (x, y) {
 
-      tmp._id = 'ObjectId(' +chance.guid()+')';
+      var tmp = deepCopy(template);//TODO deepCopyy fuckup above ObjectId
+      tmp._id = ObjectId();
+      tmp.worker_id = ObjectId(worker_id);
       var probe_time = probe_time_start.clone();
       probe_time.add(y, 'seconds');
       tmp.probe_time = probe_time.local().toISOString();
@@ -167,7 +159,17 @@ for(var x in dblist.databases){
 
   if(res !== null){
     db_count_max = Math.max(db_count_max, res[2]);
+    if(res[2] > 5){
+      var db1 = conn.getDB(dblist.databases[x].name);
+      if(db1.dropDatabase()){
+        print('Old db dropped');
+      }else{
+        print('Error dropping old db');
+      }
+    }
   }
+
+
 }
 
 print('copying '+dbname+' to '+'testdb'+(Number(db_count_max)+1));
