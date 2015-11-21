@@ -7,6 +7,7 @@ var module = {};
 load("../assets/node_modules/numeral/numeral.js");
 load("../assets/node_modules/chance/chance.js");
 load("../assets/node_modules/moment/moment.js");
+load("../assets/node_modules/moment/locale/pl.js");
 load("./gendata1.js");
 
 function deepCopy(oldObj) {
@@ -75,68 +76,78 @@ var date = moment();
 
 var events = [];
 
-var probe_time_start = moment().startOf('day');
+print('Moment locale '+moment.locale())
 
-sets.map(function (xxx, yyy){
+persons.map(function (person, person_idx){
 
-  print('Generate events for person '+yyy);
+  print('Generate events for person '+person_idx);
+
+  var worker = chance.pick(workers);
+  var worker_id = worker._id.str;
+  var leader_name =  all_workers.filter(function(x){return x._id === worker.leader})[0].fullname;
 
 
-  xxx.map(function (xx, yy) {
-    print('    period '+yy);
+  var template =  {
+    "_id" : ObjectId(),
+    "worker_id" : ObjectId(worker_id),
+    "duration" : 3600,
+    "app_category" : "productive",
+    "leader_name" : leader_name,
+    "print_qty" : 3,
+    "total_downloads_size" : 2145,
+    "workstation" : chance.word({ syllabes: 3 }).toUpperCase(),
+    "effectiveness" : 100,
+    "probe_time" : '------',
 
-    var worker = chance.pick(workers);
-    var worker_id = worker._id.str;
-    var leader_name =  all_workers.filter(function(x){return x._id === worker.leader})[0].fullname;
+    "sample" : {
+      "image_fs_name" : "app2.exe",
+      "resource_image_name" : "",
+      "window_caption" : "",
+      "image_full_path" : ""
+    },
 
-    var template =  {
-      "_id" : ObjectId(),
-      "worker_id" : ObjectId(worker_id),
-      "duration" : 3600,
-      "app_category" : "productive",
-      "leader_name" : leader_name,
-      "print_qty" : 3,
-      "total_downloads_size" : 2145,
-      "workstation" : chance.country({ full: true }).toUpperCase(),
-      "effectiveness" : 100,
-      "probe_time" : '------',
+    "user" : {
+      "presence" : "active",
+      "work_mode" : "work",
+      "user_sid" : chance.guid(), // probably windows user sid
+      "user_login" : worker.login
+    },
+  };
 
-      "sample" : {
-        "image_fs_name" : "app2.exe",
-        "resource_image_name" : "",
-        "window_caption" : "",
-        "image_full_path" : ""
-      },
+  person.map(function (day, dayidx) {
 
-      "user" : {
-        "presence" : "active",
-        "work_mode" : "work",
-        "user_sid" : chance.guid(), // probably windows user sid
-        "user_login" : worker.login
-      },
-    };
+    print('    day '+moment(day.day).format('YYYY-MM-DD'));
 
-    var event_n = moment.duration(xx.duration).asSeconds();
+    day.schedule.map(function (schedule, scheduleidx) {
 
-    Array.apply(0, Array(event_n)).map(function (x, y) {
+      print('        schedule '+scheduleidx);
 
-      var tmp = deepCopy(template);//TODO deepCopyy fuckup above ObjectId
-      tmp._id = ObjectId();
-      tmp.worker_id = ObjectId(worker_id);
-      var probe_time = probe_time_start.clone();
-      probe_time.add(y, 'seconds');
-      tmp.probe_time = probe_time.local().toISOString();
-      tmp.duration = 1;
 
-      tmp.user.work_mode = xx.work_mode;
-      tmp.sample.image_fs_name = chance.pick(['gg','chrome','iexplorer','gra5','mediaplayer','app1'])+'.exe';
+      var event_n = moment.duration(schedule.duration).asSeconds();
+      var event_idx = 0;
 
-      events.push(tmp);
+      Array.apply(0, Array(event_n)).map(function (x, y) {
+
+        var tmp = deepCopy(template);
+        tmp._id = ObjectId();//TODO deepCopyy fuckup above ObjectId
+        tmp.worker_id = ObjectId(worker_id);
+
+        var probe_time = moment(day.day);
+        probe_time.add(event_idx++, 'seconds');
+        tmp.probe_time = probe_time.local().toISOString();
+        tmp.duration = 1;
+
+        tmp.user.work_mode = schedule.work_mode;
+        tmp.sample.image_fs_name = chance.pick(['gg','chrome','iexplorer','gra5','mediaplayer','app1'])+'.exe';
+
+        events.push(tmp);
+      });
+
+      print('            event 0..'+event_n);
+
     });
-
-    print('        event 0..'+event_n);
-
   });
+
 
 });
 
@@ -192,13 +203,22 @@ if(cleardb){
 
 }
 
-print('>>>> Populating database');
+function populate() {
+  print('>>>> Populating database');
 
-db.groups.insert(groups);
-db.workers.insert(all_workers);
+  db.groups.insert(groups);
+  db.workers.insert(all_workers);
 
-print('Events to push '+events.length);
+  print('Events to push '+events.length);
+  var inserted = db.events.insert(events).nInserted;
+  print('Result inserted '+inserted);
 
-print('Result inserted '+db.events.insert(events).nInserted);
+  print('Events in collection '+db.events.count());
 
-print('Events in collection '+db.events.count());
+  if(events.length !== inserted && inserted !== db.events.count()){
+    print('Error inserting events');
+  }
+}
+
+
+populate();
