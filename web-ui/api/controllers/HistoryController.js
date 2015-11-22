@@ -39,8 +39,6 @@ module.exports = {
           return new ObjectId(x);
         });
 
-
-
         Event.native(function(err, collection) {
           if (err) return gres.serverError(err);
 
@@ -126,6 +124,10 @@ module.exports = {
                     xx.leader_name = res.filter(function (x) {
                       return xx._id.worker_id.equals(x.id);
                     })[0].leader.fullname;
+
+                    xx.worker_name = res.filter(function (x) {
+                      return xx._id.worker_id.equals(x.id);
+                    })[0].fullname;
 
                   })
                 });
