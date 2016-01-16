@@ -22,6 +22,7 @@ angular.module('myApp.calendarModule')
 
 
         var updateToScopeEnabled = true;
+        var viewMode = scope.minViewMode;
 
         //var beginOfDay = function(date){
         //  var tmp = date;
@@ -87,16 +88,24 @@ angular.module('myApp.calendarModule')
 
         scope.$watch('minViewMode', function(){
 
-          elem.find('.input-daterange').datepicker('remove');
-          elem.find('.input-daterange').remove();
-          elem.append('<div class="input-daterange" style="line-height: 1.3;"><table> <tr> <td style="padding-right: 15px;"><div id="cal1" value="2012-04-05"></div></td> <td style="padding-right: 15px;"><div id="cal2" value="2012-04-07"></div></td> </tr> </table></div>');
 
-          var domElem = elem.find('.input-daterange').datepicker({
+
+          if(viewMode !== scope.minViewMode){
+
+            console.log("watch minViewMode");
+
+            elem.find('.input-daterange').datepicker('remove');
+            elem.find('.input-daterange').remove();
+            elem.append('<div class="input-daterange" style="line-height: 1.3;"><table> <tr> <td style="padding-right: 15px;"><div id="cal1" value="2012-04-05"></div></td> <td style="padding-right: 15px;"><div id="cal2" value="2012-04-07"></div></td> </tr> </table></div>');
+
+            var domElem = elem.find('.input-daterange').datepicker({
               language : 'pl',
               minViewMode : scope.minViewMode
-          });
+            });
 
-          bindChangeDate(domElem);
+            bindChangeDate(domElem);
+
+          }
         });
 
 

@@ -22,7 +22,7 @@ angular.module('myApp.myFilters', []).
         time+=hours+'h ';
 
       if(minutes>0)
-        time += minutes+' min';
+        time += minutes+'min';
 
       if(minutes == 0 && hours == 0)
         time = "-";
@@ -60,7 +60,10 @@ angular.module('myApp.myFilters', []).
   filter('inkb', [function() {
     return function(kilobytes) {
 
-      return ""+kilobytes+" kB"
+      if(kilobytes !== null)
+      return ""+kilobytes+" kB";
+      else
+      return "";
     };
   }]).
   filter('sec2h', [function() {

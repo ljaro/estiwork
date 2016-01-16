@@ -84,9 +84,18 @@
     <div class="page page-white">
       <!-- Tab panes -->
       <div class="tab-content">
+
+
         <div role="tabpanel" class="tab-pane" id="all"><div ng-include="'js/src/historyview/all.html'"></div></div>
         <div role="tabpanel" class="tab-pane active" id="activity"><div ng-include="'js/src/historyview/activities.html'"></div></div>
         <div role="tabpanel" class="tab-pane" id="others"><div ng-include="'js/src/historyview/others.html'"></div></div>
+
+        <div style="height:150px" ng-show="loading">
+          <div class="spinner-loader" style="position: absolute;top: 50%;left: 50%;">
+            Loading…
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

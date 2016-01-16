@@ -7,7 +7,7 @@
 
 var persons = Array.apply(0, Array(10)).map(function(x, y){
 
-  var start_day = moment('2015-11-01');
+  var start_day = moment('2016-01-01');
 
   var days = Array.apply(0, Array(30)).map(function(xx, yy) {
     var day = start_day.clone().add(yy, 'days').startOf('day').toISOString();

@@ -13,6 +13,7 @@ angular.module('myApp.historyview',
 .controller('historyviewController',
 		['$scope', '$http', '$resource', 'checklistSelected', function ($scope, $http, $resource, checklistSelected){
 
+      $scope.loading = false;
       $scope.varShowCalendar = true;
       $scope.varShowSmallCalendar = false;
       $scope.datePicker = {date: {startDate:moment(), endDate:moment()} };
@@ -87,6 +88,7 @@ angular.module('myApp.historyview',
 
 			$scope.loadData = function(array_of_groups) {
 
+        $scope.loading = true;
 				var true_array = array_of_groups;
 
 
@@ -116,13 +118,14 @@ angular.module('myApp.historyview',
 				var Groups = $resource('/historyview/group/:id/range/:from,:to');
 				Groups.query({id:true_array, from:beginOfDay($scope.datePicker.date.startDate.toDate()).toISOString(), to:end_of_day.toISOString()}, function(data) {
 
+          $scope.loading = false;
 					$scope.tabledata = {groups:[]};
 					$scope.tabledata.groups = data;
 				});
 			}
 
 
-			$scope.loadData($scope.groupSelections);
+			//$scope.loadData($scope.groupSelections);
 
 
       //TODO: kolejna rzecz do skomonalizowania

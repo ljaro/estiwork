@@ -4,7 +4,7 @@
  * @description :: Server-side logic for managing workers
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-var ObjectId = require('mongodb').ObjectId
+var ObjectId = require('mongodb').ObjectId;
 var assert = require('assert');
 
 
@@ -164,10 +164,13 @@ module.exports = {
       return -1;
     };
 
+
     //TODO: example of potential async error
     var aggr_param = aggr_mode();
     if(aggr_param.toString() === '-1')
       return res.notFound("req.params.interval not in ['days', 'weeks', 'months', 'years'] = "+aggr_param);
+
+    console.log(aggr_param);
 
     var query = [{
       $match:
@@ -177,8 +180,7 @@ module.exports = {
           $gte: new Date(req.params.from),
           $lt: new Date(req.params.to)
         },
-        //TODO: hardcoded
-        worker_id: "Łukasz Sochaczewski"  /* <------------------------------  HARD CODED*/
+        worker_id: new ObjectId(req.params.id)
       }
     },
       {
@@ -226,7 +228,7 @@ module.exports = {
         }
       }];
 
-    console.log(query);
+    //console.log(query);
 
 	  collection.aggregate(
 	                        query

@@ -25,7 +25,7 @@ print('Script Mongo test started at');
 
 var script_start_time = moment();
 
-var groups = Array.apply(0, Array(10)).map(function (x, y) {
+var groups = Array.apply(0, Array(5)).map(function (x, y) {
 
   var template = {
     "_id" : ObjectId(),
@@ -36,7 +36,7 @@ var groups = Array.apply(0, Array(10)).map(function (x, y) {
 
 
 
-var leaders = Array.apply(0, Array(10)).map(function (x, y) {
+var leaders = Array.apply(0, Array(5)).map(function (x, y) {
 
   var name = chance.name();
   var login = name.split(" ")[1].toLowerCase();
@@ -52,7 +52,7 @@ var leaders = Array.apply(0, Array(10)).map(function (x, y) {
 });
 
 
-var workers = Array.apply(0, Array(50)).map(function (x, y) {
+var workers = Array.apply(0, Array(30)).map(function (x, y) {
 
   var leader = chance.pick(leaders);
   var group_id  = leader.group;
@@ -82,44 +82,42 @@ var dblist = db.adminCommand("listDatabases");
 
 var db_count_max = 0;
 
-for (var x in dblist.databases) {
-  //print(dblist.databases[x].name);
-
-  var res = /(testdb)([0-9]+)/.exec(dblist.databases[x].name);
-
-  if (res !== null) {
-    db_count_max = Math.max(db_count_max, res[2]);
-    if (res[2] > 5) {
-      var db1 = conn.getDB(dblist.databases[x].name);
-      if (db1.dropDatabase()) {
-        print('Old db dropped');
-      } else {
-        print('Error dropping old db');
-      }
-    }
-  }
-
-
-}
-
-print('copying ' + dbname + ' to ' + 'testdb' + (Number(db_count_max) + 1));
-db.copyDatabase(dbname, 'testdb' + (Number(db_count_max) + 1));
+//for (var x in dblist.databases) {
+//  //print(dblist.databases[x].name);
+//
+//  var res = /(testdb)([0-9]+)/.exec(dblist.databases[x].name);
+//
+//  if (res !== null) {
+//    db_count_max = Math.max(db_count_max, res[2]);
+//    if (res[2] > 5) {
+//      var db1 = conn.getDB(dblist.databases[x].name);
+//      if (db1.dropDatabase()) {
+//        print('Old db dropped');
+//      } else {
+//        print('Error dropping old db');
+//      }
+//    }
+//  }
+//}
+//
+//print('copying ' + dbname + ' to ' + 'testdb' + (Number(db_count_max) + 1));
+//db.copyDatabase(dbname, 'testdb' + (Number(db_count_max) + 1));
+db.dropDatabase();
 
 db = conn.getDB(dbname);
 
-if (cleardb) {
-  db.getCollectionNames().forEach(function (name) {
-
-    if (/system/.exec(name) === null) {
-      if (db.getCollection(name).drop()) {
-        print('Dropped collection ' + name);
-      } else {
-        print('Error droping collection ' + name);
-      }
-    }
-  })
-
-}
+//if (cleardb) {
+//  db.getCollectionNames().forEach(function (name) {
+//
+//    if (/system/.exec(name) === null) {
+//      if (db.getCollection(name).drop()) {
+//        print('Dropped collection ' + name);
+//      } else {
+//        print('Error droping collection ' + name);
+//      }
+//    }
+//  })
+//}
 
 
 db.getCollection('group').insert(groups);
@@ -192,7 +190,7 @@ persons.map(function (person, person_idx){
       print('        schedule '+scheduleidx);
 
       var events = [];
-      var event_n = moment.duration(schedule.duration).asSeconds();
+      var event_n = moment.duration(schedule.duration).asMinutes();
       var event_idx = 0;
 
       Array.apply(0, Array(event_n)).map(function (x, y) {
@@ -205,7 +203,7 @@ persons.map(function (person, person_idx){
         var probe_time = moment(day.day);
         probe_time.add(event_idx++, 'seconds');
         tmp.probe_time = new Date(probe_time.local().toISOString());
-        tmp.duration = 1;
+        tmp.duration = 60;
 
         tmp.user.work_mode = schedule.work_mode;
         tmp.user.presence = schedule.presence;

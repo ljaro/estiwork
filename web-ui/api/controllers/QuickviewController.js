@@ -104,7 +104,34 @@ module.exports = {
 			if (err)
 				return res.serverError(err);
 
-			return res.ok(results);
+
+
+      Worker.find({})
+        .populate('leader')
+        .exec(function (err, res2) {
+
+          results.map(function(x,y){
+            x.data.map(function (xx, yy) {
+
+              xx.leader_name = res2.filter(function (x) {
+                return xx._id.wid.equals(x.id);
+              })[0].leader.fullname;
+
+              xx.worker_name = res2.filter(function (x) {
+                return xx._id.wid.equals(x.id);
+              })[0].fullname;
+
+            })
+          });
+
+
+          return res.ok(results);
+
+        });
+
+
+
+
 		});
 
 

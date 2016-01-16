@@ -163,6 +163,7 @@ angular.module('myApp.workerview',
 
       $scope.loadData = function(id, interval, from, to){
 
+        //TODO: change id to worker (align with REST url)
         WorkersService.workerData.query({id:id, interval:interval, from:from.toDate().toISOString(), to:to.toDate().toISOString() }, function(result){
 
           if(typeof result[0] !== 'undefined')
