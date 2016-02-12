@@ -22,7 +22,7 @@ angular.module('myApp.calendarModule')
 
 
         var updateToScopeEnabled = true;
-        var viewMode = scope.minViewMode;
+        var viewMode = -111;
 
         //var beginOfDay = function(date){
         //  var tmp = date;
@@ -89,7 +89,6 @@ angular.module('myApp.calendarModule')
         scope.$watch('minViewMode', function(){
 
 
-
           if(viewMode !== scope.minViewMode){
 
             console.log("watch minViewMode");
@@ -105,6 +104,7 @@ angular.module('myApp.calendarModule')
 
             bindChangeDate(domElem);
 
+            viewMode = scope.minViewMode;
           }
         });
 
