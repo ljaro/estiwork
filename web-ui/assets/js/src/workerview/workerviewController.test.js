@@ -64,7 +64,10 @@ describe('myApp.workerview', function() {
     //TODO: mock WorkersService to not use setting on $scope parameters to that service
     it('should be defined year,month,day in data column based on login_datetime field from request', function(){
 
-      $scope.loadData(111, 0, new Date('2011-08-31T12:00:00.000Z'), new Date('2015-08-31T12:00:00.000Z'));
+      var from = moment('2011-08-31T12:00:00.000Z');
+      var to   = moment('2015-08-31T12:00:00.000Z');
+
+      $scope.loadData(111, 0, from, to);
       $httpBackend.flush();
 
       expect($scope.table).toBeDefined(); //TODO usunac jesli dziala

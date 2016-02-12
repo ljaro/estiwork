@@ -1,6 +1,6 @@
 /**
- * 
+ *
  */
 
 
-angular.module('myApp.workerview', ['ngResource']);
+angular.module('myApp.workerview', ['ngResource','smart-table']);

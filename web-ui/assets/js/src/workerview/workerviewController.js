@@ -6,7 +6,7 @@ angular.module('myApp.workerview',
   ['myApp.workerselect',
     'myApp.commonservices',
     'myApp.checklistModule',
-    'smart-table',
+    //'smart-table',
     'ngResource'
   ]
 ).controller('workerviewController',

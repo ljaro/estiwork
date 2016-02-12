@@ -22,19 +22,7 @@ angular.module('myApp.calendarModule')
 
 
         var updateToScopeEnabled = true;
-        var viewMode = -111;
-
-        //var beginOfDay = function(date){
-        //  var tmp = date;
-        //  tmp.setHours(0,0,0,0);
-        //  return tmp;
-        //}
-        //
-        //var endOfDay = function(date){
-        //  var tmp = date;
-        //  tmp.setHours(23,59,59,999);
-        //  return tmp;
-        //}
+        var viewMode = 0;
 
 
         var bindChangeDate = function(elem2){
@@ -44,14 +32,18 @@ angular.module('myApp.calendarModule')
 
               scope.$evalAsync(function(){
 
+                console.log('ddsfsdfsdfsdfsdfsd' + viewMode);
+
+                var numToStrModes = ['day', 'month', 'year'];
+
                 if(e.target.id == 'cal1') {
                   // cause calendar component store date in Date format...we want moment as output
                   var momentDate = moment(e.date);
-                  scope.first = momentDate.startOf('day');
+                  scope.first = momentDate.startOf(numToStrModes[viewMode]);
                 }
                 else if(e.target.id == 'cal2') {
                   var momentDate = moment(e.date);
-                  scope.second = momentDate.startOf('day');
+                  scope.second = momentDate.endOf(numToStrModes[viewMode]);
                 }
                 else {
                   console.log('myCalendar event clicn err')
@@ -74,9 +66,8 @@ angular.module('myApp.calendarModule')
         });
 
         scope.$watch('second', function(){
-
+          updateToScopeEnabled = false;
           try {
-            updateToScopeEnabled = false;
             console.log('second');
             var moment = scope.second.startOf('day');
             var d = moment.toDate();
