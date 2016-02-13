@@ -1,0 +1,20 @@
+#pragma once
+#include <windows.h>
+#include "../../rpc_sample_client/template_h.h"
+#include "helperdef.h"
+
+class RpcClient
+{
+public:
+	RpcClient(RPC_IF_HANDLE& interface_handle, TCHAR* endpoint_name);
+	~RpcClient(void);
+	void Close();
+
+	bool SendSerializedMessageWrapper(SERIALIZED_DATA_TYPE_HANDLE data);
+
+private:
+	RPC_IF_HANDLE& interface_handle_;
+
+	DISALLOW_COPY_AND_ASSIGN(RpcClient);
+};
+
