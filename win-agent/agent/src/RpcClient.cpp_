@@ -1,0 +1,73 @@
+#include "RpcClient.h"
+#pragma comment(lib, "rpcrt4.lib")
+#include <stdio.h>
+#include <tchar.h>
+
+
+
+RpcClient::RpcClient(RPC_IF_HANDLE& interface_handle, TCHAR* endpoint_name):
+					interface_handle_(interface_handle)
+{
+	
+
+    _TUCHAR *pszUuid             = NULL;
+    _TUCHAR *pszProtocolSequence = (_TUCHAR *)_T("ncacn_np");//????????ncalrpc 
+    _TUCHAR *pszNetworkAddress   = NULL;
+    _TUCHAR *pszEndpoint         = (_TUCHAR *)endpoint_name;
+    _TUCHAR *pszOptions          = NULL;
+    _TUCHAR *pszStringBinding    = NULL;
+    _TUCHAR *pszString           = (_TUCHAR *)_T("hello, world");
+
+
+	RPC_STATUS status;
+	status = RpcStringBindingCompose(pszUuid,
+                                     pszProtocolSequence,
+                                     pszNetworkAddress,
+                                     pszEndpoint,
+                                     pszOptions,
+                                     &pszStringBinding);
+
+	if (status) exit(status);
+
+
+	status = RpcBindingFromStringBinding(pszStringBinding, &interface_handle_);
+    if (status) exit(status);
+
+	status = RpcStringFree(&pszStringBinding);  
+    if (status) exit(status);
+
+}
+
+
+RpcClient::~RpcClient(void)
+{
+}
+
+void RpcClient::Close()
+{
+	
+	RPC_STATUS status;
+	status = RpcBindingFree(&interface_handle_); 
+    if (status) exit(status);
+}
+
+bool RpcClient::SendSerializedMessageWrapper(SERIALIZED_DATA_TYPE_HANDLE data)
+{
+	
+	RpcTryExcept  
+	{
+		SendSerializedMessage(interface_handle_, data);
+	}
+	RpcExcept(1) 
+	{
+		unsigned long ulCode;
+		ulCode = RpcExceptionCode();
+		printf("Runtime reported exception 0x%lx = %ld\n", ulCode, ulCode);
+		return false;
+	}
+	RpcEndExcept
+
+	return true;
+}
+
+

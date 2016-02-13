@@ -1,0 +1,46 @@
+# CMake generation dependency list for this directory.
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeLists.txt
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/3.1.0-rc2/CMakeSystem.cmake
+C:/MinGW/share/cmake-3.1/Modules/CMakeSystemSpecificInitialize.cmake
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/3.1.0-rc2/CMakeCCompiler.cmake
+C:/MinGW/share/cmake-3.1/Modules/CMakeSystemSpecificInformation.cmake
+C:/MinGW/share/cmake-3.1/Modules/CMakeGenericSystem.cmake
+C:/MinGW/share/cmake-3.1/Modules/Platform/Windows.cmake
+C:/MinGW/share/cmake-3.1/Modules/Platform/WindowsPaths.cmake
+C:/MinGW/share/cmake-3.1/Modules/CMakeCInformation.cmake
+C:/MinGW/share/cmake-3.1/Modules/Platform/Windows-MSVC-C.cmake
+C:/MinGW/share/cmake-3.1/Modules/Platform/Windows-MSVC.cmake
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/3.1.0-rc2/CMakeRCCompiler.cmake
+C:/MinGW/share/cmake-3.1/Modules/CMakeRCInformation.cmake
+C:/MinGW/share/cmake-3.1/Modules/CMakeCommonLanguageInclude.cmake
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/cmake/TestCInline.cmake
+C:/MinGW/share/cmake-3.1/Modules/CheckFunctionExists.cmake
+C:/MinGW/share/cmake-3.1/Modules/CheckSymbolExists.cmake
+C:/MinGW/share/cmake-3.1/Modules/CheckLibraryExists.cmake
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/cmake/CMakePushCheckState.cmake
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/cmake/GNUInstallDirs.cmake
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/cmake/FindPOPT.cmake
+C:/MinGW/share/cmake-3.1/Modules/FindPkgConfig.cmake
+C:/MinGW/share/cmake-3.1/Modules/FindPackageHandleStandardArgs.cmake
+C:/MinGW/share/cmake-3.1/Modules/FindPackageMessage.cmake
+C:/MinGW/share/cmake-3.1/Modules/CMakeParseArguments.cmake
+C:/MinGW/share/cmake-3.1/Modules/FindPackageHandleStandardArgs.cmake
+C:/MinGW/share/cmake-3.1/Modules/FindPackageMessage.cmake
+C:/MinGW/share/cmake-3.1/Modules/CMakeParseArguments.cmake
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/cmake/FindXmlTo.cmake
+C:/MinGW/share/cmake-3.1/Modules/FindPackageHandleStandardArgs.cmake
+C:/MinGW/share/cmake-3.1/Modules/FindPackageMessage.cmake
+C:/MinGW/share/cmake-3.1/Modules/CMakeParseArguments.cmake
+C:/MinGW/share/cmake-3.1/Modules/FindDoxygen.cmake
+C:/MinGW/share/cmake-3.1/Modules/FindPackageHandleStandardArgs.cmake
+C:/MinGW/share/cmake-3.1/Modules/FindPackageMessage.cmake
+C:/MinGW/share/cmake-3.1/Modules/CMakeParseArguments.cmake
+C:/MinGW/share/cmake-3.1/Modules/FindThreads.cmake
+C:/MinGW/share/cmake-3.1/Modules/CheckIncludeFiles.cmake
+C:/MinGW/share/cmake-3.1/Modules/CheckLibraryExists.cmake
+C:/MinGW/share/cmake-3.1/Modules/CheckSymbolExists.cmake
+C:/MinGW/share/cmake-3.1/Modules/FindPackageHandleStandardArgs.cmake
+C:/MinGW/share/cmake-3.1/Modules/FindPackageMessage.cmake
+C:/MinGW/share/cmake-3.1/Modules/CMakeParseArguments.cmake
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/cmake/config.h.in
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/librabbitmq.pc.in

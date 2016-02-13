@@ -1,0 +1,183 @@
+#need glob to get source files
+import glob
+import os
+import sys
+import urllib
+import zipfile
+import tarfile
+import platform
+import shutil
+
+
+
+DIR_DOWNLOADS 	= 'downloads'
+DIR_THRIFT_DEP	= 'third_party'
+DIR_TOOLS		= 'tools'
+DIR_OPENSSL_INSTALL = os.path.join('c:/','OpenSSL-Win32')
+
+print os.linesep
+print "##############################################################################"
+print 'CWD:'+os.getcwd()
+########################################
+
+
+
+def reporthook(blocknum, blocksize, totalsize):
+    readsofar = blocknum * blocksize
+    if totalsize > 0:
+        percent = readsofar * 1e2 / totalsize
+        s = "\r%5.1f%% %*d / %d" % (
+            percent, len(str(totalsize)), readsofar, totalsize)
+        sys.stderr.write(s)
+        if readsofar >= totalsize: # near the end
+            sys.stderr.write("\n")
+    else: # total size is unknown
+        sys.stderr.write("read %d\n" % (readsofar,))
+        
+def getunzipped(theurl, thedir):
+    name = os.path.join(thedir, os.path.split(theurl)[-1])
+    try:
+        print 'Downloading url '+theurl
+        name, hdrs = urllib.urlretrieve(theurl, name, reporthook)
+    except IOError, e:
+        print "Can't retrieve %r to %r: %s" % (theurl, thedir, e)
+        return
+    print 'Downloaded '+name
+
+	
+#######################################
+working_dir = os.getcwd()
+
+if not os.path.exists(DIR_THRIFT_DEP):
+    os.mkdir(DIR_THRIFT_DEP)
+
+if not os.path.exists(DIR_DOWNLOADS):
+    os.mkdir(DIR_DOWNLOADS)
+	
+if not os.path.exists(DIR_TOOLS):
+    os.mkdir(DIR_TOOLS)
+	
+	
+###############
+# Pantheios
+
+SConscript(['pantheios/SConscript'])
+	
+###############
+# OpenSSL
+
+if os.path.exists(DIR_OPENSSL_INSTALL):
+	if not os.path.exists(os.path.join(DIR_THRIFT_DEP,'openssl','OpenSSL-Win32')):
+		try:
+			shutil.copytree(DIR_OPENSSL_INSTALL, os.path.join(DIR_THRIFT_DEP,'openssl','OpenSSL-Win32'))
+			print 'OpenSSL copied'
+		except shutil.Error as e:
+			print('Directory not copied. Error: %s' % e)
+			# Any error saying that the directory doesn't exist
+		except OSError as e:
+			print('Directory not copied. Error: %s' % e)
+else:
+	print('Directory not exists '+os.path.join('c:/','OpenSSL-Win32'))
+	sys.exit()
+    
+    
+###############
+#libevent (for libthriftnb only) http://monkey.org/~provos/libevent/
+
+if not os.path.exists(os.path.join(DIR_THRIFT_DEP,'release-2.0.21-stable.zip')):
+    print 'Downloading dependencies:'
+    dep1 = 'https://github.com/libevent/libevent/archive/release-2.0.21-stable.zip'
+    getunzipped(dep1, DIR_THRIFT_DEP)
+
+if not os.path.exists(os.path.join(DIR_THRIFT_DEP,'libevent-release-2.0.21-stable')):
+	with zipfile.ZipFile(os.path.join(DIR_THRIFT_DEP,'release-2.0.21-stable.zip'), 'r') as myzip:
+		print 'Extracting'
+		myzip.extractall(os.path.join(DIR_THRIFT_DEP))
+		myzip.close()  
+
+if os.path.exists(os.path.join(DIR_THRIFT_DEP,'libevent-release-2.0.21-stable')):		
+	if not os.path.exists(os.path.join(DIR_THRIFT_DEP,'libevent-2.0.21-stable')):				
+		os.system('ln -s '+os.path.join('.',DIR_THRIFT_DEP,'libevent-release-2.0.21-stable'+os.sep)+' '+os.path.join('.',DIR_THRIFT_DEP,'libevent-2.0.21-stable'+os.sep))		
+
+os.environ['LIBEVENT_ROOT_DIR'] = os.path.join(DIR_THRIFT_DEP,'libevent-release-2.0.21-stable')
+
+################
+# Thrift
+# http://ftp.ps.pl/pub/apache/thrift/0.9.2/thrift-0.9.2.tar.gz
+
+if not os.path.exists(os.path.join(DIR_DOWNLOADS,'thrift-0.9.2.tar.gz')):
+    print 'Downloading dependencies:'
+    dep1 = 'http://ftp.ps.pl/pub/apache/thrift/0.9.2/thrift-0.9.2.tar.gz'
+    getunzipped(dep1, os.path.join(DIR_DOWNLOADS))
+    
+if not os.path.exists(os.path.join('thrift-0.9.2')):  
+    tar = tarfile.open(os.path.join(DIR_DOWNLOADS,'thrift-0.9.2.tar.gz'))
+    print 'Extracting '+tar.name
+    tar.extractall()
+    tar.close()
+
+if not os.path.exists(os.path.join(DIR_TOOLS,'thrift-0.9.2.exe')):
+	dep1 = 'http://ftp.ps.pl/pub/apache/thrift/0.9.2/thrift-0.9.2.exe'
+	getunzipped(dep1, os.path.join(DIR_DOWNLOADS))
+	shutil.copy(os.path.join(DIR_DOWNLOADS,'thrift-0.9.2.exe'), DIR_TOOLS)
+	
+	
+################
+# BOOST    
+# http://sourceforge.net/projects/boost/files/boost/1.47.0/boost_1_47_0.zip/download    
+    
+if not os.path.exists(os.path.join(DIR_THRIFT_DEP,'boost_1_47_0.zip')):
+    print 'Downloading dependencies:'
+    dep1 = 'http://sourceforge.net/projects/boost/files/boost/1.47.0/boost_1_47_0.zip/download'
+    getunzipped(dep1, DIR_THRIFT_DEP)
+    os.rename(os.path.join(DIR_THRIFT_DEP,'download'), os.path.join(DIR_THRIFT_DEP,'boost_1_47_0.zip'))
+    
+if not os.path.exists(os.path.join(DIR_THRIFT_DEP,'boost','boost_1_47_0')):  
+    with zipfile.ZipFile(os.path.join(DIR_THRIFT_DEP,'boost_1_47_0.zip'), 'r') as myzip:
+        print 'Extracting'
+        myzip.extractall(os.path.join(DIR_THRIFT_DEP,'boost'))
+        myzip.close()
+
+cmd0 = '"C:\\Program Files (x86)\\Microsoft Visual Studio 10.0\\VC\\vcvarsall.bat"'
+cmd1 = 'msbuild libthrift.vcxproj /t:Build /p:Configuration=Debug-mt /p:OutputPath=..\..\..\lib'
+cmd2 = 'msbuild libthriftnb.vcxproj /t:Build /p:Configuration=Debug-mt /p:OutputPath=..\..\..\lib'
+cmd3 = 'msbuild thrift.sln /t:Build /p:Configuration=Debug-mt /p:"OutputPath=.\\xxx" '
+# os.system(cmd0)
+
+
+
+
+os.environ[DIR_THRIFT_DEP] = os.path.join(working_dir,DIR_THRIFT_DEP)
+os.environ['LIBEVENT_ROOT'] = os.environ['LIBEVENT_ROOT_DIR']
+
+os.chdir(working_dir)
+os.chdir(os.path.join('.','thrift-0.9.2','lib','cpp'))
+
+if os.environ['VS100COMNTOOLS'] != '':
+    os.system('"'+os.path.join(os.environ['VS100COMNTOOLS'],'vsvars32.bat')+'"')
+elif os.environ['VS120COMNTOOLS'] != '':
+    os.system('"'+os.path.join(os.environ['VS120COMNTOOLS'],'vsvars32.bat')+'"')   
+
+	
+os.system(cmd3)
+
+
+
+# target_dir = os.path.join('.')
+# cmd3 = '' #copy targets libs
+# os.system(cmd3)
+os.chdir(working_dir)
+
+if not os.path.exists('lib'):
+    os.mkdir('lib')
+	
+for file in glob.glob(os.path.join('.','thrift-0.9.2','lib','cpp','Debug-mt','*.lib')):
+    print file                                                                                                                                        
+    shutil.copy(file, 'lib')
+	
+
+	
+##############
+#os.chdir(os.path.join('.','thrift-0.9.2','compiler','cpp'))
+#os.system('msbuild compiler.sln /t:Build /p:Configuration=Release ')
+

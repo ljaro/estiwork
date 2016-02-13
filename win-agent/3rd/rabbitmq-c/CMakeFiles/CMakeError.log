@@ -1,0 +1,76 @@
+Determining if the function clock_gettime exists in the rt failed with the following output:
+Change Dir: C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/12.0/bin/MSBuild.exe" "cmTryCompileExec2750557765.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=12.0"
+Microsoft (R) Build Engine version 12.0.31101.0
+[Microsoft .NET Framework, version 4.0.30319.34209]
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 2015-04-09 20:28:01.
+Project "C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\cmTryCompileExec2750557765.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTryCompileExec2750557765.dir\Debug\".
+  Creating directory "C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTryCompileExec2750557765.dir\Debug\cmTryCom.E3521424.tlog\".
+InitializeBuildStatus:
+  Creating "cmTryCompileExec2750557765.dir\Debug\cmTryCom.E3521424.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=clock_gettime /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTryCompileExec2750557765.dir\Debug\\" /Fd"cmTryCompileExec2750557765.dir\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue "C:\MinGW\share\cmake-3.1\Modules\CheckFunctionExists.c"
+  CheckFunctionExists.c
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec2750557765.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/CMakeTmp/time.h" /LIBPATH:"C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/CMakeTmp/time.h/Debug" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib rt.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec2750557765.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec2750557765.lib" /MACHINE:X86 /SAFESEH  /machine:X86 /debug cmTryCompileExec2750557765.dir\Debug\CheckFunctionExists.obj
+LINK : fatal error LNK1104: cannot open file 'rt.lib' [C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\cmTryCompileExec2750557765.vcxproj]
+Done Building Project "C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\cmTryCompileExec2750557765.vcxproj" (default targets) -- FAILED.
+
+Build FAILED.
+
+"C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\cmTryCompileExec2750557765.vcxproj" (default target) (1) ->
+(Link target) -> 
+  LINK : fatal error LNK1104: cannot open file 'rt.lib' [C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\cmTryCompileExec2750557765.vcxproj]
+
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:00.40
+
+
+Determining if files pthread.h exist failed with the following output:
+Change Dir: C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Program Files (x86)/MSBuild/12.0/bin/MSBuild.exe" "cmTryCompileExec2471168760.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=12.0"
+Microsoft (R) Build Engine version 12.0.31101.0
+[Microsoft .NET Framework, version 4.0.30319.34209]
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 2015-04-09 20:28:02.
+Project "C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\cmTryCompileExec2471168760.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTryCompileExec2471168760.dir\Debug\".
+  Creating directory "C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\Debug\".
+  Creating directory "cmTryCompileExec2471168760.dir\Debug\cmTryCom.80D2D231.tlog\".
+InitializeBuildStatus:
+  Creating "cmTryCompileExec2471168760.dir\Debug\cmTryCom.80D2D231.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTryCompileExec2471168760.dir\Debug\\" /Fd"cmTryCompileExec2471168760.dir\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\CheckIncludeFiles.c"
+  CheckIncludeFiles.c
+C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\CheckIncludeFiles.c(2): fatal error C1083: Cannot open include file: 'pthread.h': No such file or directory [C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\cmTryCompileExec2471168760.vcxproj]
+Done Building Project "C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\cmTryCompileExec2471168760.vcxproj" (default targets) -- FAILED.
+
+Build FAILED.
+
+"C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\cmTryCompileExec2471168760.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\CheckIncludeFiles.c(2): fatal error C1083: Cannot open include file: 'pthread.h': No such file or directory [C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\CMakeTmp\cmTryCompileExec2471168760.vcxproj]
+
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:00.39
+
+Source:
+/* */
+#include <pthread.h>
+
+
+int main(void){return 0;}
+
