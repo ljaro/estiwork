@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="Windows-1252"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{D9E4CE08-25FB-40C2-9869-B65D053ECF03}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>ZERO_CHECK</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="CMakeFiles\7e2ce6a84a55dba161401c924d466d3e\generate.stamp.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+C:\MinGW\bin\cmake.exe "-HC:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c" "-BC:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/7e2ce6a84a55dba161401c924d466d3e/generate.stamp.rule;C:\MinGW\share\cmake-3.1\Modules\CMakeCInformation.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeCommonLanguageInclude.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeGenericSystem.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeParseArguments.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeRCInformation.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeSystemSpecificInformation.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckFunctionExists.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckIncludeFiles.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckLibraryExists.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckSymbolExists.cmake;C:\MinGW\share\cmake-3.1\Modules\FindDoxygen.cmake;C:\MinGW\share\cmake-3.1\Modules\FindPackageHandleStandardArgs.cmake;C:\MinGW\share\cmake-3.1\Modules\FindPackageMessage.cmake;C:\MinGW\share\cmake-3.1\Modules\FindPkgConfig.cmake;C:\MinGW\share\cmake-3.1\Modules\FindThreads.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\Windows-MSVC-C.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\Windows-MSVC.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\Windows.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\WindowsPaths.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\3.1.0-rc2\CMakeCCompiler.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\3.1.0-rc2\CMakeRCCompiler.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\3.1.0-rc2\CMakeSystem.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeLists.txt;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\CMakePushCheckState.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\FindPOPT.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\FindXmlTo.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\GNUInstallDirs.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\InstallMacros.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\TestCInline.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\config.h.in;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\examples\CMakeLists.txt;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq.pc.in;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\generate.stamp;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\CMakeFiles\generate.stamp;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\examples\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+C:\MinGW\bin\cmake.exe "-HC:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c" "-BC:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/7e2ce6a84a55dba161401c924d466d3e/generate.stamp.rule;C:\MinGW\share\cmake-3.1\Modules\CMakeCInformation.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeCommonLanguageInclude.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeGenericSystem.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeParseArguments.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeRCInformation.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeSystemSpecificInformation.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckFunctionExists.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckIncludeFiles.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckLibraryExists.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckSymbolExists.cmake;C:\MinGW\share\cmake-3.1\Modules\FindDoxygen.cmake;C:\MinGW\share\cmake-3.1\Modules\FindPackageHandleStandardArgs.cmake;C:\MinGW\share\cmake-3.1\Modules\FindPackageMessage.cmake;C:\MinGW\share\cmake-3.1\Modules\FindPkgConfig.cmake;C:\MinGW\share\cmake-3.1\Modules\FindThreads.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\Windows-MSVC-C.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\Windows-MSVC.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\Windows.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\WindowsPaths.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\3.1.0-rc2\CMakeCCompiler.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\3.1.0-rc2\CMakeRCCompiler.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\3.1.0-rc2\CMakeSystem.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeLists.txt;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\CMakePushCheckState.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\FindPOPT.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\FindXmlTo.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\GNUInstallDirs.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\InstallMacros.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\TestCInline.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\config.h.in;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\examples\CMakeLists.txt;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq.pc.in;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\generate.stamp;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\CMakeFiles\generate.stamp;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\examples\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+C:\MinGW\bin\cmake.exe "-HC:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c" "-BC:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/7e2ce6a84a55dba161401c924d466d3e/generate.stamp.rule;C:\MinGW\share\cmake-3.1\Modules\CMakeCInformation.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeCommonLanguageInclude.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeGenericSystem.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeParseArguments.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeRCInformation.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeSystemSpecificInformation.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckFunctionExists.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckIncludeFiles.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckLibraryExists.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckSymbolExists.cmake;C:\MinGW\share\cmake-3.1\Modules\FindDoxygen.cmake;C:\MinGW\share\cmake-3.1\Modules\FindPackageHandleStandardArgs.cmake;C:\MinGW\share\cmake-3.1\Modules\FindPackageMessage.cmake;C:\MinGW\share\cmake-3.1\Modules\FindPkgConfig.cmake;C:\MinGW\share\cmake-3.1\Modules\FindThreads.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\Windows-MSVC-C.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\Windows-MSVC.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\Windows.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\WindowsPaths.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\3.1.0-rc2\CMakeCCompiler.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\3.1.0-rc2\CMakeRCCompiler.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\3.1.0-rc2\CMakeSystem.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeLists.txt;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\CMakePushCheckState.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\FindPOPT.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\FindXmlTo.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\GNUInstallDirs.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\InstallMacros.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\TestCInline.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\config.h.in;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\examples\CMakeLists.txt;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq.pc.in;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\generate.stamp;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\CMakeFiles\generate.stamp;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\examples\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Checking Build System</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+C:\MinGW\bin\cmake.exe "-HC:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c" "-BC:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "$(SolutionPath)"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/7e2ce6a84a55dba161401c924d466d3e/generate.stamp.rule;C:\MinGW\share\cmake-3.1\Modules\CMakeCInformation.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeCommonLanguageInclude.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeGenericSystem.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeParseArguments.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeRCInformation.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeSystemSpecificInformation.cmake;C:\MinGW\share\cmake-3.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckFunctionExists.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckIncludeFiles.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckLibraryExists.cmake;C:\MinGW\share\cmake-3.1\Modules\CheckSymbolExists.cmake;C:\MinGW\share\cmake-3.1\Modules\FindDoxygen.cmake;C:\MinGW\share\cmake-3.1\Modules\FindPackageHandleStandardArgs.cmake;C:\MinGW\share\cmake-3.1\Modules\FindPackageMessage.cmake;C:\MinGW\share\cmake-3.1\Modules\FindPkgConfig.cmake;C:\MinGW\share\cmake-3.1\Modules\FindThreads.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\Windows-MSVC-C.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\Windows-MSVC.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\Windows.cmake;C:\MinGW\share\cmake-3.1\Modules\Platform\WindowsPaths.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\3.1.0-rc2\CMakeCCompiler.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\3.1.0-rc2\CMakeRCCompiler.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\3.1.0-rc2\CMakeSystem.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeLists.txt;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\CMakePushCheckState.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\FindPOPT.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\FindXmlTo.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\GNUInstallDirs.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\InstallMacros.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\TestCInline.cmake;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\cmake\config.h.in;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\examples\CMakeLists.txt;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq.pc.in;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\CMakeFiles\generate.stamp;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\CMakeFiles\generate.stamp;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\examples\CMakeFiles\generate.stamp</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

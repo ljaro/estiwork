@@ -1,0 +1,19 @@
+﻿Build started 2015-04-09 21:19:30.
+     1>Project "C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\ZERO_CHECK.vcxproj" on node 2 (build target(s)).
+     1>PrepareForBuild:
+         Creating directory "C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\Release\".
+       InitializeBuildStatus:
+         Creating "Win32\Release\ZERO_CHECK\ZERO_CHECK.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       CustomBuild:
+         Checking Build System
+         CMake does not need to re-run because C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/generate.stamp is up-to-date.
+         CMake does not need to re-run because C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/librabbitmq/CMakeFiles/generate.stamp is up-to-date.
+         CMake does not need to re-run because C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/examples/CMakeFiles/generate.stamp is up-to-date.
+       FinalizeBuildStatus:
+         Deleting file "Win32\Release\ZERO_CHECK\ZERO_CHECK.unsuccessfulbuild".
+         Touching "Win32\Release\ZERO_CHECK\ZERO_CHECK.lastbuildstate".
+     1>Done Building Project "C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\ZERO_CHECK.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.10

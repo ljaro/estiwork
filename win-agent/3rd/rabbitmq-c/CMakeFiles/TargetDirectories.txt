@@ -1,0 +1,13 @@
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/examples/CMakeFiles/amqp_rpc_sendstring_client.dir
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/examples/CMakeFiles/amqp_unbind.dir
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/examples/CMakeFiles/amqp_listenq.dir
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/examples/CMakeFiles/amqp_consumer.dir
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/examples/CMakeFiles/amqp_listen.dir
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/ALL_BUILD.dir
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/examples/CMakeFiles/amqp_exchange_declare.dir
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/examples/CMakeFiles/amqp_connect_timeout.dir
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/examples/CMakeFiles/amqp_bind.dir
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/CMakeFiles/ZERO_CHECK.dir
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/examples/CMakeFiles/amqp_producer.dir
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/librabbitmq/CMakeFiles/rabbitmq.dir
+C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/examples/CMakeFiles/amqp_sendstring.dir
