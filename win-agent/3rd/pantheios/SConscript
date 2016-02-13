@@ -1,0 +1,86 @@
+import glob
+import os
+import sys
+import urllib
+import zipfile
+import tarfile
+import platform
+import shutil
+
+DIR_DOWNLOADS 	= 'downloads'
+
+def reporthook(blocknum, blocksize, totalsize):
+    readsofar = blocknum * blocksize
+    if totalsize > 0:
+        percent = readsofar * 1e2 / totalsize
+        s = "\r%5.1f%% %*d / %d" % (
+            percent, len(str(totalsize)), readsofar, totalsize)
+        sys.stderr.write(s)
+        if readsofar >= totalsize: # near the end
+            sys.stderr.write("\n")
+    else: # total size is unknown
+        sys.stderr.write("read %d\n" % (readsofar,))
+        
+def getunzipped(theurl, thedir):
+    name = os.path.join(thedir, os.path.split(theurl)[-1])
+    try:
+        print 'Downloading url '+theurl
+        name, hdrs = urllib.urlretrieve(theurl, name, reporthook)
+    except IOError, e:
+        print "Can't retrieve %r to %r: %s" % (theurl, thedir, e)
+        return
+    print 'Downloaded '+name
+
+	
+#####
+## pantheios-1.0.1-beta216-src.zip TEGO PLIKU NIE MA NA GITGUB 
+#####
+if not os.path.exists(os.path.join('pantheios-1.0.1-beta216')):	
+	if not os.path.exists(os.path.join(DIR_DOWNLOADS, 'pantheios-1.0.1-beta216-src.zip')):
+		if not os.path.exists(DIR_DOWNLOADS): os.mkdir(DIR_DOWNLOADS)
+		url = 'http://downloads.sourceforge.net/project/pantheios/Pantheios%20%28C%20and%20Cxx%29/1.0.1%20%28beta%20216%29/pantheios-1.0.1-beta216-src.zip'
+		getunzipped(url, DIR_DOWNLOADS)
+	with zipfile.ZipFile(os.path.join(DIR_DOWNLOADS,'pantheios-1.0.1-beta216-src.zip'), 'r') as myzip:
+		print 'Extracting pantheios-1.0.1-beta216-src.zip'
+		myzip.extractall(os.path.join('.'))
+		myzip.close()
+		#shutil.move('Pantheios-Pantheios-1.0.1-beta216-src', 'Pantheios-1.0.1-beta216')
+		
+#####################
+# STLSoft
+		
+if not os.path.exists(os.path.join('stlsoft-1.9.124')):	
+	if not os.path.exists(os.path.join(DIR_DOWNLOADS, 'stlsoft-1.9.124-hdrs.zip')):
+		if not os.path.exists(DIR_DOWNLOADS): os.mkdir(DIR_DOWNLOADS)
+		url = 'https://sourceforge.net/projects/stlsoft/files/STLSoft%201.9/1.9.124/stlsoft-1.9.124-hdrs.zip'
+		getunzipped(url, DIR_DOWNLOADS)
+	with zipfile.ZipFile(os.path.join(DIR_DOWNLOADS,'stlsoft-1.9.124-hdrs.zip'), 'r') as myzip:
+		print 'Extracting stlsoft-1.9.124-hdrs.zip'
+		myzip.extractall(os.path.join('.'))
+		myzip.close()
+
+####################
+#b64
+#http://synesis.com.au/downloads/software/b64-1.4.2.zip
+
+# if not os.path.exists(os.path.join('b64-1.4.2')):	
+	# if not os.path.exists(os.path.join(DIR_DOWNLOADS, 'b64-1.4.2.zip')):
+		# if not os.path.exists(DIR_DOWNLOADS): os.mkdir(DIR_DOWNLOADS)
+		# url = 'http://synesis.com.au/downloads/software/b64-1.4.2.zip'
+		# getunzipped(url, DIR_DOWNLOADS)
+	# with zipfile.ZipFile(os.path.join(DIR_DOWNLOADS,'b64-1.4.2.zip'), 'r') as myzip:
+		# print 'Extracting b64-1.4.2.zip'
+		# myzip.extractall(os.path.join('.'))
+		# myzip.close()
+
+
+ROOT_DIR = os.getcwd()
+os.chdir(os.path.join('.','Pantheios-1.0.1-beta216','build','vc10'))
+		
+os.environ['PANTHEIOS_ROOT'] = os.path.join(ROOT_DIR,'Pantheios-1.0.1-beta216')
+os.environ['STLSOFT'] = os.path.join(ROOT_DIR,'stlsoft-1.9.124')
+
+#os.system('nmake build.libs.core')
+os.system('nmake')
+
+
