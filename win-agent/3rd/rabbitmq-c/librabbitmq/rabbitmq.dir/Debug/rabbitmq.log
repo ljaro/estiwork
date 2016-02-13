@@ -1,0 +1,35 @@
+﻿Build started 2015-04-09 21:19:06.
+     1>Project "C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\rabbitmq.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "rabbitmq.dir\Debug\rabbitmq.unsuccessfulbuild".
+       CustomBuild:
+         All outputs are up-to-date.
+       ClCompile:
+         All outputs are up-to-date.
+       ManifestResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\Debug\rabbitmq.4.dll" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib ws2_32.lib wsock32.lib /MANIFEST /ManifestFile:"rabbitmq.dir\Debug\rabbitmq.4.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/librabbitmq/Debug/rabbitmq.4.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/librabbitmq/Debug/rabbitmq.4.lib" /MACHINE:X86 /DLL rabbitmq.dir\Debug\rabbitmq.4.dll.embed.manifest.res
+         rabbitmq.dir\Debug\amqp_framing.obj
+         rabbitmq.dir\Debug\amqp_api.obj
+         rabbitmq.dir\Debug\amqp_connection.obj
+         rabbitmq.dir\Debug\amqp_mem.obj
+         rabbitmq.dir\Debug\amqp_socket.obj
+         rabbitmq.dir\Debug\amqp_table.obj
+         rabbitmq.dir\Debug\amqp_url.obj
+         rabbitmq.dir\Debug\amqp_tcp_socket.obj
+         rabbitmq.dir\Debug\amqp_timer.obj
+         rabbitmq.dir\Debug\amqp_consumer.obj  /machine:X86 /debug 
+            Creating library C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/librabbitmq/Debug/rabbitmq.4.lib and object C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/librabbitmq/Debug/rabbitmq.4.exp
+     1>amqp_framing.obj : error LNK2019: unresolved external symbol _ntohll referenced in function _amqp_d64
+     1>amqp_connection.obj : error LNK2001: unresolved external symbol _ntohll
+     1>amqp_table.obj : error LNK2001: unresolved external symbol _ntohll
+     1>amqp_framing.obj : error LNK2019: unresolved external symbol _htonll referenced in function _amqp_e64
+     1>amqp_connection.obj : error LNK2001: unresolved external symbol _htonll
+     1>amqp_table.obj : error LNK2001: unresolved external symbol _htonll
+     1>C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\Debug\rabbitmq.4.dll : fatal error LNK1120: 2 unresolved externals
+     1>Done Building Project "C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\rabbitmq.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.21

@@ -1,0 +1,57 @@
+﻿Build started 2015-04-09 21:35:24.
+     1>Project "C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\rabbitmq.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "rabbitmq.dir\Release\rabbitmq.unsuccessfulbuild".
+       CustomBuild:
+         All outputs are up-to-date.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq" /I"C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\win32" /nologo /W3 /WX- /O2 /Ob2 /Oy- /D WIN32 /D _WINDOWS /D NDEBUG /D HAVE_CONFIG_H /D AMQP_BUILD /D "CMAKE_INTDIR=\"Release\"" /D rabbitmq_EXPORTS /D _WINDLL /D _MBCS /Gm- /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"rabbitmq.dir\Release\\" /Fd"rabbitmq.dir\Release\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt amqp_api.c amqp_connection.c amqp_consumer.c amqp_framing.c amqp_mem.c amqp_socket.c amqp_table.c amqp_tcp_socket.c amqp_url.c
+         amqp_api.c
+     1>amqp_api.c(149): warning C4996: 'strdup': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strdup. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(238) : see declaration of 'strdup'
+     1>amqp_api.c(268): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(371) : see declaration of 'sprintf'
+     1>amqp_api.c(285): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(371) : see declaration of 'sprintf'
+         amqp_connection.c
+     1>amqp_connection.c(119): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(157) : see declaration of 'strerror'
+         amqp_consumer.c
+     1>amqp_consumer.c(255): warning C4244: 'function' : conversion from 'uint64_t' to 'size_t', possible loss of data
+         amqp_framing.c
+         amqp_mem.c
+         amqp_socket.c
+     1>amqp_socket.c(300): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(371) : see declaration of 'sprintf'
+     1>amqp_socket.c(385): warning C4133: 'function' : incompatible types - from 'int *' to 'char *'
+     1>amqp_socket.c(667): warning C4244: '=' : conversion from 'uint64_t' to 'long', possible loss of data
+     1>amqp_socket.c(841): warning C4244: '=' : conversion from 'uint64_t' to 'long', possible loss of data
+         amqp_table.c
+         amqp_tcp_socket.c
+         amqp_url.c
+     1>amqp_url.c(89): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\stdio.h(325) : see declaration of 'sscanf'
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\Release\rabbitmq.4.dll" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib ws2_32.lib /MANIFEST /ManifestFile:"rabbitmq.dir\Release\rabbitmq.4.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/librabbitmq/Release/rabbitmq.4.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/librabbitmq/Release/rabbitmq.4.lib" /MACHINE:X86 /DLL rabbitmq.dir\Release\amqp_framing.obj
+         rabbitmq.dir\Release\amqp_api.obj
+         rabbitmq.dir\Release\amqp_connection.obj
+         rabbitmq.dir\Release\amqp_mem.obj
+         rabbitmq.dir\Release\amqp_socket.obj
+         rabbitmq.dir\Release\amqp_table.obj
+         rabbitmq.dir\Release\amqp_url.obj
+         rabbitmq.dir\Release\amqp_tcp_socket.obj
+         rabbitmq.dir\Release\amqp_timer.obj
+         rabbitmq.dir\Release\amqp_consumer.obj  /machine:X86 
+            Creating library C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/librabbitmq/Release/rabbitmq.4.lib and object C:/Users/luk/Dysk Google/Projects/Natalis/3rd/rabbitmq-c/librabbitmq/Release/rabbitmq.4.exp
+         rabbitmq.vcxproj -> C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\Release\rabbitmq.4.dll
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\Release\rabbitmq.4.dll;#2" /manifest rabbitmq.dir\Release\rabbitmq.4.dll.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "rabbitmq.dir\Release\rabbitmq.unsuccessfulbuild".
+         Touching "rabbitmq.dir\Release\rabbitmq.lastbuildstate".
+     1>Done Building Project "C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\rabbitmq.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.96
