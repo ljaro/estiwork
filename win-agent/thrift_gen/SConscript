@@ -1,0 +1,44 @@
+import glob
+import os
+
+
+cpp_gen_path =          os.path.join('.')
+thrift_compiler_path =  os.path.join('.','..','3rd','tools','thrift-0.9.2.exe')
+thrift_input_path =     os.path.join('.','da2dba.thrift')
+third_party_dir =       os.path.join('.','..','3rd')
+
+
+cmd1 = thrift_compiler_path+' -r -o '+cpp_gen_path+' -gen cpp -gen java "'+thrift_input_path+'"'
+ 
+print 'Checking dependencies'
+ 
+   
+if not os.path.exists(thrift_input_path):
+    raise Exception("Thrift input file does not exists")
+ 
+if not os.path.exists(thrift_compiler_path):
+    raise Exception("Thrift compiler not found in "+thrift_compiler_path)
+
+print 'Generating thrift files'
+	
+output = os.popen(cmd1).read()
+print cmd1
+
+
+
+env = Environment(MSVC_VERSION='10.0', TARGET_ARCH='x86')
+env.Append( CCFLAGS=['/EHsc'])
+env.Append( CCFLAGS=['/MTd'])
+
+env.Append( 
+	CPPPATH=[
+#	'd:\\boost\\boost_1_47_0',
+	third_party_dir+'\\third_party\\boost\\boost_1_47_0',
+	third_party_dir+'\\thrift-0.9.2\\lib\\cpp\\src', 
+	third_party_dir+'\\pantheios-1.0.1-beta214\\include', 
+	third_party_dir+'\\stlsoft-1.9.118\\include'])
+	
+source_files = glob.glob(os.path.join(cpp_gen_path,'gen-cpp','*.cpp'))
+
+env.StaticLibrary('thriftgen', source = source_files)
+
