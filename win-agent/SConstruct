@@ -1,3 +1,0 @@
-SConscript('thrift_gen/SConscript')
-SConscript('agent/SConscript', variant_dir='agent/build')
-SConscript('broker/SConscript', variant_dir='broker/build')
