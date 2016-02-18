@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <assert.h>
 #include "../../thrift_gen/gen-cpp/da2dba_constants.h"
+#include <iostream>
 
 using namespace boost;
 boost::mutex mutex1;
@@ -27,40 +28,47 @@ DWORD GetIdle()
 
 void Sampler::operator()()
 {
-	//::system("cls");
-//	std::cout << "sample:" << sample_stack.size() << std::endl;
 	Sample sample = Sampler::GetSample();
 	sample.idle = idlemeter_.GetIdleState();
 	boost::mutex::scoped_lock lock(mutex1);
 
-	std::string str = std::string("Sample:")+boost::posix_time::to_iso_extended_string(sample.probe_time_.get());
-	//pantheios::log_INFORMATIONAL(str);
+	{
+		std::stringstream ss;
+		ss << std::string("Sample: ");
+		ss << "HWND(" << sample.window_handle_ << ") ";
+		ss << boost::posix_time::to_iso_extended_string(sample.probe_time_.get());
+
+		std::string str = ss.str();
+		dd::log_DEBUG(str);
+	}
 
 	assert(sample.probe_time_.is_initialized());
-	sample_stack.push_back(sample);
-	//Sleep(100000);
+	sample_stack.push_back(sample);	
 }
 
+/*
+	get `count` samples from sample stack
+	samples are pushed onto sample_stack at end so fetch is performed from begin
+*/
 std::deque<Sample> Sampler::FetchSamples(const unsigned int count)
 {
 	boost::mutex::scoped_lock lock(mutex1);
-	std::deque<Sample> fetched;
-//	Sleep(100000);
-	std::deque<Sample>::iterator iter = sample_stack.begin()+count;
 
+
+	std::deque<Sample> fetched;
+
+	auto iter = sample_stack.begin()+count;
+	
 	if (iter > sample_stack.end())
 		iter = sample_stack.end();
 	
 	fetched.insert(fetched.begin(), sample_stack.begin(), iter);
 	sample_stack.erase(sample_stack.begin(), iter);
-	//fetched.splice(fetched.begin(), stack, iter, iter+count);
+	
 	return fetched;
 }
 
-void Sampler::RemoveSamples(std::deque<Sample> for_remove)
-{
-	sample_stack.erase(for_remove.begin(), for_remove.end());
-}
+
 
 Sample Sampler::GetSample()
 {	
@@ -99,16 +107,9 @@ optional<TString> Sampler::GetWindowCaption(HWND handle)
 
 ImagePaths Sampler::GetWindowExePath(HWND handle)
 {
-	/*LPWSTR szName;
-	szName = new WCHAR[MAX_PATH];
-	wmemset(szName, L'\0', MAX_PATH);*/
-
 	ImagePaths info;
 	ZeroMemory(&info, sizeof(ImagePaths));
-
 	FindWindowProcessModule(handle, &info);
-	//std::wcout << info.path << std::endl;
-
 	return info;
 }
 

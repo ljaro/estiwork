@@ -57,7 +57,7 @@ private:
 
 	void reset()
 	{
-		timer_.expires_from_now(boost::posix_time::seconds(1));
+		timer_.expires_from_now(boost::posix_time::milliseconds(50));
 		timer_.async_wait(boost::bind(&StateMachine::internal_handler, this));
 	}
 

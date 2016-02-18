@@ -16,9 +16,10 @@
 #include <pantheios/inserters/integer.hpp>
 #include <pantheios/inserters/w2m.hpp>
 //#include <pantheios/inserters/m2w.hpp>
-#include <pantheios/inserters/m2t.hpp>
+//#include <pantheios/inserters/m2t.hpp>
 #include <pantheios/inserters/character.hpp>
 #include <pantheios/implicit_link/be.WindowsConsole.h>
 
 
 // TODO: reference additional headers your program requires here
+namespace dd = ::pantheios;

@@ -22,11 +22,6 @@
 
 
 MessageSender::MessageSender(void):
-	//socktype(ZMQ_DEALER),
-	//zmq_endpoint("tcp://127.0.0.1:9090"),
-	//zmq_ctx(1),
-	//transport(new TZmqClient(zmq_ctx, zmq_endpoint, socktype)),
-	//socket(new TSocket("ptaszek", 7911)),
 	pipe(new TPipe("\\\\.\\pipe\\Pipe1")),
 	transport(new TBufferedTransport(pipe)),
 	//protocol(new TBinaryProtocol(transport)),
@@ -37,10 +32,6 @@ MessageSender::MessageSender(void):
 	{
 		transport->open();
 	}
-	//catch (const zmq::error_t& e)
-	//{
-	//	pantheios::log_CRITICAL("open connection, ", e);
-	//}
 	catch (const TTransportException& ee)
 	{
 		pantheios::log_CRITICAL("open connection, ", ee);
@@ -56,18 +47,34 @@ MessageSender::~MessageSender(void)
 
 void MessageSender::WaitConnection()
 {
-	transport->flush();
+	bool oneTime = 0;	
+
+	try
+	{ 
+		transport->flush();
+	}
+	catch (TTransportException& e)
+	{
+		pantheios::log_ERROR(e);
+	}
+
 	while (!transport->isOpen())
 	{
+
 		try
 		{
 			transport->open();
 		}
-		catch (TTransportException e)
-		{
-			pantheios::log_ERROR("Cannot open connection to server ", e);
-			Sleep(1000);
+		catch (TTransportException& e)
+		{						
+			if (oneTime == 0)
+			{
+				oneTime = 1;
+				pantheios::log_ERROR("Cannot open connection to server ", e);
+			}			
 		}
+
+		Sleep(1000);
 	}
 }
 
@@ -91,6 +98,7 @@ void MessageSender::SendSamples(std::deque<SampleMessage>& stack)
 		quick info end
 	*/
 	
+	int stackSizeBegin = stack.size();
 
 	std::deque<SampleMessage> failStack;
 	while(stack.size()>0)	
@@ -133,7 +141,7 @@ void MessageSender::SendSamples(std::deque<SampleMessage>& stack)
 		
 		if (start_flag == 1 && start_time > msg.sample.probe_time_.get())
 		{
-			pantheios::log_ALERT("problem z kolejnoscia czasu");
+			pantheios::log_ALERT("probe_time ordering problem");
 		}
 
 		if (!start_flag)
@@ -144,31 +152,27 @@ void MessageSender::SendSamples(std::deque<SampleMessage>& stack)
 		}
 
 		try
-		{
-			//WaitConnection();
+		{			
 			client.send(rpcEventSample);
 			
-			pantheios::log_DEBUG("client.send");
+			int stackSize = stack.size();
+
 			messages_sent++;
-
-
 			stack.pop_front();
+
+			pantheios::log_INFORMATIONAL("Sample sent (", dd::integer(stackSize), "/", dd::integer(stackSizeBegin), ")");
 		}
-		//catch(zmq::error_t e)
-		//{
-		//	pantheios::log_CRITICAL("zero mq error, ", e);
-		//}
 		catch (const TException& ee)
 		{
-			pantheios::log_CRITICAL("Some thrift error occurs, ", ee);
-			Sleep(1000);
+			pantheios::log_WARNING("MessageSender::SendSamples - ", ee);
+			Sleep(500);
 			transport->close();
 			WaitConnection();
 		}
 		
 	}
 
-	pantheios::log_DEBUG("End with fails in count : ", pantheios::integer(failStack.size()));
+	pantheios::log_DEBUG("All samples sent(", pantheios::integer(messages_sent), "). Stack is empty. Fails count: ", pantheios::integer(failStack.size()));
 	
 	std::swap(stack, failStack);
 }

@@ -40,8 +40,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>C:\Users\luk\Dysk Google\Projects\Natalis\thrift_gen;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\pantheios-1.0.1-beta214\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\luk\Dysk Google\Projects\Natalis\thrift_gen\gen-cpp;$(IncludePath)</IncludePath>
+    <LibraryPath>..\thrift_gen;..\3rd\pantheios\pantheios-1.0.1-beta216\lib;..\utils;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\thrift_gen\gen-cpp;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -61,7 +61,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>libthrift.lib;libthriftnb.lib;thriftgen.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>User32.lib;Rpcrt4.lib;libthrift.lib;libthriftnb.lib;thriftgen.lib;WindowsUtils.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -116,11 +116,6 @@
     <ClCompile Include="src\Sampler.cpp" />
     <ClCompile Include="src\StateMachine.cpp" />
     <ClCompile Include="src\stdafx.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WindowsUtils\WindowsUtils.vcxproj">
-      <Project>{75004935-ce19-48e4-88c8-b8a9ec5fd017}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

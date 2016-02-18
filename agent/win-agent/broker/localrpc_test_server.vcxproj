@@ -42,8 +42,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Program Files %28x86%29\ZeroMQ 4.0.4\include;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\pantheios-1.0.1-beta214\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\luk\Dysk Google\Projects\Natalis\3rd\pantheios-1.0.1-beta214\lib;C:\Users\luk\Dysk Google\Projects\Natalis\thrift_gen;C:\Users\luk\Dysk Google\Projects\Natalis\3rd\rabbitmq-c\librabbitmq\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\3rd\pantheios\stlsoft-1.9.124\include;..\3rd\rabbitmq-c\librabbitmq;..\3rd\pantheios\pantheios-1.0.1-beta216\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\3rd\pantheios\pantheios-1.0.1-beta216\lib;..\thrift_gen;..\3rd\rabbitmq-c\librabbitmq\Debug;..\3rd\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -85,7 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DatabaseInterface.h" />
+    <ClInclude Include="DatabaseWriter.h" />
     <ClInclude Include="local_rpc_handler.h" />
+    <ClInclude Include="MessageSender.h" />
     <ClInclude Include="RabbitMessageSender.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -93,8 +95,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DatabaseInterface.cpp" />
+    <ClCompile Include="DatabaseWriter.cpp" />
     <ClCompile Include="db_agent.cpp" />
     <ClCompile Include="local_rpc_handler.cpp" />
+    <ClCompile Include="MessageSender.cpp" />
     <ClCompile Include="RabbitMessageSender.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="utils.cpp" />

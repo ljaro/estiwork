@@ -16,5 +16,7 @@ public:
 private:
 	amqp_socket_t *socket;
 	amqp_connection_state_t conn;
+
+	bool Publish(amqp_bytes_t& message);
 };
 

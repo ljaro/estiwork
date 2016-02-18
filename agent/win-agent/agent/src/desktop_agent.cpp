@@ -6,19 +6,11 @@
 #include "Sampler.h"
 #include "SampleBuilder.h"
 #include <boost\asio\io_service.hpp>
-//#include <vld.h>
-//#pragma comment(lib, "libtcmalloc_minimal-debug")
 
-
-//#pragma comment(lib, "pantheios.1.be.WindowsConsole.vc10.mt.debug.lib")
 #pragma comment(lib, "pantheios.1.core.vc10.mt.debug.lib")
 #pragma comment(lib, "pantheios.1.util.vc10.mt.debug.lib")
-//#pragma comment(lib, "pantheios.1.fe.null.vc10.mt.debug.lib")
-//#pragma comment(lib, "pantheios.1.fe.all.vc10.mt.debug.lib")
-//#pragma comment(lib, "pantheios.1.bec.file.vc10.mt.debug.lib")
-//#pragma comment(lib, "pantheios.1.be.file.vc10.mt.debug.lib")
 
-//extern "C" const char PANTHEIOS_FE_PROCESS_IDENTITY[] = "MyApplication";
+//extern const PAN_CHAR_T PANTHEIOS_FE_PROCESS_IDENTITY[] = "desktop_agent.exe";
 
 namespace
 {
@@ -45,7 +37,7 @@ PANTHEIOS_CALL(void) pantheios_fe_uninit(void * /* token */)
 
 PANTHEIOS_CALL(char const*) pantheios_fe_getProcessIdentity(void * /* token */)
 {
-	return "example_cpp_custom_fe";
+	return "desktop_agent.exe";
 }
 
 
@@ -61,10 +53,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	boost::asio::io_service ios;
-	Sampler s;
+	Sampler sampler;
 	MessageSender sender;
-	SampleBuilder sb(s, sender);
-	StateMachine<Sampler> sm(ios, s);
+	SampleBuilder sb(sampler, sender);
+	StateMachine<Sampler> sm(ios, sampler);
 	sm.start();
 
 	return 0;

@@ -1,9 +1,11 @@
 #include "local_rpc_handler.h"
 #include <boost\thread.hpp>
 #include <boost\thread\mutex.hpp>
-
 #include <string>
+
 extern boost::mutex queue_mutex;
+
+
 LocalRpcHandler::LocalRpcHandler(std::deque<EventSample>& message_queue) :
 	message_queue(message_queue),	
 	memBuf(new TMemoryBuffer(10000)),
@@ -18,6 +20,7 @@ void LocalRpcHandler::ping() {
 }
 
 extern ::rpc::thrift::LocalRpcClient* g_LocalRpcClient;
+
 void LocalRpcHandler::send(const EventSample& sample) {
 
 	boost::mutex::scoped_lock scoped_lock(queue_mutex);	
@@ -28,5 +31,5 @@ void LocalRpcHandler::send(const EventSample& sample) {
 	//str = memBuf->getBufferAsString();
 	//memBuf->resetBuffer();
 	
-	pantheios::log_INFORMATIONAL("sample received");
+	pantheios::log_INFORMATIONAL("EventSample received");
 }

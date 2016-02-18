@@ -23,10 +23,9 @@ class Sampler
 public:
 	Sampler(void);
 	~Sampler(void);
-			// funkcja wywolywana cyklicznie.
+	// funkcja wywolywana cyklicznie.
 	void operator()();
 	std::deque<Sample> FetchSamples(const unsigned int count);
-	void RemoveSamples(std::deque<Sample> for_remove);
 	static Sample GetSample();
 	bool GetIdleState();
 private:

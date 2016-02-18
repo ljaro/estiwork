@@ -1,9 +1,14 @@
 #include "RabbitMessageSender.h"
 
+#include "Winsock2.h"
+
 #include <amqp_tcp_socket.h>
 #include <amqp.h>
 #include <amqp_framing.h>
 #include "utils.h"
+
+#include <boost\date_time\posix_time\posix_time.hpp>
+#include <boost\thread.hpp>
 
 RabbitMessageSender::RabbitMessageSender()
 {
@@ -108,26 +113,68 @@ void RabbitMessageSender::init()
 
 void RabbitMessageSender::close()
 {
-	die_on_amqp_error(amqp_channel_close(conn, 1, AMQP_REPLY_SUCCESS), "Closing channel");
-	die_on_amqp_error(amqp_connection_close(conn, AMQP_REPLY_SUCCESS), "Closing connection");
-	die_on_error(amqp_destroy_connection(conn), "Ending connection");
+	amqp_channel_close(conn, 1, AMQP_REPLY_SUCCESS);
+	amqp_connection_close(conn, AMQP_REPLY_SUCCESS);
+	amqp_destroy_connection(conn);
 }
 
-void RabbitMessageSender::sendOne(std::vector<uint8_t>& msgBuffer)
+bool RabbitMessageSender::Publish(amqp_bytes_t& message)
 {
-
-	char message[256];
-	amqp_bytes_t message_bytes;
-	message_bytes.len = msgBuffer.size();
-	message_bytes.bytes = msgBuffer.data();
-
-	die_on_error(amqp_basic_publish(conn,
+	int result = amqp_basic_publish(conn,
 		1,
 		amqp_cstring_bytes(""),
 		amqp_cstring_bytes("exchange_key1"),
 		0,
 		0,
 		NULL,
-		message_bytes),
-		"Publishing");
+		message);
+
+	if (result != AMQP_STATUS_OK)
+	{
+		amqp_status_enum resCodes = static_cast<amqp_status_enum>(result);
+
+		switch (resCodes)
+		{
+		case AMQP_STATUS_TIMER_FAILURE:
+		case AMQP_STATUS_HEARTBEAT_TIMEOUT:
+		case AMQP_STATUS_NO_MEMORY:
+		case AMQP_STATUS_TABLE_TOO_BIG:
+		case AMQP_STATUS_CONNECTION_CLOSED:
+		case AMQP_STATUS_SSL_ERROR:
+		case AMQP_STATUS_TCP_ERROR:
+			pantheios::log_ERROR("Rabbit publishing error ", pantheios::integer(resCodes), ", ", pantheios::integer(WSAGetLastError()));
+			break;
+
+		default:
+			pantheios::log_ERROR("Rabbit publishing other error ", pantheios::integer(resCodes), ", ", pantheios::integer(WSAGetLastError()));
+			break;
+		}		
+	}
+	else
+	{
+		//pantheios::log_NOTICE("Rabbit publishing OK");		
+	}
+
+	return AMQP_STATUS_OK == result;
+}
+
+void RabbitMessageSender::sendOne(std::vector<uint8_t>& msgBuffer)
+{
+	
+	amqp_bytes_t message_bytes;
+	message_bytes.len = msgBuffer.size();
+	message_bytes.bytes = msgBuffer.data();
+
+	while (1)
+	{
+		bool result = Publish(message_bytes);
+
+		if (result)
+			break;
+
+		boost::this_thread::sleep(boost::posix_time::millisec(1000));
+		
+		close();
+		init();
+	}
 }

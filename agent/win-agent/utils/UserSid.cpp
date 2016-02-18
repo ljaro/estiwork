@@ -1,5 +1,7 @@
 #include "UserSid.h"
 #include "GlobalFunctions.h"
+#include <pantheios/pantheios.hpp> //primary header file, always be included
+#include <pantheios/inserters/integer.hpp>
 
 UserSid::UserSid(void)
 {
@@ -15,8 +17,8 @@ std::string UserSid::GetUserSID()
 {
 	HANDLE hToken;
 	if (!OpenProcessToken( GetCurrentProcess(), TOKEN_ALL_ACCESS, &hToken )) 
-	{
-		printf( "OpenProcessToken Error %u\n", GetLastError() );
+	{		
+		pantheios::log_ERROR("OpenProcessToken Error GetLastError=", pantheios::integer(GetLastError()));
 		return FALSE;
 	}
 	//BYTE sidBuffer[256];

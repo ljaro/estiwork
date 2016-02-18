@@ -9,7 +9,9 @@
 //#include <pantheios/implicit_link/be.WindowsConsole.h>
 
 //Specify process identity
-const PAN_CHAR_T PANTHEIOS_FE_PROCESS_IDENTITY [] = "test.exe";
+extern const PAN_CHAR_T PANTHEIOS_FE_PROCESS_IDENTITY [] = "desktop_agent.exe";
+
+//#define LOG_BUFFER_ALLOC_TRY
 
 
 bool GetActiveConsoleSessionId(DWORD& session_id)
@@ -32,13 +34,8 @@ void Cleanup(PTOKEN_GROUPS ptgrp)
 {
 	// Release the buffer for the token groups.
 	if(ptgrp != NULL)
-	{		
-		pantheios::log_DEBUG("Freeing up the ptgrp buffer...\n");
+	{				
 		HeapFree(GetProcessHeap(), 0, (LPVOID)ptgrp);
-	}
-	else
-	{
-		pantheios::log_DEBUG("ptgrp buffer has been freed-up!\n");
 	}
 }
 
@@ -47,13 +44,8 @@ void Cleanup(PTOKEN_USER ptgrp)
 {
 	// Release the buffer for the token groups.
 	if(ptgrp != NULL)
-	{		
-		pantheios::log_DEBUG("Freeing up the ptgrp buffer...");
+	{				
 		HeapFree(GetProcessHeap(), 0, (LPVOID)ptgrp);
-	}
-	else
-	{
-		pantheios::log_DEBUG("ptgrp buffer has been freed-up!");		
 	}
 }
 
@@ -73,12 +65,8 @@ BOOL GetUserSID(HANDLE hToken, PSID& ppsid)
 	// Although we just provide an empty buffer...
 	if(ppsid == NULL)
 	{		
-		pantheios::log_DEBUG("The ppsid pointer is NULL lol!");
+		//pantheios::log_CRITICAL("The ppsid pointer is NULL lol!");
 		Cleanup(ptgrp);
-	}
-	else
-	{		
-		pantheios::log_DEBUG("The ppsid pointer is valid");
 	}
 
 
@@ -105,7 +93,7 @@ bool ConvertSIDToString(PSID ppsid, TString& ssid)
 		ppsid,  // Pointer to the SID structure to be converted
 		&pSid))) // Pointer to variable that receives the null-terminated SID string
 	{				
-		pantheios::log_DEBUG("ConvertSidToStringSid() failed, error ", pantheios::integer(GetLastError()));
+		pantheios::log_ERROR("ConvertSidToStringSid() failed, error ", pantheios::integer(GetLastError()));
 	}
 	else
 	{
@@ -135,28 +123,36 @@ bool GetToken(HANDLE hToken, T*& pToken, _TOKEN_INFORMATION_CLASS tokenClass)
 	{
 		if(GetLastError() != ERROR_INSUFFICIENT_BUFFER)
 		{
+#ifdef LOG_BUFFER_ALLOC_TRY
 			pantheios::log_DEBUG("GetTokenInformation() - buffer is OK!");
+#endif
 			Cleanup(pToken);
 		}
 		else
-		{
+		{			
+#ifdef LOG_BUFFER_ALLOC_TRY
 			pantheios::log_DEBUG("Not enough buffer, re-allocate...");
+#endif
 			pToken = (T*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, dwLength);
 		}
 
 		if(pToken == NULL)
 		{
-			pantheios::log_DEBUG("Failed to allocate heap for ptgrp, error %u", pantheios::integer(GetLastError()));
+			pantheios::log_CRITICAL("Failed to allocate heap for ptgrp, error %u", pantheios::integer(GetLastError()));
 			Cleanup(pToken);
 		}
 		else
 		{
+#ifdef LOG_BUFFER_ALLOC_TRY
 			pantheios::log_DEBUG("Well, buffer for ptgrp has been allocated!");
+#endif
 		}
 	}
 	else
 	{
+#ifdef LOG_BUFFER_ALLOC_TRY
 		pantheios::log_DEBUG("GetTokenInformation() is pretty fine!");
+#endif
 	}
 
 	// Get the token group information from the access token.
@@ -168,14 +164,15 @@ bool GetToken(HANDLE hToken, T*& pToken, _TOKEN_INFORMATION_CLASS tokenClass)
 		&dwLength       // receives required buffer size
 		))
 	{
-		pantheios::log_DEBUG("GetTokenInformation()  failed, error %u", pantheios::integer(GetLastError()));
+		pantheios::log_CRITICAL("GetTokenInformation()  failed, error %u", pantheios::integer(GetLastError()));
 		Cleanup(pToken);
 	}
 	else
 	{
+#ifdef LOG_BUFFER_ALLOC_TRY
 		pantheios::log_DEBUG("GetTokenInformation() - got the token group information!");
+#endif
 	}
-
 
 	return bSuccess;
 }
@@ -217,8 +214,7 @@ bool CopySID( PSID& from, PSID& to )
 	DWORD dwLength = 0;
 	// If the logon SID is found then make a copy of it.
 	dwLength = GetLengthSid(from);
-	// Allocate a storage
-	pantheios::log_DEBUG("Allocating heap for ppsid...");
+	// Allocate a storage	
 	to = (PSID) HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, dwLength);
 	// and verify again...
 
@@ -231,12 +227,5 @@ bool CopySID( PSID& from, PSID& to )
 		pantheios::log_DEBUG("Failed to copy the SID, error %u", pantheios::integer(GetLastError()));
 		HeapFree(GetProcessHeap(), 0, (LPVOID)to);
 		return false;
-	}
-	else
-	{
-		pantheios::log_DEBUG("The SID was copied successfully!");
-		return true;
-	}
-
-
+	}	
 }

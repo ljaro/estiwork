@@ -7,6 +7,7 @@
 #include <boost\date_time.hpp>
 #include "helperdef.h"
 
+//#define LOG_SAMPLEGROUPING
 
 // TODO: zauwzylem ze jest tu uzyty sampler i metoda wyciagania sampli. ale lepiej byloby zeby sampler byl tylko funktorem a reszta funkcji prywatne
 /// <summary>
