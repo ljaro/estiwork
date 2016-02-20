@@ -56,31 +56,20 @@ if not os.path.exists(thrift_input_path):
 if not os.path.exists(thrift_compiler_path):
     raise Exception("Thrift compiler not found")
  
-#output = os.popen(cmd1).read()
-#print cmd1
-
-##############################################
-# COMPILE THRIFT FILES
-# source_files = glob.glob(os.path.join(cpp_gen_path,'gen-cpp','*.cpp'))
-# print os.linesep
-# print 'Compiling thrift files:'
-# print os.linesep.join(source_files)
-# print os.linesep
 
 
 os.environ['PANTHEIOS_ROOT'] = r'C:\Users\luk\Dysk Google\Projects\Natalis\3rd\pantheios\pantheios-1.0.1-beta216'
 
 
-cpp_paths = ['d:/boost_1_47_0',thrift_inc]
-
 libs_paths = []
-libs_paths.append( r'"d:\boost\boost_1_47_0\stage\lib"')
+libs_paths.append( os.path.join('d:/','boost','boost_1_47_0','stage','lib'))
 libs_paths.append( os.path.join(third_party_dir,'pantheios','pantheios-1.0.1-beta216','lib'))
-libs_paths.append( r'C:\Program Files\Microsoft SDKs\Windows\v7.0\Lib')
-libs_paths.append( r'C:\Users\luk\Dysk Google\Projects\Natalis\3rd\lib')
-libs_paths.append( os.path.join('..','thrift_gen'))
-libs_paths.append( os.path.join('..','utils','Debug'))
+libs_paths.append( os.path.join('C:/','Program Files','Microsoft SDKs','Windows','v7.0','Lib'))
+libs_paths.append( os.path.join(third_party_dir,'lib'))
 libs_paths.append( os.path.join(third_party_dir,'rabbitmq-c','librabbitmq','Debug'))
+libs_paths.append( os.path.join('..','thrift_gen'))
+libs_paths.append( os.path.join('..','utils'))
+
 
 libs = []
 libs.append('User32')
