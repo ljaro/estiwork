@@ -88,8 +88,8 @@ int main(int argc, char **argv) {
 		return 1;
 	}
 
-	DatabaseWriter dbWriter(boost::posix_time::millisec(100));
-	MessageSender msgSender(boost::posix_time::millisec(3));
+	DatabaseWriter dbWriter(boost::posix_time::millisec(1000));
+	MessageSender msgSender(boost::posix_time::millisec(3000));
 
 	boost::thread db_writer(dbWriter);
 	boost::thread db_reader(msgSender);
