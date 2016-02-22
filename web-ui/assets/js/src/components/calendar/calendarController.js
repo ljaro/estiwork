@@ -22,7 +22,7 @@ angular.module('myApp.calendarModule')
 
 
         var updateToScopeEnabled = true;
-        var viewMode = 0;
+        var viewMode = -1;
 
 
         var bindChangeDate = function(elem2){
