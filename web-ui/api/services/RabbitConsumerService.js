@@ -10,7 +10,7 @@ var amq = require('amqplib');
 
 var RabbitConsumerService = {
 
-    createConnection: function () {
+    createConnection: function (perSrv) {
 
         var q = 'tasks';
         var amq = require('amqplib');
@@ -46,8 +46,8 @@ var RabbitConsumerService = {
             channel.assertQueue(q);
             channel.consume(q, function (msg) {
                 if (msg !== null) {
-                    console.log(msg.content.toString());
-                    channel.ack(msg);
+                    channel.ack(msg); //TODO simple ack, no exception safety
+                    perSrv.accept(msg);
                 }
             });
         }
