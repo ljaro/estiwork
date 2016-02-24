@@ -13,13 +13,11 @@ module.exports.bootstrap = function (cb) {
 
     sails.on('lifted', function () {
 
-        try
-        {
+        try {
             var perSrv = EventsPersistancyService;
             RabbitConsumerService.createConnection(perSrv);
         }
-        catch(e)
-        {
+        catch(e) {
             console.log(e);
             process.exit(1);
         }

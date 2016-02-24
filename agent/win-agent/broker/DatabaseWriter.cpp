@@ -4,7 +4,7 @@
 #include <boost\shared_ptr.hpp>
 
 #include <thrift/protocol/TBinaryProtocol.h>
-#include <thrift/protocol/TJSONProtocol.h>
+#include "TSimpleJSONProtocol.h"
 #include <thrift/server/TSimpleServer.h>
 #include <thrift/transport/TServerSocket.h>
 #include <thrift/transport/TPipeServer.h>
@@ -34,7 +34,10 @@ DatabaseWriter::~DatabaseWriter()
 void DatabaseWriter::operator()()
 {
 	shared_ptr<TMemoryBuffer> memBuff(new TMemoryBuffer());
-	TJSONProtocol protocol(memBuff);
+
+	shared_ptr<TJSONProtocol> protocol(new TJSONProtocol(memBuff));
+	shared_ptr<TSimpleJSONProtocol> protoDecor(new TSimpleJSONProtocol(memBuff));
+
 	DatabaseInterface db;
 
 	while (1)
@@ -52,7 +55,7 @@ void DatabaseWriter::operator()()
 			while (!message_queue.empty()) {
 
 				EventSample sample = message_queue.front();
-				sample.write(&protocol);
+				sample.write(protoDecor.get());
 
 				uint8_t* buffer = NULL;
 				uint32_t size;

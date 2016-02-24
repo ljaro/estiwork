@@ -12,7 +12,7 @@ var RabbitConsumerService = {
 
     createConnection: function (perSrv) {
 
-        var q = 'tasks';
+        var q = 'exchange_key1';
         var amq = require('amqplib');
         var RECONNECT_T = 300;
         var RETRY_TIMES = 5;
