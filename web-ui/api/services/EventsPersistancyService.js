@@ -3,8 +3,12 @@
  */
 
 var EventsPersistancyService = {
-    accept : function acceptService(){
-        console.log('msg accepted');
+    accept : function acceptService(msg){
+      var content = msg.content.toString();
+
+      Event.create(JSON.parse(content)).then(function(x){
+
+      });
     }
 }
 
