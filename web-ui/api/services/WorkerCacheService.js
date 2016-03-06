@@ -7,14 +7,30 @@ var Q = require('q');
 var WorkerCacheService = {
   get: function getService(login) {
 
-    var deffered = Q.defer();
+    var __found = function (data) {
+      return Q.fcall(function () {
+        return data;
+      });
+    }
 
-    setTimeout(function () {
-      deffered.resolve('res');
-      //deffered.reject('err');
-    }, 500);
 
-    return deffered.promise;
+    var __notfound = function (err) {
+      return Q.fcall(function () {
+        return err;
+      });
+    }
+
+    var __searchFun = function (arg1) {
+      return Worker.findOneByLogin(arg1);
+    }
+
+    var p = __searchFun(login);
+    p.then(__found, __notfound);
+    return p;
+
+  },
+
+  getOrCreate: function getOrCreateService(login) {
 
   }
 }

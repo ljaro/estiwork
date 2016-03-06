@@ -10,8 +10,7 @@ var AppCategoryService = {
     var deffered = Q.defer();
 
     setTimeout(function () {
-      deffered.resolve('res');
-      //deffered.reject('err');
+      deffered.resolve('PRODUCTIVE');
     }, 500);
 
     return deffered.promise;
