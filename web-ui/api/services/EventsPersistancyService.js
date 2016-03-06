@@ -3,20 +3,37 @@
  */
 
 var Q = require('q');
+var util = require('util');
 
 var EventsPersistancyService = {
   accept: function acceptService(msg) {
 
-    var worker_id = WorkerCacheService.get('some login');
-    var app_category = AppCategoryService.get('some');
-
-    var p = Q.all([worker_id, app_category]).then(function () {
+    try {
       var content = msg.content.toString();
       content = JSON.parse(content);
-      return Event.create(content);
-    });
 
-    return p;
+      var worker_id = WorkerCacheService.get(content.user.user_login);
+      var app_category = AppCategoryService.get(content.sample.image_fs_name);
+
+      var p = Q.all([worker_id, app_category]).then(function (res) {
+
+        if (util.isNullOrUndefined(res[0]) || util.isNullOrUndefined(res[1])) {
+          throw new Error('Time:' + content.probe_time + ', worker_id or app_category is undefined');
+        }
+
+        content['worker_id'] = res[0];
+        content['app_category'] = res[1];
+        return Event.create(content);
+      });
+
+      return p;
+    }
+    catch (e) {
+      return Q.nfcall(function () {
+        throw new Error(e);
+      })
+    }
+
   }
 }
 
