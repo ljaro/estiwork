@@ -31,7 +31,7 @@
   "scripts": {
     "debug": "node debug app.js",
     "start": "node app.js",
-    "test": "mocha test/bootstrap.test.js test/unit/**/*.test.js"
+    "test": "mocha test/bootstrap.test.js test/api/**/*.test.js"
   },
   "main": "app.js",
   "repository": {
@@ -42,10 +42,11 @@
   "license": "",
   "devDependencies": {
     "angular-mocks": "^1.4.4",
-    "chai": "^3.2.0",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.2.0",
     "grunt-beep": "^0.3.2",
     "mocha": "^2.2.5",
-    "sinon": "^1.16.1",
+    "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0"
   }
 }
