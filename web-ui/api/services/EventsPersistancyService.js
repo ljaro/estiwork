@@ -2,56 +2,21 @@
  * Created by luk on 2016-02-22.
  */
 
-var q = require('q');
+var Q = require('q');
 
 var EventsPersistancyService = {
   accept: function acceptService(msg) {
 
-    function handleNotFoundWorker() {
-      console.log('handleNotFoundWorker');
-    }
+    var worker_id = WorkerCacheService.get('some login');
+    var app_category = AppCategoryService.get('some');
 
-    try {
-
-      function _getAppCategory() {
-        var defer = q.defer();
-
-        setTimeout(function () {
-          defer.resolve('cos');
-        }, 500);
-
-        return defer.promise;
-      }
-
-      //TODO extend finding by more properties
-      function _getWorkerId(login) {
-        return Worker.findOneByLogin(login);
-      }
-
+    var p = Q.all([worker_id, app_category]).then(function () {
       var content = msg.content.toString();
       content = JSON.parse(content);
+      return Event.create(content);
+    });
 
-      _getWorkerId('Tate2').then(function (res) {
-        if(res === undefined){
-          handleNotFoundWorker();
-        }
-
-
-      }).catch(function (err) {
-        console.log(err);
-      });
-
-      //_getAppCategory().when(function(err, res){
-      //  content["app_category"] = res;
-      //}).then(function(err, res){
-      //  content["worker_id"] = _getWorkerId();
-      //  Event.create(content).then(function (x) {});
-      //});
-    }
-    catch(err){
-      console.log(err);
-    }
-
+    return p;
   }
 }
 
