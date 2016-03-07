@@ -33,7 +33,7 @@ describe('EventsPersistancyService', function () {
     };
 
     beforeEach(function () {
-      s1 = sinon.stub(WorkerCacheService, 'get').returns(Q.resolve(""));
+      s1 = sinon.stub(WorkerCacheService, 'getOrCreate').returns(Q.resolve(""));
       s2 = sinon.stub(AppCategoryService, 'get').returns(Q.resolve(""));
       s3 = sinon.stub(Event, 'create').returns(Q.resolve(1));
     });
@@ -47,7 +47,7 @@ describe('EventsPersistancyService', function () {
 
     it('should reject when WorkerCacheService return undefined promise', function () {
       s1.restore();
-      s1 = sinon.stub(WorkerCacheService, 'get').returns(Q.resolve(undefined));
+      s1 = sinon.stub(WorkerCacheService, 'getOrCreate').returns(Q.resolve(undefined));
       var res = EventsPersistancyService.accept(message);
       return expect(res).to.be.rejected;
     });
@@ -99,7 +99,7 @@ describe('EventsPersistancyService', function () {
 
     it('should reject when WorkerCacheService.get fails', function () {
       s1.restore();
-      s1 = sinon.stub(WorkerCacheService, 'get').returns(Q.reject(''));
+      s1 = sinon.stub(WorkerCacheService, 'getOrCreate').returns(Q.reject(''));
       var p = EventsPersistancyService.accept(message);
       return expect(p).to.be.rejected;
     });
@@ -115,14 +115,14 @@ describe('EventsPersistancyService', function () {
       s1.restore();
       s2.restore();
 
-      const worker_id = '11111-22222-33333';
+      const worker_id = {id:'11111-22222-33333'};
       const app_cat   = 'PROD';
 
-      s1 = sinon.stub(WorkerCacheService, 'get').returns(Q.resolve(worker_id));
+      s1 = sinon.stub(WorkerCacheService, 'getOrCreate').returns(Q.resolve(worker_id));
       s2 = sinon.stub(AppCategoryService, 'get').returns(Q.resolve(app_cat));
 
       var msg = JSON.parse(JSON.stringify(TPL)); //copy
-      msg['worker_id'] = worker_id;
+      msg['worker_id'] = worker_id.id;
       msg['app_category'] = app_cat;
 
       return EventsPersistancyService.accept(message).then(function () {
