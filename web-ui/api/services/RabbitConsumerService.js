@@ -57,7 +57,7 @@ var RabbitConsumerService = {
           }, function (err) {
             //TODO handle error
             //TODO refactor flow of resuming etc.
-            //console.log('error after accept' + err);
+            console.log('error after accept' + err);
             if (uack++ > UACKE_TIMES) {
               channel.close();
               __channel(newestConnection);
