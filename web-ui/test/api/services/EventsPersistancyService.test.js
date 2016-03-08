@@ -13,7 +13,8 @@ var Q = require('q');
 
 var TPL = {
   "user": {
-    "user_login": "randomLogin"
+    "user_login": "randomLogin",
+    "user_sid" : "1111-22222"
   },
   "sample": {
     "image_fs_name": "app.exe"
@@ -45,6 +46,7 @@ describe('EventsPersistancyService', function () {
       s3.restore();
     });
 
+
     it('should reject when WorkerCacheService return undefined promise', function () {
       s1.restore();
       s1 = sinon.stub(WorkerCacheService, 'getOrCreate').returns(Q.resolve(undefined));
@@ -71,7 +73,7 @@ describe('EventsPersistancyService', function () {
 
     it('should call WorkerCacheService to get worker_id', function () {
       EventsPersistancyService.accept(message);
-      return expect(s1).to.have.been.calledOnce;
+      return expect(s1).to.have.been.calledWith(TPL.user.user_login, TPL.user.user_sid);
     });
 
     it('should call AppCategoryService to get app_category', function () {
