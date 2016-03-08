@@ -12,7 +12,7 @@ var EventsPersistancyService = {
       var content = msg.content.toString();
       content = JSON.parse(content);
 
-      var worker_id = WorkerCacheService.getOrCreate(content.user.user_login);
+      var worker_id = WorkerCacheService.getOrCreate(content.user.user_login, content.user.user_sid);
       var app_category = AppCategoryService.get(content.sample.image_fs_name);
 
       var p = Q.all([worker_id, app_category]).then(function (res) {

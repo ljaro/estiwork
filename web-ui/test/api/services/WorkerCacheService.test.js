@@ -16,7 +16,7 @@ describe('WorkerCacheService', function () {
   describe('#get', function () {
 
     var s1, s2, s3, s4;
-    var worker = {"login": "test"};
+    var worker = {"login": "test", "user_sid":"1111-22222"};
     var group = {
       "id" : new ObjectId(),
       "name" : "Unknown",
@@ -39,34 +39,90 @@ describe('WorkerCacheService', function () {
     });
 
     it('should return promise with ObjectId when found for getService', function () {
-      var p = WorkerCacheService.get('login1');
+      var p = WorkerCacheService.get('login1', 'user_sid');
       return expect(p).to.eventually.become(worker);
     });
 
     it('should return null when worker not found for getService', function () {
       s1.restore();
       s1 = sinon.stub(Worker, 'findOneByLogin').returns(Q.resolve(null));
-      var p = WorkerCacheService.get('login1');
+      var p = WorkerCacheService.get('login1', 'user_sid');
       return expect(p).to.eventually.become(null);
     });
 
     it('should return found if found for getOrCreateService', function () {
-      var p = WorkerCacheService.getOrCreate('login1');
+      var p = WorkerCacheService.getOrCreate('login1', 'user_sid');
       return expect(p).to.eventually.become(worker);
     });
 
     it('should return newly created if not found for getOrCreateService', function () {
-      var p = WorkerCacheService.getOrCreate(worker.login);
+      var p = WorkerCacheService.getOrCreate(worker.login, worker.user_sid);
       return expect(p).to.eventually.become(worker);
     });
 
     it('should return newly created with property auto_created', function () {
-      var login = worker.login;
-      return WorkerCacheService.getOrCreate(login).then(function () {
-        sinon.assert.calledWith(s3, {login: login}, sinon.match.has("group", group.id).and(sinon.match.has("auto_created", 1).or(sinon.match.has("auto_created", "true"))));
+      return WorkerCacheService.getOrCreate(worker.login, worker.user_sid).then(function () {
+        sinon.assert.calledWith(
+          s3,
+          {login: worker.login, user_sid:worker.user_sid},
+          sinon.match.has("group", group.id)
+            .and(sinon.match.has("user_sid", worker.user_sid))
+            .and(sinon.match.has("auto_created", 1).or(sinon.match.has("auto_created", "true"))));
+
       }, function () {
         assert.fail();
       });
     });
+
+    it('should retry find until found or create', function () {
+      var err = new Error;
+      err['originalError'] = {'code': 11000};
+
+      s3.restore();
+      s3 = sinon.stub(Worker, 'findOrCreate');
+      s3.onCall(0).returns(Q.reject(err));
+      s3.onCall(1).returns(Q.reject(err));
+      s3.onCall(2).returns(Q.resolve(worker));
+
+      return WorkerCacheService.getOrCreate(worker.login, worker.user_sid).then(function () {
+        expect(s3).calledThrice
+      }, function () {
+        assert.fail();
+      });
+    });
+
+    it('should not retry if error different then duplicate keys', function () {
+      var err = new Error;
+      err['originalError'] = {'code': 0};
+
+      s3.restore();
+      s3 = sinon.stub(Worker, 'findOrCreate');
+      s3.onCall(0).returns(Q.reject(err));
+      s3.onCall(1).returns(Q.reject(err));
+      s3.onCall(2).returns(Q.resolve(worker));
+
+      return WorkerCacheService.getOrCreate(worker.login, worker.user_sid).then(function () {
+        assert.fail()
+      }, function () {
+        expect(s3).calledOnce;
+      });
+    });
+
+    it('should not retry if error different then duplicate keys2', function () {
+      var err = new Error;
+
+      s3.restore();
+      s3 = sinon.stub(Worker, 'findOrCreate');
+      s3.onCall(0).returns(Q.reject(err));
+      s3.onCall(1).returns(Q.reject(err));
+      s3.onCall(2).returns(Q.resolve(worker));
+
+      return WorkerCacheService.getOrCreate(worker.login, worker.user_sid).then(function () {
+        assert.fail()
+      }, function () {
+        expect(s3).calledOnce;
+      });
+    });
+
   });
 });
