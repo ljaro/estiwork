@@ -132,5 +132,28 @@ describe('EventsPersistancyService', function () {
       });
     });
 
+    it('should have appropriate properties', function () {
+      s1.restore();
+      s2.restore();
+
+      const worker_id = {id:'11111-22222-33333'};
+      const app_cat   = 'PROD';
+
+      s1 = sinon.stub(WorkerCacheService, 'getOrCreate').returns(Q.resolve(worker_id));
+      s2 = sinon.stub(AppCategoryService, 'get').returns(Q.resolve(app_cat));
+
+      var msg = JSON.parse(JSON.stringify(TPL)); //copy
+      msg['worker_id'] = worker_id.id;
+      msg['app_category'] = app_cat;
+
+      return EventsPersistancyService.accept(message).then(function () {
+        sinon.assert.calledWith(s3,
+          sinon.match.has("worker_id", msg.worker_id)
+            .and(sinon.match.has("app_category", app_cat))
+            .and(sinon.match.has("app_category", app_cat))
+        );
+      });
+    });
+
   });
 });
