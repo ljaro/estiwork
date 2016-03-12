@@ -5,6 +5,7 @@
   "main": "nodesSim.js",
   "dependencies": {
     "amqplib": "^0.4.1",
+    "chance": "^1.0.1",
     "moment": "^2.12.0"
   },
   "devDependencies": {},
