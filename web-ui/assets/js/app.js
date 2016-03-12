@@ -19,6 +19,7 @@ angular.module('myApp', [
   'myApp.tableexModule',
   'myApp.myFilters',
   'myApp.testgen',
+  'myApp.blinky',
   'ui.bootstrap',
   'ui.router',
   'ui.grid',
