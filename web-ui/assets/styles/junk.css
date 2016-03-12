@@ -98,3 +98,15 @@
   opacity: 1;
 }
 
+
+/*flash blinky*/
+[blink-on-change] {
+  transition: all 1s;
+  -webkit-transition: all 1s;
+}
+[blink-on-change].changed {
+  border-radius: 2px;
+  background-color: #DDD;
+  transition: none;
+  -webkit-transition: none;
+}
