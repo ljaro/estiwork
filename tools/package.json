@@ -1,0 +1,16 @@
+{
+  "name": "tools",
+  "version": "1.0.0",
+  "description": "test sim",
+  "main": "nodesSim.js",
+  "dependencies": {
+    "amqplib": "^0.4.1",
+    "moment": "^2.12.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
