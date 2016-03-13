@@ -1,4 +1,3 @@
-
 var moment = require('moment');
 var chance = require('chance').Chance(1234);
 
@@ -15,7 +14,7 @@ const q = 'exchange_key1';
 
 
 
-Object.prototype.values = function (obj) {
+Object.values = function (obj) {
     var vals = Object.keys(obj).map(function (key) {
         return obj[key];
     });
@@ -25,15 +24,13 @@ Object.prototype.values = function (obj) {
 var channels = [];
 
 var user_info_weights = {
-    'only active guy': 1,
+    'only active guy': 3,
     'only idle guy': 1,
-    'more active guy': 1,
+    'more active guy': 2,
     'more idle guy': 1,
     'random guy': 1,
 };
 
-
-var user_status_weights = {}
 
 chance.mixin({
     'user': function () {
@@ -54,7 +51,7 @@ var users = Object.keys(user_info_weights).map(function (user_info) {
     }
 }).concat(chance.unique(chance.user, NUM_OF_WORKERS));
 
-console.log("Worker num: " + users.length + " (" + NUM_OF_WORKERS + ")");
+//console.log("Worker num: " + users.length + " (" + NUM_OF_WORKERS + ")");
 
 var samples = [{
     "window_caption": "Chrome - Gazeta.pl",
@@ -108,7 +105,7 @@ function calcPresence(user) {
             result = chance.weighted(['ACTIVE', 'IDLE'], [1, 1]);
             break;
         default:
-            system.exit();
+            process.exit();
             break;
     }
 
@@ -134,7 +131,7 @@ function calcStatus(user) {
             result = chance.weighted(['BREAK', 'WORK_WITH_COMPUTER', 'WORK_WITHOUT_COMPUTER', 'CUSTOM_1', 'CUSTOM_2', 'CUSTOM_3'], [1, 1, 1, 1, 1, 1]);
             break;
         default:
-            system.exit();
+            process.exit();
             break;
     }
 
@@ -147,7 +144,7 @@ function fillTPL(probe_time, duration, sample, user) {
 
     var TPL = {
         "probe_time": probe_time.toISOString(),
-        "duration": (duration / 1000),
+        "duration": duration,
         "user": user,
         "machine": {"machine_sid": ""},
         "sample": sample
@@ -168,7 +165,7 @@ function sendTPL(ch, probe_time, duration, user) {
     var testTimeNow = moment();
     var diff = testTimeNow.diff(probe_time);
 
-    schedule(ch, randomIntInc(5 * 1000, 35 * 1000), user);
+    schedule(ch, randomIntInc(5, 35), user);
 
     ch.sendToQueue(q, new Buffer(fillTPL(probe_time, duration, chance.pickone(samples), user)));
 
@@ -182,11 +179,11 @@ function schedule(ch, duration, user) {
     var probe_time = moment();
     setTimeout(function () {
         sendTPL(ch, probe_time, duration, user);
-    }, duration);
+    }, duration * 1000);
 }
 
 function startSending(ch, user) {
-    schedule(ch, 1000, user);
+    schedule(ch, 1, user);
 }
 
 function bail(err) {
@@ -226,3 +223,4 @@ function exitHandler(options, err) {
 }
 
 process.on('exit', exitHandler.bind(null, {cleanup: true}));
+
