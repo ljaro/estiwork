@@ -41,179 +41,9 @@ var samplesFirefox = [
   }
 ]
 
-var cats = [
-  {
-    id: 1,
-    name: 'Chrome',
-    group: 'Web browser',
 
-    signatures: [
-      {
-        "name": 'md5',
-        "weight": 100,
-        "func": function (str) {
-          return ['111111'].indexOf(str) != -1;
-        }
-      },
-      {
-        "name": 'resource_image_name',
-        "weight": 7,
-        "func": function (str) {
-          return str === 'chrome.exe';
-        }
-      },
-      {
-        "name": 'window_caption',
-        "weight": 5,
-        "func": function (str) {
-          return str.endsWith('- Google Chrome');
-        }
-      },
-      {
-        "name": 'image_fs_name',
-        "weight": 2,
-        "func": function (str) {
-          return str === 'chrome.exe';
-        }
-      },
-      {
-        "name": 'image_full_path',
-        "weight": 2,
-        "func": function (str) {
-          return str.endsWith('chrome.exe');
-        }
-      }
-    ]
-  },
-  {
-    id: 2,
-    name: 'Firefox',
-    group: 'Web browser',
-    md5: [],
 
-    signatures: [
-      {
-        "name": 'md5',
-        "weight": 100,
-        "func": function (str) {
-          return ['222222'].indexOf(str) != -1;
-        }
-      },
-      {
-        "name": 'resource_image_name',
-        "weight": 7,
-        "func": function (str) {
-          return str === 'firefox.exe';
-        }
-      },
-      {
-        "name": 'window_caption',
-        "weight": 5,
-        "func": function (str) {
-          return str.endsWith('- Mozilla Firefox');
-        }
-      },
-      {
-        "name": 'image_fs_name',
-        "weight": 2,
-        "func": function (str) {
-          return str === 'firefox.exe';
-        }
-      },
-      {
-        "name": 'image_full_path',
-        "weight": 2,
-        "func": function (str) {
-          return str.endsWith('firefox.exe');
-        }
-      }
-    ]
-  },
-  {
-    id: 3,
-    name: 'Opera',
-    group: 'Web browser',
-    md5: [],
 
-    signatures: [
-      {
-        "name": 'md5',
-        "weight": 100,
-        "func": function (str) {
-          return ['333333'].indexOf(str) != -1;
-        }
-      },
-      {
-        "name": 'resource_image_name',
-        "weight": 7,
-        "func": function (str) {
-          return str === 'opera.exe';
-        }
-      },
-      {
-        "name": 'window_caption',
-        "weight": 5,
-        "func": function (str) {
-          return str.endsWith('- Opera');
-        }
-      },
-      {
-        "name": 'image_fs_name',
-        "weight": 2,
-        "func": function (str) {
-          return str === 'opera.exe';
-        }
-      },
-      {
-        "name": 'image_full_path',
-        "weight": 2,
-        "func": function (str) {
-          return str.endsWith('opera.exe');
-        }
-      }
-    ]
-  }
-]
-
-function findAppSig(sample) {
-  var rank = {};
-
-  if (sample.resource_image_name === '' || sample.resource_image_name === undefined) {
-    sample.resource_image_name = sample.image_fs_name;
-  }
-
-  if (sample.resource_image_name !== sample.image_fs_name) {
-    return 'Invalid'
-  }
-
-  cats.forEach(function (cat) {
-    cat.signatures.forEach(function (sig) {
-      if (sample[sig.name] !== undefined) {
-        if (rank[cat.id] === undefined) rank[cat.id] = 0;
-        rank[cat.id] += sig.func(sample[sig.name]) === true ? sig.weight : 0;
-      }
-    });
-  });
-
-  var max = 0;
-  var max_id;
-  Object.keys(rank).forEach(function (x) {
-    if (rank[x] > max) {
-      max = rank[x];
-      max_id = x;
-    }
-  });
-
-  var result = cats.filter(function (x) {
-    return x.id == max_id;
-  });
-
-  if (result.length > 0) {
-    return result[0].name;
-  }
-
-  return undefined;
-}
 
 describe('AppCategoryService', function () {
 
@@ -226,9 +56,11 @@ describe('AppCategoryService', function () {
     });
 
     it('matching test firefox examples', function () {
-      samplesFirefox.forEach(function (sample) {
-        var res = findAppSig(sample);
-        assert.equal(res, 'Firefox');
+      var operations = samplesFirefox.map(AppCategoryService.get);
+      return Q.all(operations).then(function (res) {
+        res.forEach(function (value) {
+          assert.equal(value.name, 'Firefox');
+        });
       });
     });
 
@@ -241,8 +73,10 @@ describe('AppCategoryService', function () {
         "md5": '333333'
       }
 
-      var res = findAppSig(sample);
-      assert.equal(res, 'Opera');
+      var res = AppCategoryService.get(sample).then(function (obj) {
+        return obj.name;
+      });
+      return expect(res).to.eventually.equals('Opera');
     });
 
     it('resource_name should have priority over caption', function () {
@@ -253,8 +87,10 @@ describe('AppCategoryService', function () {
         "resource_image_name": "firefox.exe"
       }
 
-      var res = findAppSig(sample);
-      assert.equal(res, 'Firefox');
+      var res = AppCategoryService.get(sample).then(function (obj) {
+        return obj.name;
+      });
+      return expect(res).to.eventually.equals('Firefox');
     });
 
     it('caption should have lower priority then resource_name', function () {
@@ -265,8 +101,10 @@ describe('AppCategoryService', function () {
         "resource_image_name": "chrome.exe"
       }
 
-      var res = findAppSig(sample);
-      assert.equal(res, 'Chrome');
+      var res = AppCategoryService.get(sample).then(function (obj) {
+        return obj.name;
+      });
+      return expect(res).to.eventually.equals('Chrome');
     });
 
     it('resouce_name should have lower priority then md5', function () {
@@ -280,8 +118,10 @@ describe('AppCategoryService', function () {
         "resource_image_name": ""
       }
 
-      var res = findAppSig(sample);
-      assert.equal(res, 'Chrome');
+      var res = AppCategoryService.get(sample).then(function (obj) {
+        return obj.name;
+      });
+      return expect(res).to.eventually.equals('Chrome');
     });
 
     it('should detect when image_fs_name or image_full_path is in odd directory', function () {
@@ -299,8 +139,10 @@ describe('AppCategoryService', function () {
         "resource_image_name": "chrome.exe"
       }
 
-      var res = findAppSig(sample);
-      assert.equal(res, 'Invalid');
+      var res = AppCategoryService.get(sample).then(function (obj) {
+        return obj.name;
+      });
+      return expect(res).to.eventually.equals('Invalid');
     });
 
   });
