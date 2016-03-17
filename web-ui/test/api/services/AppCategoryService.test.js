@@ -38,12 +38,6 @@ var samplesFirefox = [
     "image_fs_name": "firefox.exe",
     "image_full_path": "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe",
     "resource_image_name": "firefox.exe"
-  },
-  {
-    "window_caption": "XXXXXXXXXXXXXX - Mozilla Firefox XXXXXXXXXX",
-    "image_fs_name": "firefox1111.exe",
-    "image_full_path": "C:\\Program Files (x86)\\Mozilla Firefox\\firefox1111.exe",
-    "resource_image_name": "firefox.exe"
   }
 ]
 
@@ -52,31 +46,41 @@ var cats = [
     id: 1,
     name: 'Chrome',
     group: 'Web browser',
-    md5:[],
 
     signatures: [
       {
+        "name": 'md5',
+        "weight": 100,
+        "func": function (str) {
+          return ['111111'].indexOf(str) != -1;
+        }
+      },
+      {
+        "name": 'resource_image_name',
+        "weight": 7,
+        "func": function (str) {
+          return str === 'chrome.exe';
+        }
+      },
+      {
         "name": 'window_caption',
+        "weight": 5,
         "func": function (str) {
           return str.endsWith('- Google Chrome');
         }
       },
       {
         "name": 'image_fs_name',
+        "weight": 2,
         "func": function (str) {
           return str === 'chrome.exe';
         }
       },
       {
         "name": 'image_full_path',
+        "weight": 2,
         "func": function (str) {
           return str.endsWith('chrome.exe');
-        }
-      },
-      {
-        "name": 'resource_image_name',
-        "func": function (str) {
-          return str === 'chrome.exe';
         }
       }
     ]
@@ -85,31 +89,86 @@ var cats = [
     id: 2,
     name: 'Firefox',
     group: 'Web browser',
-    md5:[],
+    md5: [],
 
     signatures: [
       {
+        "name": 'md5',
+        "weight": 100,
+        "func": function (str) {
+          return ['222222'].indexOf(str) != -1;
+        }
+      },
+      {
+        "name": 'resource_image_name',
+        "weight": 7,
+        "func": function (str) {
+          return str === 'firefox.exe';
+        }
+      },
+      {
         "name": 'window_caption',
+        "weight": 5,
         "func": function (str) {
           return str.endsWith('- Mozilla Firefox');
         }
       },
       {
         "name": 'image_fs_name',
+        "weight": 2,
         "func": function (str) {
           return str === 'firefox.exe';
         }
       },
       {
         "name": 'image_full_path',
+        "weight": 2,
         "func": function (str) {
           return str.endsWith('firefox.exe');
+        }
+      }
+    ]
+  },
+  {
+    id: 3,
+    name: 'Opera',
+    group: 'Web browser',
+    md5: [],
+
+    signatures: [
+      {
+        "name": 'md5',
+        "weight": 100,
+        "func": function (str) {
+          return ['333333'].indexOf(str) != -1;
         }
       },
       {
         "name": 'resource_image_name',
+        "weight": 7,
         "func": function (str) {
-          return str === 'firefox.exe';
+          return str === 'opera.exe';
+        }
+      },
+      {
+        "name": 'window_caption',
+        "weight": 5,
+        "func": function (str) {
+          return str.endsWith('- Opera');
+        }
+      },
+      {
+        "name": 'image_fs_name',
+        "weight": 2,
+        "func": function (str) {
+          return str === 'opera.exe';
+        }
+      },
+      {
+        "name": 'image_full_path',
+        "weight": 2,
+        "func": function (str) {
+          return str.endsWith('opera.exe');
         }
       }
     ]
@@ -119,11 +178,19 @@ var cats = [
 function findAppSig(sample) {
   var rank = {};
 
+  if (sample.resource_image_name === '' || sample.resource_image_name === undefined) {
+    sample.resource_image_name = sample.image_fs_name;
+  }
+
+  if (sample.resource_image_name !== sample.image_fs_name) {
+    return 'Invalid'
+  }
+
   cats.forEach(function (cat) {
     cat.signatures.forEach(function (sig) {
       if (sample[sig.name] !== undefined) {
-        if(rank[cat.id] === undefined) rank[cat.id] = 0;
-        rank[cat.id] += sig.func(sample[sig.name]) === true ? 1 : 0;
+        if (rank[cat.id] === undefined) rank[cat.id] = 0;
+        rank[cat.id] += sig.func(sample[sig.name]) === true ? sig.weight : 0;
       }
     });
   });
@@ -166,18 +233,55 @@ describe('AppCategoryService', function () {
     });
 
     it('md5 should have priority over caption and res_name', function () {
+      var sample = {
+        "window_caption": "RabbitMQ Management - Google Chrome",
+        "image_fs_name": "firefox.exe",
+        "image_full_path": "C:\\Program Files (x86)\\Opera\\firefox.exe",
+        "resource_image_name": "firefox.exe",
+        "md5": '333333'
+      }
+
+      var res = findAppSig(sample);
+      assert.equal(res, 'Opera');
     });
 
     it('resource_name should have priority over caption', function () {
+      var sample = {
+        "window_caption": "RabbitMQ Management - Google Chrome",
+        "image_fs_name": "firefox.exe",
+        "image_full_path": "C:\\Program Files (x86)\\Opera\\opera.exe",
+        "resource_image_name": "firefox.exe"
+      }
+
+      var res = findAppSig(sample);
+      assert.equal(res, 'Firefox');
     });
 
     it('caption should have lower priority then resource_name', function () {
+      var sample = {
+        "window_caption": "RabbitMQ Management - Mozilla Firefox",
+        "image_fs_name": "chrome.exe",
+        "image_full_path": "C:\\Program Files (x86)\\Mozilla Firefox\\opera.exe",
+        "resource_image_name": "chrome.exe"
+      }
+
+      var res = findAppSig(sample);
+      assert.equal(res, 'Chrome');
     });
 
     it('resouce_name should have lower priority then md5', function () {
     });
 
     it('image_fs_name and image_full_path should be used when no resource_name', function () {
+      var sample = {
+        "window_caption": "RabbitMQ Management - Google Chrome",
+        "image_fs_name": "chrome.exe",
+        "image_full_path": "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe",
+        "resource_image_name": ""
+      }
+
+      var res = findAppSig(sample);
+      assert.equal(res, 'Chrome');
     });
 
     it('should detect when image_fs_name or image_full_path is in odd directory', function () {
@@ -188,6 +292,15 @@ describe('AppCategoryService', function () {
     it('should detect when image_fs_name or image_full_path has odd names', function () {
       // hard to code, optional
       // consider removing usage
+      var sample = {
+        "window_caption": "RabbitMQ Management - Google Chrome",
+        "image_fs_name": "firefox.exe",
+        "image_full_path": "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe",
+        "resource_image_name": "chrome.exe"
+      }
+
+      var res = findAppSig(sample);
+      assert.equal(res, 'Invalid');
     });
 
   });
