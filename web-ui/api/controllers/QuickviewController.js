@@ -39,7 +39,7 @@ module.exports = {
           $group: {
             _id: {wid: "$worker_id", grp: "$group"},
             //"login_datetime": {$min: {$cond: [{$eq: ["$user.presence", 'active']}, "$probe_time", new Date("2215-04-25T00:00:00")]}},
-            "login_datetime": {$min:"$probe_time"},
+            "login_datetime": {$min: "$probe_time"},
             "logout_datetime": {
               $max: {
                 $cond: [
@@ -52,9 +52,9 @@ module.exports = {
             },
             "total_logged_time": {$sum: "$duration"},
             "total_break_time": {$sum: {$cond: [{$eq: ["$user.work_mode", 'BREAK']}, "$duration", 0]}},
-            "total_idle_time": {$sum: {$cond: [{$eq: ["$user.presence", 'IDLE']}, "$duration", 0]}},
+            "total_idle_time": {$sum: {$cond: [{$and:[{$ne: ["$user.work_mode", 'BREAK']},{$eq: ["$user.presence", 'IDLE']}]}, "$duration", 0]}},
             "total_pro_apps_time": {$sum: {$cond: [{$eq: ["$app_category", 'PRODUCTIVE']}, "$duration", 0]}},
-            "total_nonpro_apps_time": {$sum: {$cond: [{$ne: ["$app_category", 'PRODUCTIVE']}, "$duration", 0]}},
+            "total_nonpro_apps_time": {$sum: {$cond: [{$and:[{$ne: ["$user.work_mode", 'BREAK']},{$ne: ["$app_category", 'PRODUCTIVE']}]}, "$duration", 0]}},
             "current_app": {$last: "$sample"},
             "custom_1": {$sum: {$cond: [{$eq: ["$user.work_mode", 'CUSTOM_1']}, "$duration", 0]}},
             "custom_2": {$sum: {$cond: [{$eq: ["$user.work_mode", 'CUSTOM_2']}, "$duration", 0]}},
