@@ -13,7 +13,7 @@ var EventsPersistancyService = {
       content = JSON.parse(content);
 
       var worker_id = WorkerCacheService.getOrCreate(content.user.user_login, content.user.user_sid);
-      var app_category = AppCategoryService.get(content.sample.image_fs_name);
+      var app_category = AppCategoryService.get(content.sample);
 
       var p = Q.all([worker_id, app_category]).then(function (res) {
 
@@ -22,7 +22,7 @@ var EventsPersistancyService = {
         }
 
         content['worker_id'] = res[0].id;
-        content['app_category'] = res[1];
+        content['app_category'] = res[1].type;
         return Event.create(content);
       });
 

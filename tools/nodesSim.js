@@ -54,35 +54,35 @@ var users = Object.keys(user_info_weights).map(function (user_info) {
 //console.log("Worker num: " + users.length + " (" + NUM_OF_WORKERS + ")");
 
 var samples = [{
-    "window_caption": "Chrome - Gazeta.pl",
-    "image_fs_name": "Chrome",
-    "image_full_path": "\\Device\\HarddiskVolume2\\Windows\\System32\\cmd.exe",
-    "resource_image_name": ""
+    "window_caption": "Gazeta.pl - Google Chrome",
+    "image_fs_name": "chrome.exe",
+    "image_full_path": "C:\\Program Files (x86)\\Google Chrome\\chrome.exe",
+    "resource_image_name": "chrome.exe"
 }, {
-    "window_caption": "Chrome - wp.pl - serwis informacyjny",
-    "image_fs_name": "Chrome",
-    "image_full_path": "\\Device\\HarddiskVolume2\\Windows\\System32\\cmd.exe",
-    "resource_image_name": ""
+    "window_caption": "wp.pl - serwis informacyjny - Google Chrome",
+    "image_fs_name": "chrome.exe",
+    "image_full_path": "C:\\Program Files (x86)\\Google Chrome\\chrome.exe",
+    "resource_image_name": "chrome.exe"
 }, {
     "window_caption": "GG",
     "image_fs_name": "GG",
-    "image_full_path": "\\Device\\HarddiskVolume2\\Windows\\System32\\cmd.exe",
+    "image_full_path": "C:\\Program Files (x86)\\GG\\gg.exe",
     "resource_image_name": ""
 }, {
     "window_caption": "Company of Heroes 2",
-    "image_fs_name": "coh2",
-    "image_full_path": "\\Device\\HarddiskVolume2\\Windows\\System32\\cmd.exe",
-    "resource_image_name": ""
+    "image_fs_name": "coh2.exe",
+    "image_full_path": "\\Device\\HarddiskVolume2\\Windows\\System32\\coh2.exe",
+    "resource_image_name": "coh2.exe"
 }, {
     "window_caption": "Mount and Blade 2",
-    "image_fs_name": "mb2",
-    "image_full_path": "\\Device\\HarddiskVolume2\\Windows\\System32\\cmd.exe",
-    "resource_image_name": ""
+    "image_fs_name": "mb2.exe",
+    "image_full_path": "\\Device\\HarddiskVolume2\\Windows\\System32\\mb2.exe",
+    "resource_image_name": "mb2.exe"
 }, {
     "window_caption": "Total commander - shareware",
-    "image_fs_name": "totalcmd",
-    "image_full_path": "\\Device\\HarddiskVolume2\\Windows\\System32\\cmd.exe",
-    "resource_image_name": ""
+    "image_fs_name": "totalcmd.exe",
+    "image_full_path": "\\Device\\HarddiskVolume2\\Windows\\System32\\totalcmd.exe",
+    "resource_image_name": "totalcmd.exe"
 }];
 
 function calcPresence(user) {
