@@ -112,5 +112,17 @@ angular.module('myApp.myFilters', []).
     return function (sec) {
       return moment.duration(sec, 'seconds').format('d[d] h[h] m[m]', {trim: false});
     }
-  }]);
+  }]).
+filter('truncDots', [function () {
+
+  return function (str) {
+    const maxstrlen = 10;
+
+    if(str.length>maxstrlen){
+      return str.substr(0, maxstrlen-3)+'...';
+    }else{
+      return str;
+    }
+  }
+}]);
 

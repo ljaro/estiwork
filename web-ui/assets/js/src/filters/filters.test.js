@@ -165,4 +165,19 @@ describe('myApp.myFilters', function() {
       }
     }));
   });
+
+  describe('truncDots', function(){
+    it('has truncDots filter', function($filter){
+      expect($filter('truncDots')).not.toBeNull();
+    });
+
+    it('should not modify short names', inject(function ($filter) {
+      expect($filter('truncDots')('short name')).toEqual("short name");
+    }));
+
+    it('should trunc with dots', inject(function ($filter) {
+      expect($filter('truncDots')('short nameX')).toEqual("short n...");
+    }));
+
+  });
 });

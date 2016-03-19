@@ -44,7 +44,7 @@
       <!--<td>{{row.total_downloads_size | inkb}}</td>-->
       <td>{{row.custom_1 | secondsToDateTime | date: 'HH:mm:ss' }}</td>
       <td>{{row.custom_2 | secondsToDateTime | date: 'HH:mm:ss' }}</td>
-      <td>{{row.workstation}}</td>
+      <td uib-tooltip="{{row.workstation.name}}" tooltip-placement="left" tooltip-append-to-body="true">{{row.workstation.name | truncDots}}</td>
       <td>{{row.effectiveness}}</td>
     </tr>
 
