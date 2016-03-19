@@ -11,12 +11,19 @@ angular.module('myApp.quickview', ['ngResource', 'ui.grid', 'ui.bootstrap', 'myA
       $scope.flatGroups = [];
       $scope.test = 0;
 
+      $scope.filterSelection = function (x) {
+        var res = $scope.flatGroups.find(function (xx) {
+          return xx.id === x && xx.ticked;
+        });
+        return res !== undefined;
+      }
+
       GroupsService.all.query(function (data) {
 
         // translate groups to flat json
         var flatGroups = [];
         angular.forEach(data, function (value, key) {
-          var newGrpItm = {'id': value.id, 'name': value.name, 'ticked': false};
+          var newGrpItm = {'id': value.id, 'name': value.name, 'ticked': true};
           this.push(newGrpItm);
         }, flatGroups);
 
@@ -44,7 +51,7 @@ angular.module('myApp.quickview', ['ngResource', 'ui.grid', 'ui.bootstrap', 'myA
 
       $scope.loadData = function (array_of_groups) {
 
-        console.log("load data:" + array_of_groups);
+        // console.log("load data:" + array_of_groups);
 
         last_groups = array_of_groups;
 
@@ -79,13 +86,16 @@ angular.module('myApp.quickview', ['ngResource', 'ui.grid', 'ui.bootstrap', 'myA
         console.log('unselecting:' + grpId);
 
 
-        $scope.tabledata.groups = $scope.tabledata.groups.filter(function (obj) {
-          return obj.id !== grpId;
-        });
+        //TODO remove?
+        // $scope.tabledata.groups = $scope.tabledata.groups.filter(function (obj) {
+        //   return obj.id !== grpId;
+        // });
 
-        $scope.groupSelections.splice($scope.groupSelections.indexOf(grpId), 1);
+        $scope.flatGroups.find(function (x) {
+          return x.id === grpId;
+        })['ticked'] = false;
 
-        console.log('unselected after:' + $scope.groupSelections);
+        console.log('unselected after:' + JSON.stringify($scope.groupSelections));
       }
 
 

@@ -3,6 +3,7 @@
  */
 
 var Q = require('q');
+
 //TODO: refactoring what should I do to add new field to user model.. write down every point
 var WorkerCacheService = {
   get: function getService(login, usersid) {
@@ -43,7 +44,10 @@ var WorkerCacheService = {
       });
     }
 
-    return Group.findOneByName("Unknown").then(function (grp) {
+    var test_groups = ['Unknown', 'Unknown1', 'Unknown2', 'Unknown3', 'Unknown4'];
+
+
+    return Group.findOneByName(test_groups[Math.floor((Math.random() * 5))]).then(function (grp) {
       return __findOrCreateWorker(grp);
     });
 

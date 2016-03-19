@@ -14,7 +14,7 @@ var Q = require('q');
 var TPL = {
   "user": {
     "user_login": "randomLogin",
-    "user_sid" : "1111-22222"
+    "user_sid" : "1111-22222",
   },
   "sample": {
     "image_fs_name": "app.exe"
@@ -129,7 +129,7 @@ describe('EventsPersistancyService', function () {
       s1.restore();
       s2.restore();
 
-      const worker_id = {id:'11111-22222-33333'};
+      const worker_id = {id:'11111-22222-33333', group:'2343'};
       const app_cat   = {name:'Web Browsers', type:'PRODUCTIVE'};
 
       s1 = sinon.stub(WorkerCacheService, 'getOrCreate').returns(Q.resolve(worker_id));
@@ -139,6 +139,7 @@ describe('EventsPersistancyService', function () {
       msg['worker_id'] = worker_id.id;
       msg['app_category'] = app_cat.type;
       msg['workstation_id'] = '111';
+      msg['group'] = '2343';
 
       return EventsPersistancyService.accept(message).then(function () {
         sinon.assert.calledWith(s3, msg);
