@@ -5,6 +5,7 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 var moment = require('moment');
+var ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
 
@@ -19,17 +20,24 @@ module.exports = {
 
 
       var d1 = new Date(new Date().setHours(0, 0, 0, 0));
-      console.log(d1.toISOString());
+      //console.log(d1.toISOString());
 
       var d2 = moment().startOf('day').toDate();
-      console.log(d2.toISOString());
+      //console.log(d2.toISOString());
+
+      var groupsFilter = req.params['id'].split(',');
+
+      groupsFilter = groupsFilter.map(function (x) {
+        return new ObjectId(x);
+      });
 
       collection.aggregate([
         {
           $match: {
             probe_time: {
               $gt: new Date(new Date().setHours(0, 0, 0, 0))
-            }
+            },
+            group: {$in:groupsFilter}
           }
         },
         {
@@ -116,6 +124,9 @@ module.exports = {
         if (err)
           return res.serverError(err);
 
+        results.forEach(function (group) {
+
+        })
 
         results.forEach(function (group) {
           group.data.map(function (person) {
@@ -129,6 +140,7 @@ module.exports = {
 
         Worker.find({})
           .populate('leader')
+          .populate('group')
           .exec(function (err, res2) {
 
             results.map(function (x, y) {
@@ -146,6 +158,7 @@ module.exports = {
 
                 xx.worker_name = tmpWorker ? tmpWorker.login : "-";
                 xx['worker_info'] = tmpWorker ? tmpWorker.info : "no info";
+                x['name'] = tmpWorker.group.name;
 
               })
             });

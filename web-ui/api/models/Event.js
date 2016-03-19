@@ -20,6 +20,7 @@ module.exports = {
      */
     app_category:{type:'string'},
     worker_id:{model:'worker'},
-    workstation_id:{model:'workstation'}
+    workstation_id:{model:'workstation'},
+    group:{model:'group'}
 	}
 }

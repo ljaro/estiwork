@@ -16,8 +16,12 @@ var DefaultDocsService = {
 
 
         Group.findOrCreate({name: 'Unknown'}, {name: 'Unknown'}),
+        Group.findOrCreate({name: 'Unknown1'}, {name: 'Unknown1'}),
+        Group.findOrCreate({name: 'Unknown2'}, {name: 'Unknown2'}),
+        Group.findOrCreate({name: 'Unknown3'}, {name: 'Unknown3'}),
+        Group.findOrCreate({name: 'Unknown4'}, {name: 'Unknown4'}),
 
-        
+
         Worker.native(function (err, collection) {
           return collection.createIndex({
             "login": 1,

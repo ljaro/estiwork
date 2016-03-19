@@ -30,6 +30,9 @@ var EventsPersistancyService = {
         content['app_category'] = res[1].type;
         content['workstation_id'] = res[2];
 
+        // group id at event creation time
+        content['group'] = res[0].group;
+
         return Event.create(content);
       });
 
