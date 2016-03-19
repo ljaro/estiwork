@@ -56,6 +56,7 @@ module.exports = {
             "total_pro_apps_time": {$sum: {$cond: [{$eq: ["$app_category", 'PRODUCTIVE']}, "$duration", 0]}},
             "total_nonpro_apps_time": {$sum: {$cond: [{$and:[{$ne: ["$user.work_mode", 'BREAK']},{$ne: ["$app_category", 'PRODUCTIVE']}]}, "$duration", 0]}},
             "current_app": {$last: "$sample"},
+            "last_app_cat": {$last: "$app_category"},
             "custom_1": {$sum: {$cond: [{$eq: ["$user.work_mode", 'CUSTOM_1']}, "$duration", 0]}},
             "custom_2": {$sum: {$cond: [{$eq: ["$user.work_mode", 'CUSTOM_2']}, "$duration", 0]}},
             "custom_3": {$sum: {$cond: [{$eq: ["$user.work_mode", 'CUSTOM_3']}, "$duration", 0]}},
@@ -65,7 +66,9 @@ module.exports = {
             "print_qty": {$last: "$print_qty"},
             "total_downloads_size": {$last: "$total_downloads_size"},
             "workstation": {$last: "$workstation"},
-            "effectiveness": {$last: "$effectiveness"}
+            "effectiveness": {$last: "$effectiveness"},
+
+            "last_app_cat": {$last:"$app_category"}
 
           }
         },
@@ -78,7 +81,15 @@ module.exports = {
             "total_idle_time": 1,
             "total_pro_apps_time": 1,
             "total_nonpro_apps_time": 1,
-            "current_app": 1,
+
+            "current_app": {
+              "window_caption":"$current_app.window_caption",
+              "image_fs_name":"$current_app.image_fs_name",
+              "image_full_path":"$current_app.image_full_path",
+              "resource_image_name":"$current_app.resource_image_name",
+              "app_category":"$last_app_cat"
+            },
+
             "custom_1": 1,
             "custom_2": 1,
             "custom_3": 1,
@@ -141,4 +152,5 @@ module.exports = {
 
   }
 };
+
 
