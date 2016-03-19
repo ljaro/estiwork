@@ -78,7 +78,7 @@ describe('EventsPersistancyService', function () {
 
     it('should call WorkerCacheService to get worker_id', function () {
       EventsPersistancyService.accept(message);
-      return expect(s1).to.have.been.calledWith(TPL.user.user_login, TPL.user.user_sid);
+      return expect(s1).to.have.been.calledWith(TPL.user);
     });
 
     it('should call AppCategoryService to get app_category', function () {

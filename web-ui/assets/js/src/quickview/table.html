@@ -28,7 +28,7 @@
     <tbody>
     <tr ng-repeat="row in group.data track by $index">
       <!--<td>{{row.leader_name}}</td>-->
-      <td>{{row.worker_name}}</td>
+      <td uib-tooltip="{{row.worker_info}}" tooltip-placement="left" tooltip-append-to-body="true">{{row.worker_name}}</td>
       <td>{{row.login_datetime | date: 'HH:mm'}}</td>
       <td>{{row.logout_datetime | date: 'HH:mm'}}</td>
       <td>{{row.total_logged_time | secondsToDateTime | date: 'HH:mm:ss'}}</td>

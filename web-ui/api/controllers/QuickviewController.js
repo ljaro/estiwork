@@ -145,6 +145,7 @@ module.exports = {
                 });
 
                 xx.worker_name = tmpWorker ? tmpWorker.login : "-";
+                xx['worker_info'] = tmpWorker ? tmpWorker.info : "no info";
 
               })
             });

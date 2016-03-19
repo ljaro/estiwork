@@ -13,7 +13,7 @@ var EventsPersistancyService = {
       content = JSON.parse(content);
 
       var promises = [
-        WorkerCacheService.getOrCreate(content.user.user_login, content.user.user_sid),
+        WorkerCacheService.getOrCreate(content.user),
         AppCategoryService.get(content.sample),
         WorkstationCacheService.getOrCreate(content.machine.machine_sid)
       ];

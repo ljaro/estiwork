@@ -16,7 +16,7 @@ describe('WorkerCacheService', function () {
   describe('#get', function () {
 
     var s1, s2, s3, s4;
-    var worker = {"login": "test", "user_sid":"1111-22222"};
+    var worker = {"user_login": "test", "user_sid":"1111-22222", "user_info":"this is user info"};
     var group = {
       "id" : new ObjectId(),
       "name" : "Unknown",
@@ -51,22 +51,23 @@ describe('WorkerCacheService', function () {
     });
 
     it('should return found if found for getOrCreateService', function () {
-      var p = WorkerCacheService.getOrCreate('login1', 'user_sid');
+      var p = WorkerCacheService.getOrCreate(worker);
       return expect(p).to.eventually.become(worker);
     });
 
     it('should return newly created if not found for getOrCreateService', function () {
-      var p = WorkerCacheService.getOrCreate(worker.login, worker.user_sid);
+      var p = WorkerCacheService.getOrCreate(worker);
       return expect(p).to.eventually.become(worker);
     });
 
     it('should return newly created with property auto_created', function () {
-      return WorkerCacheService.getOrCreate(worker.login, worker.user_sid).then(function () {
+      return WorkerCacheService.getOrCreate(worker).then(function () {
         sinon.assert.calledWith(
           s3,
-          {login: worker.login, user_sid:worker.user_sid},
+          {login: worker.user_login, user_sid:worker.user_sid},
           sinon.match.has("group", group.id)
             .and(sinon.match.has("user_sid", worker.user_sid))
+            .and(sinon.match.has("info", worker.user_info))
             .and(sinon.match.has("auto_created", 1).or(sinon.match.has("auto_created", "true"))));
 
       }, function () {
@@ -84,7 +85,7 @@ describe('WorkerCacheService', function () {
       s3.onCall(1).returns(Q.reject(err));
       s3.onCall(2).returns(Q.resolve(worker));
 
-      return WorkerCacheService.getOrCreate(worker.login, worker.user_sid).then(function () {
+      return WorkerCacheService.getOrCreate(worker).then(function () {
         expect(s3).calledThrice
       }, function () {
         assert.fail();
@@ -101,7 +102,7 @@ describe('WorkerCacheService', function () {
       s3.onCall(1).returns(Q.reject(err));
       s3.onCall(2).returns(Q.resolve(worker));
 
-      return WorkerCacheService.getOrCreate(worker.login, worker.user_sid).then(function () {
+      return WorkerCacheService.getOrCreate(worker).then(function () {
         assert.fail()
       }, function () {
         expect(s3).calledOnce;
@@ -117,7 +118,7 @@ describe('WorkerCacheService', function () {
       s3.onCall(1).returns(Q.reject(err));
       s3.onCall(2).returns(Q.resolve(worker));
 
-      return WorkerCacheService.getOrCreate(worker.login, worker.user_sid).then(function () {
+      return WorkerCacheService.getOrCreate(worker).then(function () {
         assert.fail()
       }, function () {
         expect(s3).calledOnce;

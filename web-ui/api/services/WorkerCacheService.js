@@ -3,13 +3,16 @@
  */
 
 var Q = require('q');
-
+//TODO: refactoring what should I do to add new field to user model.. write down every point
 var WorkerCacheService = {
   get: function getService(login, usersid) {
     return Worker.findOneByLogin({login: login, user_sid: usersid});
   },
 
-  getOrCreate: function getOrCreateService(login, usersid) {
+  getOrCreate: function getOrCreateService(user) {
+
+    var login = user.user_login;
+    var usersid = user.user_sid;
 
     function __findOrCreateWorker(grp) {
       var findCrit = {
@@ -20,6 +23,7 @@ var WorkerCacheService = {
       var createCrit = {
         login: login,
         user_sid: usersid,
+        info: user.user_info,
         auto_created: 1,
         group: grp.id
       };
