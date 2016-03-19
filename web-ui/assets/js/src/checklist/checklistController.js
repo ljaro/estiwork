@@ -36,13 +36,13 @@ angular.module('myApp.checklistModule')
             var checked = $(e.target).prop('active') || false;
 
             if($(e.target).is('a')){
-              $child_input = $(e.target).find('input');
-              $child_input.trigger("click");
-              checked = $child_input.prop("checked");
+              var child_input = $(e.target).find('input');
+              child_input.trigger("click");
+              checked = child_input.prop("checked");
             }
             else if($(e.target).is('label')) {
-              $child_input = $(e.target).find('input');
-              checked = $child_input.prop("checked");
+              var child_input = $(e.target).find('input');
+              checked = child_input.prop("checked");
             }
             else if($(e.target).is('input')) {
               checked = $(e.target).prop("checked");
