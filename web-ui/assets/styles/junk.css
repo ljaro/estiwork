@@ -104,9 +104,22 @@
   transition: all 1s;
   -webkit-transition: all 1s;
 }
-[blink-on-change].changed {
+[blink-on-change].changed_green {
   border-radius: 2px;
-  background-color: #DDD;
+  background-color: #6ddd10;
+  transition: none;
+  -webkit-transition: none;
+}
+
+
+/*flash blinky*/
+[blink-on-change] {
+  transition: all 1s;
+  -webkit-transition: all 1s;
+}
+[blink-on-change].changed_red {
+  border-radius: 2px;
+  background-color: #dd4b08;
   transition: none;
   -webkit-transition: none;
 }

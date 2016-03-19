@@ -7,9 +7,12 @@ angular.module('myApp.blinky')
       scope.$watch(attr.blinkOnChange, function (nv, ov) {
 
         if (nv != ov) {
-          elem.addClass('changed');
+
+          var style = (nv.app_category === 'PRODUCTIVE' ? 'changed_green' : 'changed_red');
+
+          elem.addClass(style);
           $timeout(function () {
-            elem.removeClass('changed');
+            elem.removeClass(style);
           }, 1000);
         }
       }, true);
