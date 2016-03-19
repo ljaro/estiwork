@@ -12,22 +12,24 @@ var EventsPersistancyService = {
       var content = msg.content.toString();
       content = JSON.parse(content);
 
-      var worker_id = WorkerCacheService.getOrCreate(content.user.user_login, content.user.user_sid);
-      var app_category = AppCategoryService.get(content.sample);
-      var workstation_id = WorkstationCacheService.findIdBySid(content.machine.machine_sid);
+      var promises = [
+        WorkerCacheService.getOrCreate(content.user.user_login, content.user.user_sid),
+        AppCategoryService.get(content.sample),
+        WorkstationCacheService.findIdBySid(content.machine.machine_sid)
+      ];
 
-      var p = Q.all([worker_id, app_category, workstation_id]).then(function (res) {
+      var p = Q.all(promises).then(function (res) {
 
-        if (
-          util.isNullOrUndefined(res[0]) ||
-          util.isNullOrUndefined(res[1]) ||
-          util.isNullOrUndefined(res[2])) {
-          throw new Error('Time:' + content.probe_time + ', worker_id or app_category is undefined');
-        }
+        res.forEach(function (p) {
+          if(util.isNullOrUndefined(p)){
+            throw new Error('Time:' + content.probe_time + ', worker_id or app_category is undefined');
+          }
+        });
 
         content['worker_id'] = res[0].id;
         content['app_category'] = res[1].type;
         content['workstation_id'] = res[2];
+
         return Event.create(content);
       });
 

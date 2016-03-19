@@ -104,6 +104,13 @@ describe('EventsPersistancyService', function () {
       return expect(p).to.be.rejected;
     });
 
+    it.only('should reject when one of promises throw', function () {
+      s4.restore();
+      s4 = sinon.stub(WorkstationCacheService, 'findIdBySid').returns(Q.resolve(null));
+      var p = EventsPersistancyService.accept(message);
+      return expect(p).to.be.rejected;
+    });
+
     it('should reject when WorkerCacheService.get fails', function () {
       s1.restore();
       s1 = sinon.stub(WorkerCacheService, 'getOrCreate').returns(Q.reject(''));
