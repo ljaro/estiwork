@@ -19,6 +19,7 @@ module.exports = {
      * This are helper calculated fields
      */
     app_category:{type:'string'},
-    worker_id:{model:'worker'}
+    worker_id:{model:'worker'},
+    workstation_id:{model:'workstation'}
 	}
 }
