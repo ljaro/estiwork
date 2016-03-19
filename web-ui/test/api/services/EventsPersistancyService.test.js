@@ -18,6 +18,9 @@ var TPL = {
   },
   "sample": {
     "image_fs_name": "app.exe"
+  },
+  "machine" : {
+    "machine_sid" : "3823284-82384-2389482"
   }
 };
 
@@ -35,8 +38,9 @@ describe('EventsPersistancyService', function () {
 
     beforeEach(function () {
       s1 = sinon.stub(WorkerCacheService, 'getOrCreate').returns(Q.resolve(""));
-      s2 = sinon.stub(AppCategoryService, 'get').returns(Q.resolve(""));
+      s2 = sinon.stub(AppCategoryService, 'get').returns(Q.resolve({name:'Web Browsers', type:'PRODUCTIVE'}));
       s3 = sinon.stub(Event, 'create').returns(Q.resolve(1));
+      s4 = sinon.stub(WorkstationCacheService, 'findIdBySid').returns(Q.resolve('111'));
     });
 
     afterEach(function () {
@@ -44,6 +48,7 @@ describe('EventsPersistancyService', function () {
       s1.restore();
       s2.restore();
       s3.restore();
+      s4.restore();
     });
 
 
@@ -113,19 +118,20 @@ describe('EventsPersistancyService', function () {
       expect(p).to.be.rejected;
     });
 
-    it('should persist msg with worker_id and app_category', function () {
+    it('should persist msg with worker_id and app_category and workstation_id', function () {
       s1.restore();
       s2.restore();
 
       const worker_id = {id:'11111-22222-33333'};
-      const app_cat   = 'PROD';
+      const app_cat   = {name:'Web Browsers', type:'PRODUCTIVE'};
 
       s1 = sinon.stub(WorkerCacheService, 'getOrCreate').returns(Q.resolve(worker_id));
       s2 = sinon.stub(AppCategoryService, 'get').returns(Q.resolve(app_cat));
 
       var msg = JSON.parse(JSON.stringify(TPL)); //copy
       msg['worker_id'] = worker_id.id;
-      msg['app_category'] = app_cat;
+      msg['app_category'] = app_cat.type;
+      msg['workstation_id'] = '111';
 
       return EventsPersistancyService.accept(message).then(function () {
         sinon.assert.calledWith(s3, msg);
@@ -137,20 +143,22 @@ describe('EventsPersistancyService', function () {
       s2.restore();
 
       const worker_id = {id:'11111-22222-33333'};
-      const app_cat   = 'PROD';
+      const app_cat   = {name:'Web Browsers', type:'PRODUCTIVE'};
 
       s1 = sinon.stub(WorkerCacheService, 'getOrCreate').returns(Q.resolve(worker_id));
       s2 = sinon.stub(AppCategoryService, 'get').returns(Q.resolve(app_cat));
 
       var msg = JSON.parse(JSON.stringify(TPL)); //copy
       msg['worker_id'] = worker_id.id;
-      msg['app_category'] = app_cat;
+      msg['app_category'] = app_cat.type;
+      msg['workstation_id'] = '111';
 
       return EventsPersistancyService.accept(message).then(function () {
         sinon.assert.calledWith(s3,
           sinon.match.has("worker_id", msg.worker_id)
-            .and(sinon.match.has("app_category", app_cat))
-            .and(sinon.match.has("app_category", app_cat))
+            .and(sinon.match.has("app_category", app_cat.type))
+            .and(sinon.match.has("app_category", app_cat.type))
+            .and(sinon.match.has("workstation_id", msg.workstation_id))
         );
       });
     });

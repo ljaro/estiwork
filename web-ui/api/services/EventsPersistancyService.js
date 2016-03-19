@@ -14,15 +14,20 @@ var EventsPersistancyService = {
 
       var worker_id = WorkerCacheService.getOrCreate(content.user.user_login, content.user.user_sid);
       var app_category = AppCategoryService.get(content.sample);
+      var workstation_id = WorkstationCacheService.findIdBySid(content.machine.machine_sid);
 
-      var p = Q.all([worker_id, app_category]).then(function (res) {
+      var p = Q.all([worker_id, app_category, workstation_id]).then(function (res) {
 
-        if (util.isNullOrUndefined(res[0]) || util.isNullOrUndefined(res[1])) {
+        if (
+          util.isNullOrUndefined(res[0]) ||
+          util.isNullOrUndefined(res[1]) ||
+          util.isNullOrUndefined(res[2])) {
           throw new Error('Time:' + content.probe_time + ', worker_id or app_category is undefined');
         }
 
         content['worker_id'] = res[0].id;
         content['app_category'] = res[1].type;
+        content['workstation_id'] = res[2];
         return Event.create(content);
       });
 
