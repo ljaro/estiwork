@@ -52,9 +52,9 @@ module.exports = {
             },
             "total_logged_time": {$sum: "$duration"},
             "total_break_time": {$sum: {$cond: [{$eq: ["$user.work_mode", 'BREAK']}, "$duration", 0]}},
-            "total_idle_time": {$sum: {$cond: [{$and:[{$ne: ["$user.work_mode", 'BREAK']},{$eq: ["$user.presence", 'IDLE']}]}, "$duration", 0]}},
+            "total_idle_time": {$sum: {$cond: [{$and: [{$ne: ["$user.work_mode", 'BREAK']}, {$eq: ["$user.presence", 'IDLE']}]}, "$duration", 0]}},
             "total_pro_apps_time": {$sum: {$cond: [{$eq: ["$app_category", 'PRODUCTIVE']}, "$duration", 0]}},
-            "total_nonpro_apps_time": {$sum: {$cond: [{$and:[{$ne: ["$user.work_mode", 'BREAK']},{$ne: ["$app_category", 'PRODUCTIVE']}]}, "$duration", 0]}},
+            "total_nonpro_apps_time": {$sum: {$cond: [{$and: [{$ne: ["$user.work_mode", 'BREAK']}, {$ne: ["$app_category", 'PRODUCTIVE']}]}, "$duration", 0]}},
             "current_app": {$last: "$sample"},
             "last_app_cat": {$last: "$app_category"},
             "custom_1": {$sum: {$cond: [{$eq: ["$user.work_mode", 'CUSTOM_1']}, "$duration", 0]}},
@@ -65,10 +65,10 @@ module.exports = {
             "leader_name": {$last: "$leader_name"},
             "print_qty": {$last: "$print_qty"},
             "total_downloads_size": {$last: "$total_downloads_size"},
-            "workstation": {$last: "$workstation"},
+            "workstation_id": {$last: "$workstation_id"},
             "effectiveness": {$last: "$effectiveness"},
 
-            "last_app_cat": {$last:"$app_category"}
+            "last_app_cat": {$last: "$app_category"}
 
           }
         },
@@ -83,11 +83,11 @@ module.exports = {
             "total_nonpro_apps_time": 1,
 
             "current_app": {
-              "window_caption":"$current_app.window_caption",
-              "image_fs_name":"$current_app.image_fs_name",
-              "image_full_path":"$current_app.image_full_path",
-              "resource_image_name":"$current_app.resource_image_name",
-              "app_category":"$last_app_cat"
+              "window_caption": "$current_app.window_caption",
+              "image_fs_name": "$current_app.image_fs_name",
+              "image_full_path": "$current_app.image_full_path",
+              "resource_image_name": "$current_app.resource_image_name",
+              "app_category": "$last_app_cat"
             },
 
             "custom_1": 1,
@@ -101,7 +101,7 @@ module.exports = {
             "leader_name": 1,
             "print_qty": 1,
             "total_downloads_size": 1,
-            "workstation": 1,
+            "workstation": {"workstation_id": "$workstation_id"},
             "effectiveness": 1
           }
         },
@@ -115,6 +115,16 @@ module.exports = {
       ]).toArray(function (err, results) {
         if (err)
           return res.serverError(err);
+
+
+        results.forEach(function (group) {
+          group.data.map(function (person) {
+            Workstation.findOne({id:person.workstation.workstation_id}).then(function (res) {
+              person.workstation['name'] = res.name;
+              person.workstation['machine_sid'] = res.machine_sid;
+            })
+          });
+        });
 
 
         Worker.find({})
@@ -138,10 +148,7 @@ module.exports = {
 
               })
             });
-
-
             return res.ok(results);
-
           });
 
 
