@@ -5,7 +5,7 @@ var chance = require('chance').Chance(1234);
  ***********************************************************
  ***********************************************************
  */
-const NUM_OF_WORKERS = 5;
+const NUM_OF_WORKERS = 105;
 const q = 'exchange_key1';
 
 /***********************************************************
@@ -29,6 +29,11 @@ var user_info_weights = {
     'more active guy': 2,
     'more idle guy': 1,
     'random guy': 1,
+    'break lover guy': 1,
+    'computer maniac guy':1,
+    'computer hater guy':1,
+    'good worker guy':1,
+    'bad worker guy':1,
 };
 
 
@@ -96,6 +101,8 @@ function calcPresence(user) {
             result = 'IDLE';
             break;
         case 'more active guy':
+        case 'good worker guy':
+        case 'bad worker guy':
             result = chance.weighted(['ACTIVE', 'IDLE'], [6, 1]);
             break;
         case 'more idle guy':
@@ -104,8 +111,11 @@ function calcPresence(user) {
         case 'random guy':
             result = chance.weighted(['ACTIVE', 'IDLE'], [1, 1]);
             break;
+        case 'computer hater guy':
+            result = chance.weighted(['ACTIVE', 'IDLE'], [1, 3]);
+            break;
         default:
-            process.exit();
+            result = chance.weighted(['ACTIVE', 'IDLE'], [3, 1]);
             break;
     }
 
@@ -122,6 +132,8 @@ function calcStatus(user) {
             result = chance.weighted(['BREAK', 'WORK_WITH_COMPUTER', 'WORK_WITHOUT_COMPUTER'], [0.5, 6, 2]);
             break;
         case 'more active guy':
+        case 'good worker guy':
+        case 'bad worker guy':
             result = chance.weighted(['BREAK', 'WORK_WITH_COMPUTER', 'WORK_WITHOUT_COMPUTER', 'CUSTOM_1', 'CUSTOM_2', 'CUSTOM_3'], [1, 6, 2, 1, 1, 1]);
             break;
         case 'more idle guy':
@@ -130,6 +142,19 @@ function calcStatus(user) {
         case 'random guy':
             result = chance.weighted(['BREAK', 'WORK_WITH_COMPUTER', 'WORK_WITHOUT_COMPUTER', 'CUSTOM_1', 'CUSTOM_2', 'CUSTOM_3'], [1, 1, 1, 1, 1, 1]);
             break;
+        case 'break lover guy':
+            result = chance.weighted(['BREAK', 'WORK_WITH_COMPUTER', 'WORK_WITHOUT_COMPUTER', 'CUSTOM_1', 'CUSTOM_2', 'CUSTOM_3'], [6, 0, 0, 0, 0, 0]);
+            break;
+        case 'computer maniac guy':
+            result = chance.weighted(['BREAK', 'WORK_WITH_COMPUTER', 'WORK_WITHOUT_COMPUTER', 'CUSTOM_1', 'CUSTOM_2', 'CUSTOM_3'], [0, 1, 0, 0, 0, 0]);
+            break;
+        case 'computer hater guy':
+            result = chance.weighted(['BREAK', 'WORK_WITH_COMPUTER', 'WORK_WITHOUT_COMPUTER', 'CUSTOM_1', 'CUSTOM_2', 'CUSTOM_3'], [0, 0, 1, 0, 0, 0]);
+            break;
+        case 'status1 lover guy':
+            result = chance.weighted(['BREAK', 'WORK_WITH_COMPUTER', 'WORK_WITHOUT_COMPUTER', 'CUSTOM_1', 'CUSTOM_2', 'CUSTOM_3'], [0.5, 3, 1, 6, 0, 0]);
+            break;
+
         default:
             process.exit();
             break;
@@ -146,7 +171,7 @@ function fillTPL(probe_time, duration, sample, user) {
         "probe_time": probe_time.toISOString(),
         "duration": duration,
         "user": user,
-        "machine": {"machine_sid": ""},
+        "machine": {"machine_sid": 'MACHINE_'+user.user_sid},
         "sample": sample
     };
     return JSON.stringify(TPL);
@@ -161,13 +186,24 @@ function logMsg(user, probe_time, duration, testTimeNow, diff) {
     console.log(user.user_login + "> " + probe_time.toISOString() + ", " + duration + " (" + testTimeNow.toISOString() + ")" + "    diff:" + diff + "=" + duration);
 }
 
+function getSampleForGuy(user_info){
+    switch(user_info){
+        case 'good worker guy':
+            return samples[0];
+            break;
+        default:
+            return chance.pickone(samples);
+            break;
+    }
+}
+
 function sendTPL(ch, probe_time, duration, user) {
     var testTimeNow = moment();
     var diff = testTimeNow.diff(probe_time);
 
     schedule(ch, randomIntInc(5, 35), user);
 
-    ch.sendToQueue(q, new Buffer(fillTPL(probe_time, duration, chance.pickone(samples), user)));
+    ch.sendToQueue(q, new Buffer(fillTPL(probe_time, duration, getSampleForGuy(user.user_info), user)));
 
     logMsg(user, probe_time, duration, testTimeNow, diff);
 }
