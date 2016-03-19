@@ -37,11 +37,11 @@ angular.module('myApp.workerview',
           ],
           "This Month": [
             moment().startOf('month'),
-            moment(),
+            moment()
           ],
           "Last Month": [
             moment().startOf('month').subtract(2, 'days').startOf('month'),
-            moment().startOf('month').subtract(2, 'days').endOf('month'),
+            moment().startOf('month').subtract(2, 'days').endOf('month')
           ]
         },
         "locale": {
