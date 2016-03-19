@@ -15,7 +15,7 @@ var EventsPersistancyService = {
       var promises = [
         WorkerCacheService.getOrCreate(content.user.user_login, content.user.user_sid),
         AppCategoryService.get(content.sample),
-        WorkstationCacheService.findIdBySid(content.machine.machine_sid)
+        WorkstationCacheService.getOrCreate(content.machine.machine_sid)
       ];
 
       var p = Q.all(promises).then(function (res) {
