@@ -24,8 +24,7 @@
     "mongodb": "^2.0.41",
     "q": "^1.4.1",
     "rc": "~0.5.0",
-    "sails": "git://github.com/balderdashy/sails.git",
-    "sails-disk": "~0.10.0",
+    "sails": "~0.12.0",
     "sails-mongo": "^0.11.2",
     "thrift": "^0.9.3"
   },

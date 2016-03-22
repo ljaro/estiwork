@@ -4,21 +4,15 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-sm-5">
-            <!--
-              <div ng-controller="checklistController" class="" style="max-width: 200px; padding: 15px;">
-                <my-check-list data="groups" model="groupSelections"></my-check-list>
-                <button class="btn btn-default" ng-click="loadData(groupSelections)">Refresh</button>
-              </div>
-               -->
             <span>
             <div isteven-multi-select input-model="flatGroups" output-model="groupSelections" button-label="name"
                  item-label="name" selection-mode="multiple"
                  group-property="multiSelectGroup" tick-property="ticked" orientation="horizontal"
-                 on-item-click="getSelected(data)" helper-elements=""></div>
+                 helper-elements=""></div>
             </span>
           </div>
           <div class="col-sm-7">
-            <button class="btn btn-primary" ng-click="loadData(groupSelections)">Refresh</button>
+            <!--<button class="btn btn-primary" ng-click="loadData(groupSelections)">Refresh</button>-->
           </div>
         </div>
       </div>
