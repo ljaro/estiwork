@@ -145,5 +145,101 @@ describe('AppCategoryService', function () {
       return expect(res).to.eventually.equals('Invalid');
     });
 
+    describe('#Web browser applications distinct', function () {
+
+      beforeEach(function () {
+      });
+
+      afterEach(function () {
+      });
+
+      it('web browser app2', function () {
+        var sample = {
+          "window_caption": "Gazeta.pl - Opera",
+          "image_fs_name": "opera.exe",
+          "image_full_path": "C:\\Program Files (x86)\\Opera\\opera.exe",
+          "resource_image_name": "opera.exe"
+        }
+
+        var res = AppCategoryService.get(sample).then(function (obj) {
+          return obj.type;
+        });
+        return expect(res).to.eventually.equals('NONPRODUCTIVE');
+      });
+
+      //TODO add md5 tests (need to implement injecting sig into AppCategoryService)
+      it('web browser app2', function () {
+        var sample = {
+          "window_caption": "Gazeta.pl - Opera",
+          "image_fs_name": "opera.exe",
+          "image_full_path": "C:\\Program Files (x86)\\Opera\\opera.exe",
+          "resource_image_name": "opera.exe"
+        }
+
+        var res = AppCategoryService.get(sample).then(function (obj) {
+          return obj.type;
+        });
+        return expect(res).to.eventually.equals('NONPRODUCTIVE');
+      });
+
+      it('web browser app3', function () {
+        var sample = {
+          "window_caption": "Prod. app on Opera - Opera",
+          "image_fs_name": "opera.exe",
+          "image_full_path": "C:\\Program Files (x86)\\Opera\\opera.exe",
+          "resource_image_name": "opera.exe"
+        }
+
+        var res = AppCategoryService.get(sample).then(function (obj) {
+          return obj.name;
+        });
+        return expect(res).to.eventually.equals('Prod. app on Opera');
+      });
+
+      it('should match with respect of case sensitivity', function () {
+        var sample = {
+          "window_caption": "xxxxx Prod. app on opera - Opera",
+          "image_fs_name": "opera.exe",
+          "image_full_path": "C:\\Program Files (x86)\\Opera\\opera.exe",
+          "resource_image_name": "opera.exe"
+        }
+
+        var res = AppCategoryService.get(sample).then(function (obj) {
+          return obj.name;
+        });
+        return expect(res).to.eventually.equals('Opera');
+      });
+
+      it('should match with prefix', function () {
+        var sample = {
+          "window_caption": "xxxxx Prod. app on Opera - Opera",
+          "image_fs_name": "opera.exe",
+          "image_full_path": "C:\\Program Files (x86)\\Opera\\opera.exe",
+          "resource_image_name": "opera.exe"
+        }
+
+        var res = AppCategoryService.get(sample).then(function (obj) {
+          return obj.name;
+        });
+        return expect(res).to.eventually.equals('Prod. app on Opera');
+      });
+
+      it('should match when resource name is wrong', function () {
+        var sample = {
+          "window_caption": "Prod. app on Opera - Opera",
+          "image_fs_name": "chrome.exe",
+          "image_full_path": "C:\\Program Files (x86)\\Opera\\opera.exe",
+          "resource_image_name": "chrome.exe"
+        }
+
+        var res = AppCategoryService.get(sample).then(function (obj) {
+          return obj.name;
+        });
+        return expect(res).to.eventually.equals('Prod. app on Opera');
+      });
+
+    });
+
+
   });
 });

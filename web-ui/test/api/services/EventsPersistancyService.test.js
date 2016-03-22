@@ -125,12 +125,13 @@ describe('EventsPersistancyService', function () {
       expect(p).to.be.rejected;
     });
 
+    //TODO this test always fail after adding new fields, remove?????????
     it('should persist msg with worker_id and app_category and workstation_id', function () {
       s1.restore();
       s2.restore();
 
       const worker_id = {id:'11111-22222-33333', group:'2343'};
-      const app_cat   = {name:'Web Browsers', type:'PRODUCTIVE'};
+      const app_cat   = {name:'Chrome', type:'PRODUCTIVE', group:'Web browsers'};
 
       s1 = sinon.stub(WorkerCacheService, 'getOrCreate').returns(Q.resolve(worker_id));
       s2 = sinon.stub(AppCategoryService, 'get').returns(Q.resolve(app_cat));
@@ -140,6 +141,7 @@ describe('EventsPersistancyService', function () {
       msg['app_category'] = app_cat.type;
       msg['workstation_id'] = '111';
       msg['group'] = '2343';
+      msg['app_info'] = {'name':app_cat.name, 'type':app_cat.type, 'group':app_cat.group};
 
       return EventsPersistancyService.accept(message).then(function () {
         sinon.assert.calledWith(s3, msg);

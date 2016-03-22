@@ -30,6 +30,12 @@ var EventsPersistancyService = {
         content['app_category'] = res[1].type;
         content['workstation_id'] = res[2];
 
+        content['app_info'] = {
+          'name':res[1].name,
+          'type':res[1].type,
+          'group':res[1].group,
+        };
+
         // group id at event creation time
         content['group'] = res[0].group;
 
