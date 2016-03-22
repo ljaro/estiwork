@@ -24,6 +24,7 @@ Object.values = function (obj) {
 var channels = [];
 
 var user_info_weights = {
+    'opera apps guy': 2,
     'only active guy': 3,
     'only idle guy': 1,
     'more active guy': 2,
@@ -56,7 +57,33 @@ var users = Object.keys(user_info_weights).map(function (user_info) {
     }
 }).concat(chance.unique(chance.user, NUM_OF_WORKERS));
 
-//console.log("Worker num: " + users.length + " (" + NUM_OF_WORKERS + ")");
+
+var samples_opera_apps = [
+    {
+        "window_caption": "Gazeta.pl - Opera",
+        "image_fs_name": "opera.exe",
+        "image_full_path": "C:\\Program Files (x86)\\Opera\\opera.exe",
+        "resource_image_name": "opera.exe"
+    },
+    {
+        "window_caption": "Onet.pl - Opera",
+        "image_fs_name": "opera.exe",
+        "image_full_path": "C:\\Program Files (x86)\\Opera\\opera.exe",
+        "resource_image_name": "opera.exe"
+    },
+    {
+        "window_caption": "Company of Heroes 2",
+        "image_fs_name": "coh2.exe",
+        "image_full_path": "\\Device\\HarddiskVolume2\\Windows\\System32\\coh2.exe",
+        "resource_image_name": "coh2.exe"
+    },
+    {
+        "window_caption": "xxxxx Prod. app on Opera - Opera",
+        "image_fs_name": "opera.exe",
+        "image_full_path": "C:\\Program Files (x86)\\Opera\\opera.exe",
+        "resource_image_name": "opera.exe"
+    }
+];
 
 var samples = [{
     "window_caption": "Gazeta.pl - Google Chrome",
@@ -125,6 +152,7 @@ function calcStatus(user) {
     var usr_info = user.user_info;
     var result;
     switch (usr_info) {
+        case 'opera apps guy':
         case 'only active guy':
             result = chance.weighted(['BREAK', 'WORK_WITH_COMPUTER', 'WORK_WITHOUT_COMPUTER'], [0.5, 6, 2]);
             break;
@@ -188,6 +216,9 @@ function logMsg(user, probe_time, duration, testTimeNow, diff) {
 
 function getSampleForGuy(user_info){
     switch(user_info){
+        case 'opera apps guy':
+            return chance.weighted(samples_opera_apps, [1,1,1,5]);
+            break;
         case 'good worker guy':
             return samples[0];
             break;

@@ -98,7 +98,7 @@ var cats = [
     id: 3,
     name: 'Opera',
     group: 'Web browser',
-    type: 'PRODUCTIVE',
+    type: 'NONPRODUCTIVE',
 
     signatures: [
       {
@@ -137,6 +137,50 @@ var cats = [
         }
       }
     ]
+  },
+  {
+    id: 4,
+    name: 'Prod. app on Opera',
+    group: 'Work apps',
+    type: 'PRODUCTIVE',
+
+    signatures: [
+      {
+        "name": 'md5',
+        "weight": 100,
+        "func": function (str) {
+          return ['333333'].indexOf(str) != -1;
+        }
+      },
+      {
+        "name": 'resource_image_name',
+        "weight": 7,
+        "func": function (str) {
+          return str === 'opera.exe';
+        }
+      },
+      {
+        "name": 'window_caption',
+        "weight": 8,
+        "func": function (str) {
+          return /.*?Prod. app on Opera - Opera/.test(str);
+        }
+      },
+      {
+        "name": 'image_fs_name',
+        "weight": 2,
+        "func": function (str) {
+          return str === 'opera.exe';
+        }
+      },
+      {
+        "name": 'image_full_path',
+        "weight": 2,
+        "func": function (str) {
+          return str.endsWith('opera.exe');
+        }
+      }
+    ]
   }
 ];
 
@@ -154,6 +198,7 @@ var AppCategoryService = {
       }
 
       if (sample.resource_image_name !== sample.image_fs_name) {
+        console.log('Match dropped with reason: sample.resource_image_name !== sample.image_fs_name');
         return {name:'Invalid', type:'NONPRODUCTIVE'};
       }
 
@@ -162,16 +207,19 @@ var AppCategoryService = {
           if (sample[sig.name] !== undefined) {
             if (rank[cat.id] === undefined) rank[cat.id] = 0;
             rank[cat.id] += sig.func(sample[sig.name]) === true ? sig.weight : 0;
+
+            //TODO add to logs important!
+            //console.log(cat.name+' with id:'+cat.id+' has '+rank[cat.id]+' pts.');
           }
         });
       });
 
       var max = 0;
       var max_id;
-      Object.keys(rank).forEach(function (x) {
-        if (rank[x] > max) {
-          max = rank[x];
-          max_id = x;
+      Object.keys(rank).forEach(function (id) {
+        if (rank[id] > max) {
+          max = rank[id];
+          max_id = id;
         }
       });
 
