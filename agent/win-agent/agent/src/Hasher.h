@@ -10,5 +10,6 @@ public:
 	void fillHash(SampleMessage& sample);
 private:
 	bool getHash(const TString& path, TString& out);
+	bool simpleHash(void* input, unsigned long length, unsigned char* md);
 };
 

@@ -40,8 +40,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>..\thrift_gen;..\3rd\pantheios\pantheios-1.0.1-beta216\lib;..\utils;..\3rd\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>..\thrift_gen\gen-cpp;$(IncludePath)</IncludePath>
+    <LibraryPath>..\thrift_gen;..\3rd\pantheios\pantheios-1.0.1-beta216\lib;..\utils;..\3rd\lib;..\3rd\third_party\openssl\OpenSSL-Win32\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\thrift_gen\gen-cpp;..\3rd\third_party\openssl\OpenSSL-Win32\include\;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -61,7 +61,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>User32.lib;Rpcrt4.lib;libthrift.lib;libthriftnb.lib;thriftgen.lib;WindowsUtils.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>User32.lib;Rpcrt4.lib;libthrift.lib;libthriftnb.lib;thriftgen.lib;WindowsUtils.lib;libeay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
