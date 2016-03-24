@@ -1,6 +1,12 @@
 #include "SampleBuilder.h"
 #include "..\..\utils\UserSid.h"
 #include <sstream>
+#include <boost\asio\io_service.hpp>
+
+#include <boost\bind.hpp>
+#define BOOST_THREAD_PROVIDES_FUTURE
+
+#include <boost\thread\future.hpp>
 
 const int NUM_SAMPLES_TO_FETCH = 5;
 const int NUM_SAMPLES_TO_GROUP = 5;
@@ -12,7 +18,8 @@ const int THREAD_SLEEP_SECONDS = 0;
 SampleBuilder::SampleBuilder(Sampler& sampler, MessageSender& sender):
 	sampler_(sampler),
 	thread_terminated_(false),
-	sender_(sender)
+	sender_(sender),
+	io_processor(io_processor)
 {
 	fetch_thread = new boost::thread(&SampleBuilder::thread_main, this);
 }
@@ -78,6 +85,10 @@ void SampleBuilder::thread_main()
 
 			SampleMessage new_merged = GroupMerge(s);
 
+
+			hasher.fillHash(new_merged);
+			
+
 			std::stringstream ss;
 			ss << "Sample: "
 				<< boost::posix_time::to_simple_string(new_merged.sample.probe_time_.get())
@@ -85,9 +96,8 @@ void SampleBuilder::thread_main()
 	
 			dd::log_DEBUG(ss.str());
 
-
 			sample_stack_for_send.push_back(new_merged);
-		}
+		}		
 
 		// WYSYLANIE
 		// wysylanie zgrupowanych sampli

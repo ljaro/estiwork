@@ -40,7 +40,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>..\thrift_gen;..\3rd\pantheios\pantheios-1.0.1-beta216\lib;..\utils;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\thrift_gen;..\3rd\pantheios\pantheios-1.0.1-beta216\lib;..\utils;..\3rd\lib;$(LibraryPath)</LibraryPath>
     <IncludePath>..\thrift_gen\gen-cpp;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
@@ -89,6 +89,7 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Hasher.h" />
     <ClInclude Include="src\helperdef.h" />
     <ClInclude Include="src\IdleMeter.h" />
     <ClInclude Include="src\MessageSender.h" />
@@ -105,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\desktop_agent.cpp" />
+    <ClCompile Include="src\Hasher.cpp" />
     <ClCompile Include="src\IdleMeter.cpp" />
     <ClCompile Include="src\MessageSender.cpp" />
     <ClCompile Include="src\ProcessIdentity.cpp" />
