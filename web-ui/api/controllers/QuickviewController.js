@@ -64,6 +64,7 @@ module.exports = {
             "total_pro_apps_time": {$sum: {$cond: [{$eq: ["$app_category", 'PRODUCTIVE']}, "$duration", 0]}},
             "total_nonpro_apps_time": {$sum: {$cond: [{$and: [{$ne: ["$user.work_mode", 'BREAK']}, {$ne: ["$app_category", 'PRODUCTIVE']}]}, "$duration", 0]}},
             "current_app": {$last: "$sample"},
+            "current_app_info": {$last: "$app_info"},
             "last_app_cat": {$last: "$app_category"},
             "custom_1": {$sum: {$cond: [{$eq: ["$user.work_mode", 'CUSTOM_1']}, "$duration", 0]}},
             "custom_2": {$sum: {$cond: [{$eq: ["$user.work_mode", 'CUSTOM_2']}, "$duration", 0]}},
@@ -95,7 +96,8 @@ module.exports = {
               "image_fs_name": "$current_app.image_fs_name",
               "image_full_path": "$current_app.image_full_path",
               "resource_image_name": "$current_app.resource_image_name",
-              "app_category": "$last_app_cat"
+              "app_category": "$last_app_cat",
+              "app_info": "$current_app_info"
             },
 
             "custom_1": 1,
@@ -123,10 +125,6 @@ module.exports = {
       ]).toArray(function (err, results) {
         if (err)
           return res.serverError(err);
-
-        results.forEach(function (group) {
-
-        })
 
         results.forEach(function (group) {
           group.data.map(function (person) {

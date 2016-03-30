@@ -17,7 +17,7 @@ var AppCategoryService = {
 
       if (sample.resource_image_name !== sample.image_fs_name) {
         console.log('Match dropped with reason: sample.resource_image_name !== sample.image_fs_name');
-        return {name: 'Invalid', type: 'NONPRODUCTIVE'};
+        return {type: 'NONPRODUCTIVE'};
       }
 
       cats.forEach(function (cat) {
@@ -49,7 +49,7 @@ var AppCategoryService = {
         return result[0];
       }
 
-      return {name: 'Invalid', type: 'NONPRODUCTIVE'};
+      return {type: 'NONPRODUCTIVE'};
     }
 
     try {

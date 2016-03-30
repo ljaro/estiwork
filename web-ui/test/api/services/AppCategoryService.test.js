@@ -124,7 +124,7 @@ describe('AppCategoryService', function () {
       var res = AppCategoryService.get(sample).then(function (obj) {
         return obj.name;
       });
-      return expect(res).to.eventually.equals('Invalid');
+      return expect(res).to.eventually.equals(undefined);
     });
 
     describe('#Web browser applications distinct', function () {

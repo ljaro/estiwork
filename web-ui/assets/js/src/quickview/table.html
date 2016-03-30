@@ -22,7 +22,7 @@
       <th>Status 1</th>
       <th>Status 2</th>
       <th>Stanowisko</th>
-      <th>EFK.</th>
+      <!--<th>EFK.</th>-->
     </tr>
     </thead>
     <tbody>
@@ -36,7 +36,7 @@
       <td>{{row.total_idle_time | secondsToDateTime | date: 'HH:mm:ss'}}</td>
       <td blink-on-change="row.current_app" style="white-space: nowrap; text-align: right"><a href="#"
                                                                                                           uib-tooltip-template="'js/src/common/app_usage_pop_template.html'"
-                                                                                                          tooltip-placement="right">{{row.current_app.image_fs_name}}</a>
+                                                                                                          tooltip-placement="right">{{row.current_app.app_info.name || row.current_app.image_fs_name | cutExe}}</a>
       </td>
       <td>{{row.total_pro_apps_time | secondsToDateTime | date: 'HH:mm:ss' }}</td>
       <td>{{row.total_nonpro_apps_time| secondsToDateTime | date: 'HH:mm:ss'}}</td>
@@ -45,7 +45,7 @@
       <td>{{row.custom_1 | secondsToDateTime | date: 'HH:mm:ss' }}</td>
       <td>{{row.custom_2 | secondsToDateTime | date: 'HH:mm:ss' }}</td>
       <td uib-tooltip="{{row.workstation.name}}" tooltip-placement="left" tooltip-append-to-body="true">{{row.workstation.name | truncDots}}</td>
-      <td>{{row.effectiveness}}</td>
+      <!--<td>{{row.effectiveness}}</td>-->
     </tr>
 
     </tbody>
