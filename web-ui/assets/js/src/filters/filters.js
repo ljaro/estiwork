@@ -123,5 +123,17 @@ filter('truncDots', [function () {
       return str;
     }
   }
+}]).
+filter('cutExe', [function () {
+
+  return function (str) {
+    const maxstrlen = 10;
+
+    if(str.endsWith('.exe')){
+      return str.substr(0, str.length-4);
+    }else{
+      return str;
+    }
+  }
 }]);
 

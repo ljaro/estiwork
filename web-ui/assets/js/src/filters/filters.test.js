@@ -180,4 +180,27 @@ describe('myApp.myFilters', function() {
     }));
 
   });
+
+
+  describe('cut exe', function(){
+    it('has truncDots filter', function($filter){
+      expect($filter('cutExe')).not.toBeNull();
+    });
+
+    it('should cut exe from long file name', inject(function ($filter) {
+      expect($filter('cutExe')('long_file_name.exe')).toEqual("long_file_name");
+    }));
+
+    it('should cut exe from short file name', inject(function ($filter) {
+      expect($filter('cutExe')('a.exe')).toEqual("a");
+    }));
+
+    it('should cut exe from end only', inject(function ($filter) {
+      expect($filter('cutExe')('c:\\aaaa\\bb.exe\\exe\\a.exe')).toEqual("c:\\aaaa\\bb.exe\\exe\\a");
+    }));
+
+    it('should cut not change if no exe at end', inject(function ($filter) {
+      expect($filter('cutExe')('c:\\aaaa\\bb.exe\\exe\\a')).toEqual("c:\\aaaa\\bb.exe\\exe\\a");
+    }));
+  });
 });
