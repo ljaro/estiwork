@@ -40,6 +40,7 @@ libs_paths.append( os.path.join('C:/','Program Files','Microsoft SDKs','Windows'
 libs_paths.append( os.path.join(third_party_dir,'lib'))
 libs_paths.append( os.path.join('..','thrift_gen'))
 libs_paths.append( os.path.join('..','utils'))
+libs_paths.append( os.path.join(third_party_dir,'third_party', 'openssl', 'OpenSSL-Win32', 'lib'))
 
 libs = []
 libs.append('User32')
@@ -48,6 +49,7 @@ libs.append('libthrift')
 libs.append('libthriftnb')
 libs.append('thriftgen')
 libs.append('WindowsUtils')
+libs.append('libeay32')
 
 libs.append('pantheios.1.be.fprintf.vc10.mt.debug')
 libs.append('pantheios.1.bec.fprintf.vc10.mt.debug')
@@ -62,6 +64,7 @@ env.Append(
 	'd:\\boost\\boost_1_47_0',
 	thrift_inc, 
 	third_party_dir+'\\pantheios\\pantheios-1.0.1-beta216\\include', 
+	third_party_dir+'\\third_party\\openssl\\OpenSSL-Win32\\include',
 	third_party_dir+'\\pantheios\\stlsoft-1.9.124\\include']
 	)
 	

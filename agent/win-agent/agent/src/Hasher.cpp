@@ -49,28 +49,36 @@ bool Hasher::simpleHash(void* input, unsigned long length, unsigned char* md)
 
 bool Hasher::getHash(const TString& path, TString& out)
 {
-	boost::iostreams::mapped_file_source mf(path);
-	if(mf.is_open())
+	try
 	{
-		unsigned char result[SHA_DIGEST_LENGTH];
-		size_t size = mf.size();
-		const unsigned char* start = reinterpret_cast<const unsigned char*>(mf.data());
-		SHA1(start, size,  result);		
-		mf.close();
-		out = reinterpret_cast<const char*>(result);
+		boost::iostreams::mapped_file_source mf(path);
 
-		std::stringstream ss;
-
-		for(int i=0;i<SHA_DIGEST_LENGTH;i++)
+		if(mf.is_open())
 		{
-			ss << std::hex << (int)result[i];
-		}
+			unsigned char result[SHA_DIGEST_LENGTH];
+			size_t size = mf.size();
+			const unsigned char* start = reinterpret_cast<const unsigned char*>(mf.data());
+			SHA1(start, size,  result);		
+			mf.close();
+			out = reinterpret_cast<const char*>(result);
 
-		out = ss.str();
-		pantheios::log_INFORMATIONAL("sha1 of ", path, " ", out);
+			std::stringstream ss;
 
-		return true;
-	}		
+			for(int i=0;i<SHA_DIGEST_LENGTH;i++)
+			{
+				ss << std::hex << (int)result[i];
+			}
+
+			out = ss.str();
+			pantheios::log_INFORMATIONAL("sha1 of ", path, " ", out);
+
+			return true;
+		}	
+	}
+	catch(...)
+	{
+		return false;
+	}
 
 	return false;
 }

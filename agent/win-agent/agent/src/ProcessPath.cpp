@@ -53,6 +53,7 @@ BOOL CALLBACK EnumWindowsProc(HWND hWnd, LPARAM lParam)
  // String Children[]; 
 };
 
+
  // TODO GetFileVersionInfo uzywa sciezki do pliku. trzeba sprawdzic czy mozna uzyskac info z wgranego obrazu OpenProcess
  LPCTSTR GetOriginalFileName( LPCTSTR path )
  {
@@ -89,6 +90,7 @@ BOOL CALLBACK EnumWindowsProc(HWND hWnd, LPARAM lParam)
 					reinterpret_cast<LPVOID *>(&trans),
 					&uiSize);
 
+					uiSize++;
 
 					errCode = GetLastError();
 
@@ -102,7 +104,7 @@ BOOL CALLBACK EnumWindowsProc(HWND hWnd, LPARAM lParam)
 										//std::wstringstream strsTemp;
 										//std::stringstream strsTemp2;
 
-										TCHAR tszVerStrName[128];
+										TCHAR tszVerStrName[228];
 						
 										
 										wsprintf(tszVerStrName, 
@@ -126,8 +128,8 @@ BOOL CALLBACK EnumWindowsProc(HWND hWnd, LPARAM lParam)
 						pvValue = L"\0";
 
 					size_t len = _tcslen((LPCTSTR)pvValue);
-					TCHAR* ret = new TCHAR[len+1];
-					_tcscpy_s(ret, len+1, (LPCTSTR)pvValue);
+					TCHAR* ret = new TCHAR[len+2];
+					_tcscpy_s(ret, len+2, (LPCTSTR)pvValue);
 
 					delete[] InfoData;
 					return ret;

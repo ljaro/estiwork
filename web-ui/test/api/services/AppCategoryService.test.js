@@ -16,30 +16,6 @@ var TPL = {
     "user_login": "randomLogin"
   }
 };
-/**
- *
- * @type {*[]}
- */
-var samplesFirefox = [
-  {
-    "window_caption": "RabbitMQ Management - Mozilla Firefox",
-    "image_fs_name": "firefox.exe",
-    "image_full_path": "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe",
-    "resource_image_name": "firefox.exe"
-  },
-  {
-    "window_caption": "XXXXXXXXXXXXXXX - Mozilla Firefox",
-    "image_fs_name": "firefox.exe",
-    "image_full_path": "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe",
-    "resource_image_name": "firefox.exe"
-  },
-  {
-    "window_caption": "XXXXXXXXXXXXXX - Mozilla Firefox XXXXXXXXXX",
-    "image_fs_name": "firefox.exe",
-    "image_full_path": "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe",
-    "resource_image_name": "firefox.exe"
-  }
-]
 
 
 
@@ -55,22 +31,13 @@ describe('AppCategoryService', function () {
     afterEach(function () {
     });
 
-    it('matching test firefox examples', function () {
-      var operations = samplesFirefox.map(AppCategoryService.get);
-      return Q.all(operations).then(function (res) {
-        res.forEach(function (value) {
-          assert.equal(value.name, 'Firefox');
-        });
-      });
-    });
-
     it('md5 should have priority over caption and res_name', function () {
       var sample = {
         "window_caption": "RabbitMQ Management - Google Chrome",
         "image_fs_name": "firefox.exe",
         "image_full_path": "C:\\Program Files (x86)\\Opera\\firefox.exe",
         "resource_image_name": "firefox.exe",
-        "md5": '333333'
+        "hash": '333333'
       }
 
       var res = AppCategoryService.get(sample).then(function (obj) {
@@ -93,9 +60,23 @@ describe('AppCategoryService', function () {
       return expect(res).to.eventually.equals('Firefox');
     });
 
-    it('caption should have lower priority then resource_name', function () {
+    it('caption should have higher priority when rest of properties match', function () {
       var sample = {
         "window_caption": "RabbitMQ Management - Mozilla Firefox",
+        "image_fs_name": "firefox.exe",
+        "image_full_path": "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe",
+        "resource_image_name": "firefox.exe"
+      }
+
+      var res = AppCategoryService.get(sample).then(function (obj) {
+        return obj.name;
+      });
+      return expect(res).to.eventually.equals('RabbitMQ Management');
+    });
+
+    it('caption should have lower priority then resource_name', function () {
+      var sample = {
+        "window_caption": "koasdkoasodoasodkao - Mozilla Firefox",
         "image_fs_name": "chrome.exe",
         "image_full_path": "C:\\Program Files (x86)\\Mozilla Firefox\\opera.exe",
         "resource_image_name": "chrome.exe"
@@ -106,6 +87,7 @@ describe('AppCategoryService', function () {
       });
       return expect(res).to.eventually.equals('Chrome');
     });
+
 
     it('resouce_name should have lower priority then md5', function () {
     });
@@ -237,6 +219,22 @@ describe('AppCategoryService', function () {
         });
         return expect(res).to.eventually.equals('Prod. app on Opera');
       });
+
+      it('should match md5', function () {
+        var sample = {
+          "window_caption": "Prod. app on Opera - Oper1a",
+          "image_fs_name": "chrome.exe",
+          "image_full_path": "C:\\Program Files (x86)\\Opera\\opera.exe",
+          "resource_image_name": "chrome.exe",
+          "hash":"333333"
+        }
+
+        var res = AppCategoryService.get(sample).then(function (obj) {
+          return obj.name;
+        });
+        return expect(res).to.eventually.equals('Opera');
+      });
+
 
     });
 

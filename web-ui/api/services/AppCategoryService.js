@@ -4,193 +4,11 @@
 
 var Q = require('q');
 
-
-var cats = [
-  {
-    id: 1,
-    name: 'Chrome',
-    group: 'Web browser',
-    type: 'PRODUCTIVE',
-
-    signatures: [
-      {
-        "name": 'md5',
-        "weight": 100,
-        "func": function (str) {
-          return ['111111'].indexOf(str) != -1;
-        }
-      },
-      {
-        "name": 'resource_image_name',
-        "weight": 7,
-        "func": function (str) {
-          return str === 'chrome.exe';
-        }
-      },
-      {
-        "name": 'window_caption',
-        "weight": 5,
-        "func": function (str) {
-          return str.endsWith('- Google Chrome');
-        }
-      },
-      {
-        "name": 'image_fs_name',
-        "weight": 2,
-        "func": function (str) {
-          return str === 'chrome.exe';
-        }
-      },
-      {
-        "name": 'image_full_path',
-        "weight": 2,
-        "func": function (str) {
-          return str.endsWith('chrome.exe');
-        }
-      }
-    ]
-  },
-  {
-    id: 2,
-    name: 'Firefox',
-    group: 'Web browser',
-    type: 'PRODUCTIVE',
-
-    signatures: [
-      {
-        "name": 'md5',
-        "weight": 100,
-        "func": function (str) {
-          return ['222222'].indexOf(str) != -1;
-        }
-      },
-      {
-        "name": 'resource_image_name',
-        "weight": 7,
-        "func": function (str) {
-          return str === 'firefox.exe';
-        }
-      },
-      {
-        "name": 'window_caption',
-        "weight": 5,
-        "func": function (str) {
-          return str.endsWith('- Mozilla Firefox');
-        }
-      },
-      {
-        "name": 'image_fs_name',
-        "weight": 2,
-        "func": function (str) {
-          return str === 'firefox.exe';
-        }
-      },
-      {
-        "name": 'image_full_path',
-        "weight": 2,
-        "func": function (str) {
-          return str.endsWith('firefox.exe');
-        }
-      }
-    ]
-  },
-  {
-    id: 3,
-    name: 'Opera',
-    group: 'Web browser',
-    type: 'NONPRODUCTIVE',
-
-    signatures: [
-      {
-        "name": 'md5',
-        "weight": 100,
-        "func": function (str) {
-          return ['333333'].indexOf(str) != -1;
-        }
-      },
-      {
-        "name": 'resource_image_name',
-        "weight": 7,
-        "func": function (str) {
-          return str === 'opera.exe';
-        }
-      },
-      {
-        "name": 'window_caption',
-        "weight": 5,
-        "func": function (str) {
-          return str.endsWith('- Opera');
-        }
-      },
-      {
-        "name": 'image_fs_name',
-        "weight": 2,
-        "func": function (str) {
-          return str === 'opera.exe';
-        }
-      },
-      {
-        "name": 'image_full_path',
-        "weight": 2,
-        "func": function (str) {
-          return str.endsWith('opera.exe');
-        }
-      }
-    ]
-  },
-  {
-    id: 4,
-    name: 'Prod. app on Opera',
-    group: 'Work apps',
-    type: 'PRODUCTIVE',
-
-    signatures: [
-      {
-        "name": 'md5',
-        "weight": 100,
-        "func": function (str) {
-          return ['333333'].indexOf(str) != -1;
-        }
-      },
-      {
-        "name": 'resource_image_name',
-        "weight": 7,
-        "func": function (str) {
-          return str === 'opera.exe';
-        }
-      },
-      {
-        "name": 'window_caption',
-        "weight": 8,
-        "func": function (str) {
-          return /.*?Prod. app on Opera - Opera/.test(str);
-        }
-      },
-      {
-        "name": 'image_fs_name',
-        "weight": 2,
-        "func": function (str) {
-          return str === 'opera.exe';
-        }
-      },
-      {
-        "name": 'image_full_path',
-        "weight": 2,
-        "func": function (str) {
-          return str.endsWith('opera.exe');
-        }
-      }
-    ]
-  }
-];
-
 var AppCategoryService = {
 
 
   get: function getService(sample) {
-
-
-    function __findAppSig(sample) {
+    function __findAppSig(sample, cats) {
       var rank = {};
 
       if (sample.resource_image_name === '' || sample.resource_image_name === undefined) {
@@ -199,7 +17,7 @@ var AppCategoryService = {
 
       if (sample.resource_image_name !== sample.image_fs_name) {
         console.log('Match dropped with reason: sample.resource_image_name !== sample.image_fs_name');
-        return {name:'Invalid', type:'NONPRODUCTIVE'};
+        return {name: 'Invalid', type: 'NONPRODUCTIVE'};
       }
 
       cats.forEach(function (cat) {
@@ -209,7 +27,7 @@ var AppCategoryService = {
             rank[cat.id] += sig.func(sample[sig.name]) === true ? sig.weight : 0;
 
             //TODO add to logs important!
-            //console.log(cat.name+' with id:'+cat.id+' has '+rank[cat.id]+' pts.');
+            // console.log(cat.name+' with id:'+cat.id+' has '+rank[cat.id]+' pts.');
           }
         });
       });
@@ -231,17 +49,22 @@ var AppCategoryService = {
         return result[0];
       }
 
-      return {name:'Invalid', type:'NONPRODUCTIVE'};
+      return {name: 'Invalid', type: 'NONPRODUCTIVE'};
     }
 
     try {
-      var result = __findAppSig(sample);
-      return Q.fcall(function () {
-        return result;
+      //TODO getOrCreate used means that creating app signatures mode enabled.
+      // Use get to disable auto creating signatures
+      return AppsCacheService.getOrCreate(sample).then(function (cats) {
+        var result = __findAppSig(sample, cats);
+        return Q.fcall(function () {
+          return result;
+        });
       });
 
     } catch (exception) {
       return Q.nfcall(function () {
+        console.log('AppCategoryService raise: ' + exception.message);
         return undefined;
       });
     }
