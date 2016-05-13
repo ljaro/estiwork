@@ -1,0 +1,39 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+
+  config.vm.provider "virtualbox" do |vb|
+    ### Change network card to PCnet-FAST III
+    # For NAT adapter
+    vb.customize ["modifyvm", :id, "--nictype1", "Am79C973"]
+    # For host-only adapter
+    #vb.customize ["modifyvm", :id, "--nictype2", "Am79C973"]
+
+    #vb.cpus = 1
+  end
+
+  config.vm.define "web" do |web|
+    web.vm.box = "deb/jessie-i386"
+    web.vm.synced_folder "../../web-ui", "/estiwork/web-ui"
+    web.vm.provision "shell", inline: <<-SHELL
+        sudo apt-get update
+        curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+        sudo apt-get install -y nodejs
+        sudo apt-get install -y git
+        sudo npm install -g bower
+        exit
+        #(cd /estiwork/web-ui; npm install)
+        #(cd /estiwork/web-ui/assets; npm install)
+        (cd /estiwork/web-ui/assets; bower install)
+    SHELL
+  end
+
+  config.vm.define "db" do |db|
+    db.vm.box = "deb/jessie-i386"
+    db.vm.provision "shell", inline: <<-SHELL
+        sudo apt-get update
+        sudo apt-get install -y mongodb
+    SHELL
+  end
+end
