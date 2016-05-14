@@ -8,22 +8,26 @@ Vagrant.configure(2) do |config|
     # For NAT adapter
     vb.customize ["modifyvm", :id, "--nictype1", "Am79C973"]
     # For host-only adapter
-    #vb.customize ["modifyvm", :id, "--nictype2", "Am79C973"]
-
+    vb.customize ["modifyvm", :id, "--nictype2", "Am79C973"]
     #vb.cpus = 1
+    vb.linked_clone = true
   end
 
   config.vm.define "web" do |web|
-    web.vm.box = "deb/jessie-i386"
+    web.vm.box = "ubuntu/trusty32"
+    web.vm.hostname = "web"
+    web.vm.network "private_network", ip: "192.168.1.10", virtualbox__intnet: true
     web.vm.synced_folder "../../web-ui", "/estiwork/web-ui"
     web.vm.provision "shell", inline: <<-SHELL
         curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
         sudo apt-get update
         sudo apt-get install -y nodejs
+        sudo apt-get install -y mongodb-clients
         sudo npm -g i npm
         sudo apt-get install -y git
         sudo npm install -g bower
         sudo npm install -g sails
+
         exit
         (cd /estiwork/web-ui; npm install)
         (cd /estiwork/web-ui/assets; npm install)
@@ -32,7 +36,9 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "db" do |db|
-    db.vm.box = "deb/jessie-i386"
+    db.vm.box = "ubuntu/trusty32"
+    db.vm.hostname = "db"
+    db.vm.network "private_network", ip: "192.168.1.20" , virtualbox__intnet: true
     db.vm.provision "shell", inline: <<-SHELL
         sudo apt-get update
         sudo apt-get install -y mongodb
