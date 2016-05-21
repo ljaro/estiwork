@@ -3,6 +3,8 @@
 
 Vagrant.configure(2) do |config|
 
+  #config.ssh.private_key_path = File.expand_path(File.join(ENV['USERPROFILE'], 'puttykey.ppk'), __FILE__)
+
   config.vm.provider "virtualbox" do |vb|
     ### Change network card to PCnet-FAST III
     # For NAT adapter
@@ -13,6 +15,10 @@ Vagrant.configure(2) do |config|
     #vb.linked_clone = true
     vb.customize ["modifyvm", :id, "--memory", "2048"]
   end
+
+
+
+
 
   config.vm.define "web" do |web|
     web.vm.box = "hashicorp/precise64"
@@ -35,6 +41,8 @@ Vagrant.configure(2) do |config|
         (cd /estiwork/web-ui; npm install)
         (cd /estiwork/web-ui/assets; npm install)
      SHELL
+
+     web.vm.network :forwarded_port, guest: 1337, host: 1337
   end
 
   config.vm.define "db" do |db|
@@ -42,10 +50,43 @@ Vagrant.configure(2) do |config|
     db.vm.hostname = "db"
     db.vm.network "private_network", ip: "192.168.1.20" , virtualbox__intnet: true
     db.vm.provision "shell", inline: <<-SHELL
+        sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+        #Ubuntu 12.04
+        echo "deb http://repo.mongodb.org/apt/ubuntu precise/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
         sudo apt-get update
-        sudo apt-get install -y mongodb
-        sudo sed -i 's/bind_ip.*/bind_ip=192.168.1.20/' /etc/mongodb.conf
-        sudo service mongodb restart
+        #sudo apt-get install -y mongodb-org=3.2.6 mongodb-org-server=3.2.6 mongodb-org-shell=3.2.6 mongodb-org-mongos=3.2.6 mongodb-org-tools=3.2.6
+        sudo apt-get install -y mongodb-org
+        # pin to specific version
+        #echo "mongodb-org hold" | sudo dpkg --set-selections
+        #echo "mongodb-org-server hold" | sudo dpkg --set-selections
+        #echo "mongodb-org-shell hold" | sudo dpkg --set-selections
+        #echo "mongodb-org-mongos hold" | sudo dpkg --set-selections
+        #echo "mongodb-org-tools hold" | sudo dpkg --set-selections
+
+        sudo sed -i 's/bindIp.*/bindIp\\: [127.0.0.1, 192.168.1.20]/' /etc/mongod.conf
+        sudo service mongod restart
     SHELL
   end
+
+  config.vm.define "mq" do |mq|
+      mq.vm.box = "ubuntu/trusty64"
+      mq.vm.hostname = "mq"
+      mq.vm.network "private_network", ip: "192.168.1.30" , virtualbox__intnet: true
+      mq.vm.network "forwarded_port", guest: 15672, host: 15672, id: "rabbitmq"
+      mq.vm.provision "shell", inline: <<-SHELL
+        echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee --append /etc/apt/sources.list.d/rabbitmq.list
+        wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+        sudo apt-key add rabbitmq-signing-key-public.asc
+        apt-get update
+        apt-get install rabbitmq-server -y
+        #curl -L https://www.opscode.com/chef/install.sh | sudo bash
+        rabbitmq-plugins enable rabbitmq_management
+        rabbitmqctl add_user admin password
+        rabbitmqctl set_user_tags admin administrator
+        rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
+        rabbitmqctl delete_user guest
+        service rabbitmq-server restart
+      SHELL
+  end
+
 end
