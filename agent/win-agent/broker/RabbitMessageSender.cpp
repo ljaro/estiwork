@@ -92,13 +92,13 @@ void RabbitMessageSender::init()
 	
 	conn = amqp_new_connection();
 	socket = amqp_tcp_socket_new(conn);
-	if (!socket) {
-		pantheios::log_CRITICAL("creating TCP socket");
+	if (!socket) {		
+		BOOST_LOG_TRIVIAL(fatal) << "creating TCP socket";
 	}
 
 	int status = amqp_socket_open(socket, "127.0.0.1", 5672);
-	if (status) {
-		pantheios::log_CRITICAL("opening TCP socket");
+	if (status) {		
+		BOOST_LOG_TRIVIAL(fatal) << "opening TCP socket";
 	}
 
 
@@ -141,12 +141,12 @@ bool RabbitMessageSender::Publish(amqp_bytes_t& message)
 		case AMQP_STATUS_TABLE_TOO_BIG:
 		case AMQP_STATUS_CONNECTION_CLOSED:
 		case AMQP_STATUS_SSL_ERROR:
-		case AMQP_STATUS_TCP_ERROR:
-			pantheios::log_ERROR("Rabbit publishing error ", pantheios::integer(resCodes), ", ", pantheios::integer(WSAGetLastError()));
+		case AMQP_STATUS_TCP_ERROR:			
+			BOOST_LOG_TRIVIAL(error) << "Rabbit publishing error " << resCodes << ", " << WSAGetLastError();
 			break;
 
-		default:
-			pantheios::log_ERROR("Rabbit publishing other error ", pantheios::integer(resCodes), ", ", pantheios::integer(WSAGetLastError()));
+		default:			
+			BOOST_LOG_TRIVIAL(error) << "Rabbit publishing other error " << resCodes << ", " << WSAGetLastError();
 			break;
 		}		
 	}

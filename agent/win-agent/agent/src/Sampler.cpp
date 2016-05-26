@@ -39,7 +39,8 @@ void Sampler::operator()()
 		ss << boost::posix_time::to_iso_extended_string(sample.probe_time_.get());
 
 		std::string str = ss.str();
-		dd::log_DEBUG(str);
+		
+		BOOST_LOG_TRIVIAL(debug) << str;
 	}
 
 	assert(sample.probe_time_.is_initialized());

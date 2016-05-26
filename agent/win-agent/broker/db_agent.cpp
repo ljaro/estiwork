@@ -38,36 +38,6 @@ std::deque<std::vector<uint8_t> > raw_message_queue;
 boost::mutex queue_mutex;
 boost::mutex queue_mutex2;
 
-#pragma comment(lib, "pantheios.1.core.vc10.mt.debug.lib")
-#pragma comment(lib, "pantheios.1.util.vc10.mt.debug.lib")
-
-namespace
-{
-	static int s_log_level = pantheios::debug;
-}
-
-PANTHEIOS_CALL(int) pantheios_fe_isSeverityLogged(void *token,
-	int severity, int backEndId)
-{
-	return severity <= s_log_level;
-}
-
-
-PANTHEIOS_CALL(int) pantheios_fe_init(void    * /* reserved */
-	, void    **ptoken)
-{
-	*ptoken = NULL;
-
-	return 0;
-}
-
-PANTHEIOS_CALL(void) pantheios_fe_uninit(void * /* token */)
-{}
-
-PANTHEIOS_CALL(char const*) pantheios_fe_getProcessIdentity(void * /* token */)
-{
-	return "example_cpp_custom_fe";
-}
 
 
 int main(int argc, char **argv) {

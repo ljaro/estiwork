@@ -48,8 +48,8 @@ void DatabaseWriter::operator()()
 			boost::mutex::scoped_lock scoped_lock(queue_mutex);
 
 			if (!message_queue.empty())
-			{
-				pantheios::log_INFORMATIONAL("Arrived messages waiting for write ", pantheios::integer(message_queue.size()));
+			{				
+				BOOST_LOG_TRIVIAL(info) << "Arrived messages waiting for write " << message_queue.size();
 			}
 
 			while (!message_queue.empty()) {

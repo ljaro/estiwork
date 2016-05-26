@@ -37,8 +37,8 @@ void MessageSender::operator()()
 			boost::mutex::scoped_lock scoped_lock(queue_mutex2);
 
 			if (!raw_message_queue.empty())
-			{
-				pantheios::log_DEBUG("Messages queued for send: ", pantheios::integer(raw_message_queue.size()));
+			{				
+				BOOST_LOG_TRIVIAL(debug) << "Messages queued for send: " << raw_message_queue.size();
 			}			
 
 			while (!raw_message_queue.empty())

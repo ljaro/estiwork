@@ -9,12 +9,12 @@ DatabaseInterface::DatabaseInterface()// : db(NULL)
 	//int result = sqlite3_open_v2("buffer.db", &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, NULL);
 
 	if (0)
-	{
-		pantheios::log_CRITICAL("database open error");
+	{		
+		BOOST_LOG_TRIVIAL(fatal) << "database open error";
 	}
 	else
 	{
-		pantheios::log_DEBUG("database opened succesfull");
+		BOOST_LOG_TRIVIAL(fatal) << "database opened succesfull";		
 		setupDatabase();
 	}
 }

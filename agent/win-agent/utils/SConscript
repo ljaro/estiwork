@@ -10,17 +10,15 @@ third_party_dir =       os.path.join(cwd_dir,'..','3rd')
 
 
 env = Environment(MSVC_VERSION='10.0', TARGET_ARCH='x86')
-env.Append( CPPPATH=['d:/boost_1_47_0'])
+env.Append( CPPPATH=[os.path.join(third_party_dir, 'third_party', 'boost', 'boost_1_61_0')])
 env.Append( CCFLAGS=['/EHsc'])
 env.Append( CCFLAGS=['/MTd'])
 
 env.Append( 
-	CPPPATH=[
-	third_party_dir+'\\pantheios\\pantheios-1.0.1-beta216\\include',
-	third_party_dir+'\\pantheios\\stlsoft-1.9.124\\include'])
+	CPPPATH=[])
 
 libs_paths = []
-libs_paths.append( os.path.join(third_party_dir,'pantheios','pantheios-1.0.1-beta216','lib'))
+#libs_paths.append( os.path.join(third_party_dir,'pantheios','pantheios-1.0.1-beta216','lib'))
 
 source_files = glob.glob(os.path.join('*.cpp'))
 

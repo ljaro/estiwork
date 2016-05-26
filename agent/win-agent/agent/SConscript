@@ -6,7 +6,7 @@ import os
 # env = Environment( MSVC_USE_SCRIPT = os.path.join('c:','Program Files (x86)','Microsoft Visual Studio 10.0','VC','vcvars32.bat') )
 env = Environment(MSVC_VERSION='10.0', TARGET_ARCH='x86')
 # env.Tool('mssdk')
-env.Append( CPPPATH=['d:/boost_1_47_0'])
+env.Append( CPPPATH=[os.path.join('..','3rd','third_party','boost','boost_1_61_0')])
 env.Append( CCFLAGS=['/EHsc'])
 env.Append( CCFLAGS=['/MTd'])
 
@@ -30,12 +30,8 @@ thrift_inc =            os.path.join('..','3rd','thrift-0.9.2','lib','cpp','src'
 third_party_dir =       os.path.join('..','3rd')
 
 
-os.environ['PANTHEIOS_ROOT'] = os.path.join(third_party_dir,'pantheios','pantheios-1.0.1-beta216')
-
-
 libs_paths = []
-libs_paths.append( os.path.join('d:/','boost','boost_1_47_0','stage','lib'))
-libs_paths.append( os.path.join(third_party_dir,'pantheios','pantheios-1.0.1-beta216','lib'))
+libs_paths.append( os.path.join('..','3rd','third_party','boost','boost_1_61_0','stage','lib'))
 libs_paths.append( os.path.join('C:/','Program Files','Microsoft SDKs','Windows','v7.0','Lib'))
 libs_paths.append( os.path.join(third_party_dir,'lib'))
 libs_paths.append( os.path.join('..','thrift_gen'))
@@ -51,19 +47,11 @@ libs.append('thriftgen')
 libs.append('WindowsUtils')
 libs.append('libeay32')
 
-libs.append('pantheios.1.be.fprintf.vc10.mt.debug')
-libs.append('pantheios.1.bec.fprintf.vc10.mt.debug')
-libs.append('pantheios.1.core.vc10.mt.debug')
-libs.append('pantheios.1.util.vc10.mt.debug')
-libs.append('pantheios.1.be.WindowsConsole.vc10.mt.debug')
-libs.append('pantheios.1.bec.WindowsConsole.vc10.mt.debug')
-libs.append('pantheios.1.fe.all.vc10.mt.debug')
   
 env.Append( 
 	CPPPATH=[
-	'd:\\boost\\boost_1_47_0',
-	thrift_inc, 
-	third_party_dir+'\\pantheios\\pantheios-1.0.1-beta216\\include', 
+	third_party_dir+'\\third_party\\boost\\boost_1_61_0',
+	thrift_inc, 	
 	third_party_dir+'\\third_party\\openssl\\OpenSSL-Win32\\include',
 	third_party_dir+'\\pantheios\\stlsoft-1.9.124\\include']
 	)

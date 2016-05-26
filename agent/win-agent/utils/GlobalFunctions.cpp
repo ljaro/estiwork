@@ -3,16 +3,7 @@
 #include <Sddl.h>
 #include <iostream>
 #include <tchar.h>
-#include <pantheios/pantheios.hpp> //primary header file, always be included
-#include <pantheios/frontends/stock.h>
-#include <pantheios/inserters/integer.hpp>
-//#include <pantheios/implicit_link/be.WindowsConsole.h>
-
-//Specify process identity
-extern const PAN_CHAR_T PANTHEIOS_FE_PROCESS_IDENTITY [] = "desktop_agent.exe";
-
-//#define LOG_BUFFER_ALLOC_TRY
-
+#include <boost\log\trivial.hpp>
 
 bool GetActiveConsoleSessionId(DWORD& session_id)
 {
@@ -92,8 +83,8 @@ bool ConvertSIDToString(PSID ppsid, TString& ssid)
 	if(!(ConvertSidToStringSid(
 		ppsid,  // Pointer to the SID structure to be converted
 		&pSid))) // Pointer to variable that receives the null-terminated SID string
-	{				
-		pantheios::log_ERROR("ConvertSidToStringSid() failed, error ", pantheios::integer(GetLastError()));
+	{						
+		BOOST_LOG_TRIVIAL(error) << "ConvertSidToStringSid() failed, error " << GetLastError();
 	}
 	else
 	{
@@ -137,8 +128,8 @@ bool GetToken(HANDLE hToken, T*& pToken, _TOKEN_INFORMATION_CLASS tokenClass)
 		}
 
 		if(pToken == NULL)
-		{
-			pantheios::log_CRITICAL("Failed to allocate heap for ptgrp, error %u", pantheios::integer(GetLastError()));
+		{			
+			BOOST_LOG_TRIVIAL(fatal) << "Failed to allocate heap for ptgrp, error " << GetLastError();
 			Cleanup(pToken);
 		}
 		else
@@ -163,8 +154,8 @@ bool GetToken(HANDLE hToken, T*& pToken, _TOKEN_INFORMATION_CLASS tokenClass)
 		dwLength,       // size of buffer
 		&dwLength       // receives required buffer size
 		))
-	{
-		pantheios::log_CRITICAL("GetTokenInformation()  failed, error %u", pantheios::integer(GetLastError()));
+	{		
+		BOOST_LOG_TRIVIAL(fatal) << "GetTokenInformation()  failed, error " << GetLastError();
 		Cleanup(pToken);
 	}
 	else
@@ -223,8 +214,8 @@ bool CopySID( PSID& from, PSID& to )
 	if(!CopySid(dwLength,
 		to,    // Destination
 		from))  // Source
-	{
-		pantheios::log_DEBUG("Failed to copy the SID, error %u", pantheios::integer(GetLastError()));
+	{		
+		BOOST_LOG_TRIVIAL(debug) << "Failed to copy the SID, error " << GetLastError();
 		HeapFree(GetProcessHeap(), 0, (LPVOID)to);
 		return false;
 	}	

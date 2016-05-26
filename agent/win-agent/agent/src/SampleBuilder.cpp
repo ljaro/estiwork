@@ -43,7 +43,7 @@ void mergequeue(std::queue<T> q1, std::queue<T> & q2)
 // glowna funkcja watku
 void SampleBuilder::thread_main()
 {
-	dd::log_INFORMATIONAL("SampleBuilder thread started");
+//	dd::log_INFORMATIONAL("SampleBuilder thread started");
 
 	using namespace boost::posix_time;
 
@@ -93,8 +93,8 @@ void SampleBuilder::thread_main()
 			ss << "Sample: "
 				<< boost::posix_time::to_simple_string(new_merged.sample.probe_time_.get())
 				<< "    " << new_merged.duration.seconds();
-	
-			dd::log_DEBUG(ss.str());
+				
+			BOOST_LOG_TRIVIAL(debug) << ss.str();
 
 			sample_stack_for_send.push_back(new_merged);
 		}		
@@ -107,7 +107,8 @@ void SampleBuilder::thread_main()
 			assert(std::adjacent_find(sample_stack_for_send.begin(), sample_stack_for_send.end(), [](SampleMessage& a, SampleMessage& b) -> bool {								
 				std::stringstream ss;
 				ss << b.sample.probe_time_.get() << " == " << (a.sample.probe_time_.get() + a.duration) << " (" << a.sample.probe_time_.get() << "+" << a.duration;
-				pantheios::log_INFORMATIONAL(ss.str());
+				
+				BOOST_LOG_TRIVIAL(info) << ss.str();
 
 				return a.sample.probe_time_.get() + a.duration != b.sample.probe_time_.get();		
 			}) == sample_stack_for_send.end());
@@ -125,11 +126,12 @@ void SampleBuilder::thread_main()
 		if (--logCnt < 0)
 		{
 			logCnt = 5;
-			dd::log_DEBUG("Messages for send left in queue ", dd::integer(sample_stack_for_send.size()));
+			
+			BOOST_LOG_TRIVIAL(error) << "Messages for send left in queue " << sample_stack_for_send.size();
 		}
 	}
-
-	pantheios::log_INFORMATIONAL("SampleBuilder thread finished");
+	
+	BOOST_LOG_TRIVIAL(info) << "SampleBuilder thread finished";
 }
 
 /*

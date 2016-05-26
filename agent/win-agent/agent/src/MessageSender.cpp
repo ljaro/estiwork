@@ -18,7 +18,7 @@
 //#pragma warning(disable: 4308)
 #include <tchar.h>
 #include "../../utils/WindowsLocalUser.h"
-
+#include <boost/log/trivial.hpp>
 
 
 MessageSender::MessageSender(void):
@@ -34,7 +34,7 @@ MessageSender::MessageSender(void):
 	}
 	catch (const TTransportException& ee)
 	{
-		pantheios::log_CRITICAL("open connection, ", ee);
+		BOOST_LOG_TRIVIAL(fatal) << "open connection, " << ee.what();		
 	}
 }
 
@@ -55,7 +55,7 @@ void MessageSender::WaitConnection()
 	}
 	catch (TTransportException& e)
 	{
-		pantheios::log_ERROR(e);
+		BOOST_LOG_TRIVIAL(error) << e.what();		
 	}
 
 	while (!transport->isOpen())
@@ -70,7 +70,7 @@ void MessageSender::WaitConnection()
 			if (oneTime == 0)
 			{
 				oneTime = 1;
-				pantheios::log_ERROR("Cannot open connection to server ", e);
+				BOOST_LOG_TRIVIAL(fatal) << "Cannot open connection to server " << e.what();
 			}			
 		}
 
@@ -140,14 +140,14 @@ void MessageSender::SendSamples(std::deque<SampleMessage>& stack)
 
 		
 		if (start_flag == 1 && start_time > msg.sample.probe_time_.get())
-		{
-			pantheios::log_ALERT("probe_time ordering problem");
+		{			
+			BOOST_LOG_TRIVIAL(error) << "probe_time ordering problem";
 		}
 
 		if (!start_flag)
 		{
-			start_time = msg.sample.probe_time_.get();
-			pantheios::log_INFORMATIONAL("Start time " + boost::posix_time::to_iso_extended_string(start_time));
+			start_time = msg.sample.probe_time_.get();			
+			BOOST_LOG_TRIVIAL(info) << "Start time " << boost::posix_time::to_iso_extended_string(start_time);
 			start_flag = 1;
 		}
 
@@ -159,21 +159,22 @@ void MessageSender::SendSamples(std::deque<SampleMessage>& stack)
 
 			messages_sent++;
 			stack.pop_front();
-
-			pantheios::log_INFORMATIONAL("Sample sent (", dd::integer(stackSize), "/", dd::integer(stackSizeBegin), ")");
+			
+			BOOST_LOG_TRIVIAL(info) << "Sample sent (" << stackSize << "/" << stackSizeBegin << ")";
 		}
 		catch (const TException& ee)
-		{
-			pantheios::log_WARNING("MessageSender::SendSamples - ", ee);
+		{			
+			BOOST_LOG_TRIVIAL(warning) << "MessageSender::SendSamples - " << ee.what();
+
 			Sleep(500);
 			transport->close();
 			WaitConnection();
 		}
 		
 	}
-
-	pantheios::log_DEBUG("All samples sent(", pantheios::integer(messages_sent), "). Stack is empty. Fails count: ", pantheios::integer(failStack.size()));
 	
+	BOOST_LOG_TRIVIAL(debug) << "All samples sent(" << messages_sent << "). Stack is empty. Fails count: " << failStack.size();
+
 	std::swap(stack, failStack);
 }
 

@@ -31,5 +31,5 @@ void LocalRpcHandler::send(const EventSample& sample) {
 	//str = memBuf->getBufferAsString();
 	//memBuf->resetBuffer();
 	
-	pantheios::log_INFORMATIONAL("EventSample received");
+	BOOST_LOG_TRIVIAL(info) << "EventSample received";
 }

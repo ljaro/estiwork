@@ -23,12 +23,12 @@ void Hasher::fillHash(SampleMessage& sample)
 		}
 		else
 		{
-			pantheios::log_ERROR("In Hasher - hashing failed");
+			BOOST_LOG_TRIVIAL(error) << "In Hasher - hashing failed";			
 		}
 	}
 	else
-	{
-		pantheios::log_ERROR("In Hasher - image path not found, hashing aborted");
+	{		
+		BOOST_LOG_TRIVIAL(error) << "In Hasher - image path not found, hashing aborted";
 	}
 }
 
@@ -70,7 +70,8 @@ bool Hasher::getHash(const TString& path, TString& out)
 			}
 
 			out = ss.str();
-			pantheios::log_INFORMATIONAL("sha1 of ", path, " ", out);
+
+			BOOST_LOG_TRIVIAL(info) << "sha1 of " << path << " " << out;			
 
 			return true;
 		}	

@@ -40,8 +40,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>..\thrift_gen;..\3rd\pantheios\pantheios-1.0.1-beta216\lib;..\utils;..\3rd\lib;..\3rd\third_party\openssl\OpenSSL-Win32\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>..\thrift_gen\gen-cpp;..\3rd\third_party\openssl\OpenSSL-Win32\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\thrift_gen;..\utils;..\3rd\lib;..\3rd\third_party\openssl\OpenSSL-Win32\lib;..\3rd\third_party\boost\boost_1_61_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\thrift_gen\gen-cpp;..\3rd\third_party\openssl\OpenSSL-Win32\include\;C:\dev\estiwork\agent\win-agent\3rd\third_party\boost\boost_1_61_0\;C:\dev\estiwork\agent\win-agent\3rd\thrift-0.9.2\lib\cpp\src;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -49,8 +49,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>

@@ -32,10 +32,8 @@ env.Append( CCFLAGS=['/MTd'])
 
 env.Append( 
 	CPPPATH=[
-#	'd:\\boost\\boost_1_47_0',
-	third_party_dir+'\\third_party\\boost\\boost_1_47_0',
-	third_party_dir+'\\thrift-0.9.2\\lib\\cpp\\src', 
-	third_party_dir+'\\pantheios-1.0.1-beta214\\include', 
+	third_party_dir+'\\third_party\\boost\\boost_1_61_0',
+	third_party_dir+'\\thrift-0.9.2\\lib\\cpp\\src', 	
 	third_party_dir+'\\stlsoft-1.9.118\\include'])
 	
 source_files = glob.glob(os.path.join(cpp_gen_path,'gen-cpp','*.cpp'))

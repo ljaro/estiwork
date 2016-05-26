@@ -5,21 +5,12 @@
 
 #pragma once
 #define WIN32_LEAN_AND_MEAN
+#define BOOST_ASIO_WINDOWS_APP
 #include "targetver.h"
 
 #include <stdio.h>
 #include <tchar.h>
-
-#include <pantheios/pantheios.hpp> //primary header file, always be included
-#include <pantheios/frontend.h>
-#include <pantheios/frontends/stock.h>
-#include <pantheios/inserters/integer.hpp>
-#include <pantheios/inserters/w2m.hpp>
-//#include <pantheios/inserters/m2w.hpp>
-//#include <pantheios/inserters/m2t.hpp>
-#include <pantheios/inserters/character.hpp>
-#include <pantheios/implicit_link/be.WindowsConsole.h>
-
-
+#include <iostream>
+#include <string>
 // TODO: reference additional headers your program requires here
-namespace dd = ::pantheios;
+#include <boost/log/trivial.hpp>
