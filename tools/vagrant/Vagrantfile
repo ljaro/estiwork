@@ -76,6 +76,7 @@ Vagrant.configure(2) do |config|
       mq.vm.provision "shell", inline: <<-SHELL
         echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee --append /etc/apt/sources.list.d/rabbitmq.list
         wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6B73A36E6026DFCA
         sudo apt-key add rabbitmq-signing-key-public.asc
         apt-get update
         apt-get install rabbitmq-server -y
