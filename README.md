@@ -10,7 +10,6 @@ Monitoring software and web UI
 ####
 
 1. run `vagrant ssh web` (you are in `web` virtual machine box)
-2. on `web` box run cmd `cd /estiwork/web-ui` and `install npm`
-3. on `web` box run cmd `cd /estiwork/web-ui/assets` and `install npm`
-4. on `web` box run cmd `cd /estiwork/web-ui` and `sails lift`
+2. on `web` box run cmd `cd /estiwork/web-ui/assets` and run `npm install`
+3. on `web` box run cmd `cd /estiwork/web-ui` and run `sails lift`
 
