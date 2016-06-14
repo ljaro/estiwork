@@ -7,7 +7,7 @@ var chance = require('chance').Chance(1234);
  */
 const NUM_OF_WORKERS = 20;
 const q = 'exchange_key1';
-
+const MQHOST = 'amqp://user1:user1@192.168.1.30'
 /***********************************************************
  ***********************************************************
  */
@@ -272,7 +272,7 @@ function publisher(conn) {
 }
 
 require('amqplib/callback_api')
-    .connect('amqp://localhost', function (err, conn) {
+    .connect(MQHOST, function (err, conn) {
         if (err != null) bail(err);
         publisher(conn);
     });

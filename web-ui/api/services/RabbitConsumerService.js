@@ -14,7 +14,7 @@ var RabbitConsumerService = {
 
     var q = 'exchange_key1';
     var amq = require('amqplib');
-    var RECONNECT_T = 300;
+    var RECONNECT_T = 3000;
     var RETRY_TIMES = 5;
     var recoveryCount = 0;
     var uack = 0;
@@ -23,7 +23,7 @@ var RabbitConsumerService = {
     var newestConnection = null;
 
     var __connect = function () {
-      var open = amq.connect('amqp://192.168.1.30');
+      var open = amq.connect('amqp://user1:user1@192.168.1.30');
       open.then(function (conn) {
         newestConnection = conn;
         conn.on('error', function (err) {
@@ -41,7 +41,9 @@ var RabbitConsumerService = {
         });
         __channel(conn);
       }, function (err) {
+        console.log(err);
         setTimeout(function () {
+          console.log('AMQ trying connect');
           __connect();
         }, RECONNECT_T);
       });

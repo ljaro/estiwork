@@ -8,9 +8,13 @@ var DefaultDocsService = {
   initializeDatabase: function initializeDatabaseService() {
 
 
+    console.log('init database');
     var q1 =
       [
         Workstation.native(function (err, collection) {
+          if(err){
+            console.log(err);
+          }
           return collection.createIndex({"machine_sid": 1}, {unique: 1});
         }),
 
