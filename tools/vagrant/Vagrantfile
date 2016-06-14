@@ -49,6 +49,8 @@ Vagrant.configure(2) do |config|
      SHELL
 
      web.vm.network :forwarded_port, guest: 1337, host: 1337
+     web.vm.network :forwarded_port, guest: 5858, host: 5858
+     web.vm.network :forwarded_port, guest: 8080, host: 8080
   end
 
   config.vm.define "db" do |db|
