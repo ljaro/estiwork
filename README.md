@@ -13,3 +13,9 @@ Monitoring software and web UI
 2. on `web` box run cmd `cd /estiwork/web-ui/assets` and run `npm install`
 3. on `web` box run cmd `cd /estiwork/web-ui` and run `sails lift`
 
+#### DEBUG
+
+1. run sails with `sails debug`
+2. goto `http://127.0.0.1:8080/?port=5858` on Chrome Browser
+
+See http://sailsjs.org/documentation/reference/command-line-interface/sails-debug
