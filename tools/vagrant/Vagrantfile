@@ -44,8 +44,11 @@ Vagrant.configure(2) do |config|
     SHELL
 
     web.vm.provision "shell", inline: <<-SHELL
-        (cd /estiwork/web-ui; npm install)
-        (cd /estiwork/web-ui/assets; npm install)
+        cd /estiwork/web-ui
+		npm install
+        cd /estiwork/web-ui/assets
+		npm install
+		cd /estiwork/web-ui
      SHELL
 
      web.vm.network :forwarded_port, guest: 1337, host: 1337
