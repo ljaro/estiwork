@@ -1,8 +1,10 @@
 'use strict';
-
 /**
- * Created by luk on 2015-08-22.
+ * Copyright (C) Łukasz Jaroszewski, All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
  */
+
   //TODO: is that test and others are to monolitic with those json response structs?
 
 //var assert = require("assert");
