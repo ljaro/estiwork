@@ -1,0 +1,1 @@
+{"virtualbox":{"/estiwork/tools":{"guestpath":"/estiwork/tools","hostpath":"C:/dev/estiwork/tools","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/dev/estiwork/tools/vagrant","disabled":false,"__vagrantfile":true}}}
