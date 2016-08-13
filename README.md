@@ -12,6 +12,13 @@ Monitoring software and web UI
 1. run `vagrant ssh web` (you are in `web` virtual machine box)
 2. on `web` box run cmd `cd /estiwork/web-ui/assets` and run `npm install`
 3. on `web` box run cmd `cd /estiwork/web-ui` and run `sails lift`
+4. now if you go to `http://localhost:1337` you should see app
+5. also you can check rabbitmq installed `localhost:15672/#/`
+
+at the end go to `web` vm by `vagrant ssh web`
+go to `/estiwork/tools`
+run `node nodeSim.js`
+you should see data on web application -> `http://localhost:1337`
 
 #### DEBUG
 
