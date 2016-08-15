@@ -1,16 +1,17 @@
 /**
- * 
+ *
  * Copyright (C) Łukasz Jaroszewski, All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * 
+ *
  * QuickviewController
  *
  * @description :: Server-side logic for managing quickviews
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 var moment = require('moment');
-var ObjectId = require('mongodb').ObjectId;
+//var ObjectId = require('mongodb').ObjectId;
+const ObjectId = require('sails-mongo').mongo.objectId;
 
 module.exports = {
 
@@ -33,10 +34,10 @@ module.exports = {
       var groupsFilter = req.params['id'].split(',');
 
       groupsFilter = groupsFilter.map(function (x) {
-        return new ObjectId(x);
+        return  new ObjectId(x);
       });
 
-      collection.aggregate([
+      var query = [
         {
           $match: {
             probe_time: {
@@ -127,7 +128,11 @@ module.exports = {
           }
         },
 
-      ]).toArray(function (err, results) {
+      ];
+
+      console.log(JSON.stringify(query, null, 4));
+
+      collection.aggregate(query).toArray(function (err, results) {
         if (err)
           return res.serverError(err);
 
