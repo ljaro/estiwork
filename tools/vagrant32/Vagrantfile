@@ -1,0 +1,84 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+
+  #config.ssh.private_key_path = File.expand_path(File.join(ENV['USERPROFILE'], 'puttykey.ppk'), __FILE__)
+
+  config.vm.provider "virtualbox" do |vb|
+    ### Change network card to PCnet-FAST III
+    # For NAT adapter
+    #vb.customize ["modifyvm", :id, "--nictype1", "Am79C973"]
+    # For host-only adapter
+    #vb.customize ["modifyvm", :id, "--nictype2", "Am79C973"]
+    vb.cpus = 2
+    #vb.linked_clone = true
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
+  end
+
+
+
+
+
+  config.vm.define "web" do |web|
+    web.vm.box = "hashicorp/precise32"
+    web.vm.hostname = "web"
+    web.vm.network "private_network", ip: "192.168.1.10", virtualbox__intnet: true
+    web.vm.synced_folder "../../web-ui", "/estiwork/web-ui"
+	web.vm.synced_folder "../../tools", "/estiwork/tools"
+    web.vm.provision "shell", inline: <<-SHELL
+        sudo apt-get update
+        sudo apt-get install -y curl
+        curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+        sudo apt-get install -y nodejs
+        sudo apt-get install -y mongodb-clients
+        #sudo npm -g i npm
+        sudo apt-get install -y git
+        sudo npm -g install bower
+        sudo npm -g install sails
+		
+		#dependencies for simulator
+		sudo npm install -g moment
+		sudo npm install -g chance
+		sudo npm install -g amqplib
+    SHELL
+
+    web.vm.provision "shell", inline: <<-SHELL
+        cd /estiwork/web-ui
+		npm install
+        cd /estiwork/web-ui/assets
+		npm install
+		cd /estiwork/web-ui
+     SHELL
+
+     web.vm.network :forwarded_port, guest: 1337, host: 1337
+     web.vm.network :forwarded_port, guest: 5858, host: 5858
+     web.vm.network :forwarded_port, guest: 8080, host: 8080
+  end
+
+  config.vm.define "mq" do |mq|
+      mq.vm.box = "ubuntu/trusty32"
+      mq.vm.hostname = "mq"
+      mq.vm.network "private_network", ip: "192.168.1.30" , virtualbox__intnet: true
+      mq.vm.network "forwarded_port", guest: 15672, host: 15672, id: "rabbitmq"
+	  mq.vm.synced_folder "../../tools", "/estiwork/tools"
+      mq.vm.provision "shell", inline: <<-SHELL
+        echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee --append /etc/apt/sources.list.d/rabbitmq.list
+        wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6B73A36E6026DFCA
+        sudo apt-key add rabbitmq-signing-key-public.asc
+        apt-get update
+        apt-get install rabbitmq-server -y
+        #curl -L https://www.opscode.com/chef/install.sh | sudo bash
+        rabbitmq-plugins enable rabbitmq_management
+        rabbitmqctl add_user admin password
+        rabbitmqctl set_user_tags admin administrator
+        rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
+        rabbitmqctl delete_user guest
+		rabbitmqctl add_user user1 user1
+		rabbitmqctl set_permissions -p / user1 ".*" ".*" ".*"
+        service rabbitmq-server restart
+      SHELL
+  end
+
+end
