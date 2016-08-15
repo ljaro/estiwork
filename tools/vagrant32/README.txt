@@ -49,11 +49,8 @@ open cmd console and type `mongo` this should make connection without an error
 /estiwork/web-ui/config/connections.js 
 
   someMongodbServer: {
-    
 	adapter: 'sails-mongo',
-    
-	host: '192.168.1.20',
-   <------  change to your host IP
+	host: '192.168.1.20', <--change to your host IP
 
 
 you can check IP by going to guest machine `vagrant ssh web` and typing `netstat -rn` 
@@ -66,7 +63,7 @@ Destination     Gateway             Genmask         Flags   MSS Window  irtt Ifa
 192.168.1.0     0.0.0.0            255.255.255.0   U         0 0          0 eth1
 
 
-also you can install https://www.mongodb.com/download-center?jmp=nav#compass - MongoDB Compass allows you to quickly visualize the structure of data in your database, and perform ad hoc queries – all with zero knowledge of MongoDB's query language.
+also you can install https://www.mongodb.com/download-center?jmp=nav#compass - MongoDB Compass allows you to quickly visualize the structure of data in your database, and perform ad hoc queries â€“ all with zero knowledge of MongoDB's query language.
 
 
 
