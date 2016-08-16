@@ -3,22 +3,16 @@
 
 Vagrant.configure(2) do |config|
 
-  #config.ssh.private_key_path = File.expand_path(File.join(ENV['USERPROFILE'], 'puttykey.ppk'), __FILE__)
-
   config.vm.provider "virtualbox" do |vb|
     ### Change network card to PCnet-FAST III
     # For NAT adapter
     #vb.customize ["modifyvm", :id, "--nictype1", "Am79C973"]
     # For host-only adapter
     #vb.customize ["modifyvm", :id, "--nictype2", "Am79C973"]
-    vb.cpus = 2
+    vb.cpus = 1
     #vb.linked_clone = true
-    vb.customize ["modifyvm", :id, "--memory", "2048"]
+    vb.customize ["modifyvm", :id, "--memory", "1048"]
   end
-
-
-
-
 
   config.vm.define "web" do |web|
     web.vm.box = "ubuntu/trusty32"
@@ -49,20 +43,10 @@ Vagrant.configure(2) do |config|
         cd /estiwork/web-ui/assets
 		npm install
 		cd /estiwork/web-ui
-     SHELL
-
-     web.vm.network :forwarded_port, guest: 1337, host: 1337
-     web.vm.network :forwarded_port, guest: 5858, host: 5858
-     web.vm.network :forwarded_port, guest: 8080, host: 8080
-  end
-
-  config.vm.define "mq" do |mq|
-      mq.vm.box = "ubuntu/trusty32"
-      mq.vm.hostname = "mq"
-      mq.vm.network "private_network", ip: "192.168.1.30" , virtualbox__intnet: true
-      mq.vm.network "forwarded_port", guest: 15672, host: 15672, id: "rabbitmq"
-	  mq.vm.synced_folder "../../tools", "/estiwork/tools"
-      mq.vm.provision "shell", inline: <<-SHELL
+    SHELL
+	 
+	 
+	web.vm.provision "shell", inline: <<-SHELL
         echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee --append /etc/apt/sources.list.d/rabbitmq.list
         wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
         sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6B73A36E6026DFCA
@@ -78,7 +62,18 @@ Vagrant.configure(2) do |config|
 		rabbitmqctl add_user user1 user1
 		rabbitmqctl set_permissions -p / user1 ".*" ".*" ".*"
         service rabbitmq-server restart
-      SHELL
+		
+		# old ip address with mq vm changed to loopback
+		sudo ifconfig lo:1 inet 192.168.1.30 netmask 255.255.255.255 up
+		sudo ifconfig lo:2 inet 192.168.1.20 netmask 255.255.255.255 up		
+    SHELL
+
+    web.vm.network :forwarded_port, guest: 1337, host: 1337
+    web.vm.network :forwarded_port, guest: 5858, host: 5858
+    web.vm.network :forwarded_port, guest: 8080, host: 8080
+	web.vm.network :forwarded_port, guest: 15672, host: 15672, id: "rabbitmq"
   end
+
+
 
 end
