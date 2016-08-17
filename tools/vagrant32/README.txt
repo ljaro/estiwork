@@ -8,14 +8,14 @@ How to install mongodb.
 
 !!Mongodb should be installed locally on your computer, not on VM guest!!
 
-1. Download mongodb from https://www.mongodb.com/download-center?jmp=nav#community
+1. download mongodb from https://www.mongodb.com/download-center?jmp=nav#community
 
-2. Create folders where database will be stored and where config file will be placed
+2. create folders where database will be stored and where config file will be placed
 
-mkdir c:\mongodb\data\db
-mkdir c:\mongodb\data\log
+	`mkdir c:\mongodb\data\db`
+	`mkdir c:\mongodb\data\log`
 
-3. Create file mongod.cfg with content:
+3. create file mongod.cfg with content:
 
 systemLog:
     destination: file
@@ -25,8 +25,9 @@ storage:
 
 and place it into c:\mongodb\
 
-4. Run command console as administrator
-go to mongodb installation folder. Default path is: C:\Program Files\MongoDB\Server\3.2\bin
+4. run command console as administrator
+
+5. go to mongodb installation folder. Default path is: C:\Program Files\MongoDB\Server\3.2\bin
 
 run command 
 
@@ -34,16 +35,23 @@ run command
 
 and
 
-net start MongoDB
+`net start MongoDB`
 
 
-also add folder C:\Program Files\MongoDB\Server\3.2\bin to PATH environment variables for better use of mondo.exe command
+also add folder `C:\Program Files\MongoDB\Server\3.2\bin` to PATH environment variables for better use of `mongo.exe` command
 
 
-5. check if database is corretly installed and run
+5. check if database is correctly installed:
+	open cmd console and type `mongo` this should make connection without an error
 
-open cmd console and type `mongo` this should make connection without an error
+here is official instruction:
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#install-mongodb-community-edition
 
+
+
+
+
+OPTIONAL:
 
 6. If database is properly setup then last you should change IP for mondodb in :
 /estiwork/web-ui/config/connections.js 
@@ -57,15 +65,10 @@ you can check IP by going to guest machine `vagrant ssh web` and typing `netstat
 
 vagrant@web:/estiwork/web-ui$ netstat -rn
 Kernel IP routing table
-Destination     Gateway             Genmask         Flags   MSS Window  irtt Iface
-0.0.0.0         10.0.2.2 <--this IP  0.0.0.0         UG        0 0          0 eth0
+Destination     Gateway             Genmask       Flags   MSS Window  irtt Iface
+0.0.0.0         10.0.2.2 <--this IP  0.0.0.0       UG        0 0          0 eth0
 10.0.2.0        0.0.0.0            255.255.255.0   U         0 0          0 eth0
 192.168.1.0     0.0.0.0            255.255.255.0   U         0 0          0 eth1
 
 
-also you can install https://www.mongodb.com/download-center?jmp=nav#compass - MongoDB Compass allows you to quickly visualize the structure of data in your database, and perform ad hoc queries – all with zero knowledge of MongoDB's query language.
 
-
-
-here is official instruction:
-https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#install-mongodb-community-edition
