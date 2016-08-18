@@ -9,6 +9,8 @@ Monitoring software and web UI
 
 ####
 
+Be sure to have ssh client in PATH, i.e from `C:\Program Files\Git\usr\bin`
+
 1. run `vagrant ssh web` (you are in `web` virtual machine box)
 2. on `web` box run cmd `cd /estiwork/web-ui/assets` and run `npm install`
 3. on `web` box run cmd `cd /estiwork/web-ui` and run `sails lift`
