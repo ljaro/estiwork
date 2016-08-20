@@ -64,14 +64,15 @@ Vagrant.configure(2) do |config|
         rabbitmqctl delete_user guest
         rabbitmqctl add_user user1 user1
         rabbitmqctl set_permissions -p / user1 ".*" ".*" ".*"
-        service rabbitmq-server restart
-        
-        # old ip address with mq vm changed to loopback
-        sudo ifconfig lo:1 inet 192.168.1.30 netmask 255.255.255.255 up
-        
-        sudo iptables -t nat -A OUTPUT -d 192.168.1.20 -j DNAT --to-destination 10.0.2.2
+        service rabbitmq-server restart      
     SHELL
 
+	web.vm.provision "shell", run: 'always', inline: <<-SHELL
+	    # old ip address with mq vm changed to loopback
+        sudo ifconfig lo:1 inet 192.168.1.30 netmask 255.255.255.255 up        
+        sudo iptables -t nat -A OUTPUT -d 192.168.1.20 -j DNAT --to-destination 10.0.2.2
+	SHELL
+	
     web.vm.network :forwarded_port, guest: 1337, host: 1337
     web.vm.network :forwarded_port, guest: 5858, host: 5858
     web.vm.network :forwarded_port, guest: 8080, host: 8080
