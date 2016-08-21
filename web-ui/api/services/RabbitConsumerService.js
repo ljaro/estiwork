@@ -25,7 +25,7 @@ var RabbitConsumerService = {
     var newestConnection = null;
 
     var __connect = function () {
-      var open = amq.connect('amqp://user1:user1@192.168.1.30');
+      var open = amq.connect('amqp://user1:user1@mq');
       open.then(function (conn) {
         newestConnection = conn;
         conn.on('error', function (err) {
