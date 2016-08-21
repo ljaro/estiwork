@@ -51,6 +51,12 @@ Vagrant.configure(2) do |config|
 		cd /estiwork/web-ui
 
 	#
+	# mongodb rabbit host names
+	#
+		sudo echo "127.0.0.1     db" >> /etc/hosts
+		sudo echo "127.0.0.1     mq" >> /etc/hosts
+		
+	#
 	# mongodb
 	#
         sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
@@ -67,7 +73,7 @@ Vagrant.configure(2) do |config|
         #echo "mongodb-org-tools hold" | sudo dpkg --set-selections
 
         sudo sed -i 's/bindIp.*/bindIp\\: [127.0.0.1, 192.168.1.20]/' /etc/mongod.conf
-        sudo service mongod restart
+        sudo service mongod restart		
 
 	#
 	# rabbitmq
@@ -86,15 +92,9 @@ Vagrant.configure(2) do |config|
         rabbitmqctl delete_user guest
 		rabbitmqctl add_user user1 user1
 		rabbitmqctl set_permissions -p / user1 ".*" ".*" ".*"
-        service rabbitmq-server restart
-
+        service rabbitmq-server restart		
     SHELL
 	
-	web.vm.provision "shell", run: 'always', inline: <<-SHELL
-		# old ip address with mq vm changed to loopback
-		sudo ifconfig lo:1 inet 192.168.1.30 netmask 255.255.255.255 up
-		sudo ifconfig lo:2 inet 192.168.1.20 netmask 255.255.255.255 up	
-	SHELL
 
      web.vm.network :forwarded_port, guest: 1337, host: 1337
      web.vm.network :forwarded_port, guest: 5858, host: 5858

@@ -1,19 +1,34 @@
 # estiwork
 Monitoring software and web UI
 
+Docker installation
+
+1. install docker for linux https://docs.docker.com/engine/installation/linux/ubuntulinux/
+2. create docker group https://docs.docker.com/engine/installation/linux/ubuntulinux/#/create-a-docker-group
+3. install docker-compose https://docs.docker.com/compose/install/
+4. clone this repo
+5. go to `estiwork` cloned repo dir
+6. run `docker-compose up`
+
+
+
+
+Vagrant installation
+
 1. install VirtualBox
 2. install Vagrant
-3. run command prompt as administrator
-4. goto `estiwork/tools/vagrant`
-5. run `vagrant up`
+3. clone this repo
+4. run command prompt as administrator
+5. go to cloned repo `estiwork/tools/vagrant`
+6. run `vagrant up`
 
 If any troubles:
 
-0. type `ssh` in cmd line to check if exits in PATH env variable
-1. in Vagrantfile uncomment gui = true
-2. type `vagrant ssh-config` and delete insecure ssh key file
-3. in Vagrantfile uncomment `#vb.customize ["modifyvm", :id, "--nictype1", "Am79C973"]`
-4. try disable windows firewall
+1. type `ssh` in cmd line to check if exits in PATH env variable
+2. in Vagrantfile uncomment gui = true
+3. type `vagrant ssh-config` and delete insecure ssh key file
+4. in Vagrantfile uncomment `#vb.customize ["modifyvm", :id, "--nictype1", "Am79C973"]`
+5. try disable windows firewall
 
 ####
 

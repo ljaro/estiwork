@@ -1,0 +1,30 @@
+db:
+    build: db
+    restart: always
+mq:
+    build: mq
+    restart: always
+    ports:
+    - "4369:4369"
+    - "5672:5672"
+    - "15672:15672"
+    expose:
+    - "15672"
+web:
+    build: web-ui
+    restart: always
+    ports:
+    - "1337"
+    expose:
+    - "1337"
+    links:
+    - db:db
+    - mq:mq
+    volumes:
+    - ./tools:/estiwork/tools
+    environment:
+      NODE_ENV: development
+    
+
+
+
