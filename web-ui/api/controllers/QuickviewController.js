@@ -130,7 +130,7 @@ module.exports = {
 
       ];
 
-      console.log(JSON.stringify(query, null, 4));
+      //console.log(JSON.stringify(query, null, 4));
 
       collection.aggregate(query).toArray(function (err, results) {
         if (err)
@@ -182,4 +182,5 @@ module.exports = {
   }
 };
 
+// test1
 
