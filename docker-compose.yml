@@ -5,9 +5,9 @@ mq:
     build: mq
     restart: always
     ports:
+    - "127.0.0.1:15672:15672"
     - "127.0.0.1:4369:4369"
     - "127.0.0.1:5672:5672"
-    - "127.0.0.1:15672:15672"
     expose:
     - "15672"
 web:
@@ -22,8 +22,10 @@ web:
     - mq:mq
     volumes:
     - ./tools:/estiwork/tools
+    - ./web-ui:/estiwork/web-ui
     environment:
       NODE_ENV: development
+      NODE_PATH: /tmp/estiwork/web-ui/node_modules:/usr/local/lib/node_modules
 
     
 
