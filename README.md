@@ -2,7 +2,7 @@
 Monitoring software and web UI
 
 
-**Manual installation**
+###Manual installation
 
 App consists of such components: 
 - nodejs v4.5.0
@@ -44,7 +44,7 @@ App consists of such components:
 8. go to `web-ui\assets` and run `npm install`
 
 
-**Docker installation**
+###Docker installation
 
 1. install docker for linux https://docs.docker.com/engine/installation/linux/ubuntulinux/
 2. create docker group https://docs.docker.com/engine/installation/linux/ubuntulinux/#/create-a-docker-group
@@ -55,7 +55,7 @@ App consists of such components:
 
 
 
-**Vagrant installation**
+###Vagrant installation
 
 1. install VirtualBox
 2. install Vagrant
@@ -64,7 +64,7 @@ App consists of such components:
 5. go to cloned repo `estiwork/tools/vagrant`
 6. run `vagrant up`
 
-**If any troubles:**
+###If any troubles:
 
 1. type `ssh` in cmd line to check if exits in PATH env variable
 2. in Vagrantfile uncomment gui = true
