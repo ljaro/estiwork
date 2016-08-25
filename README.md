@@ -1,7 +1,39 @@
 # estiwork
 Monitoring software and web UI
 
-Docker installation
+
+**Manual installation**
+
+App consists of such components: 
+- nodejs v4.5.0
+- mongodb:3.2.6
+- rabbitmq:3.6.5
+- npm 2.15.9
+
+1. install above components
+2. all of them should be in PATH env variable, so you can run directly run them from command line console
+   
+  open console (with administrator rights on windows) and run each command to check if exists 
+   - `node` <enter>
+   - `mongo` <enter>
+   - `rabbitmqctl` <enter>
+   - `npm -v` <enter>
+   
+3. You need remove guest user from RabbitMq and add new one
+   - `rabbitmqctl add_user admin password`
+   - `rabbitmqctl set_user_tags admin administrator`
+   - `rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"`
+   - `rabbitmqctl delete_user guest`
+   - `rabbitmqctl add_user user1 user1`
+   - `rabbitmqctl set_permissions -p / user1 ".*" ".*" ".*"`
+   - `rabbitmq-plugins enable rabbitmq_management`
+   - go to admin page [http://localhost:15672/#/]()
+4. MongoDB installed only copy files. To install service follow [https://github.com/zer0m/estiwork/blob/master/tools/vagrant32/README.txt]()
+5. add hosts to `/etc/hosts` or `C:\Windows\System32\drivers\etc\hosts`
+   
+
+
+**Docker installation**
 
 1. install docker for linux https://docs.docker.com/engine/installation/linux/ubuntulinux/
 2. create docker group https://docs.docker.com/engine/installation/linux/ubuntulinux/#/create-a-docker-group
@@ -12,8 +44,7 @@ Docker installation
 
 
 
-
-Vagrant installation
+**Vagrant installation**
 
 1. install VirtualBox
 2. install Vagrant
@@ -22,7 +53,7 @@ Vagrant installation
 5. go to cloned repo `estiwork/tools/vagrant`
 6. run `vagrant up`
 
-If any troubles:
+**If any troubles:**
 
 1. type `ssh` in cmd line to check if exits in PATH env variable
 2. in Vagrantfile uncomment gui = true
@@ -30,9 +61,9 @@ If any troubles:
 4. in Vagrantfile uncomment `#vb.customize ["modifyvm", :id, "--nictype1", "Am79C973"]`
 5. try disable windows firewall
 
-####
 
-Be sure to have ssh client in PATH, i.e from `C:\Program Files\Git\usr\bin`
+
+**In order to ssh into vagrant vm, you need to have ssh client in PATH, i.e from git installation `C:\Program Files\Git\usr\bin`**
 
 1. run `vagrant ssh web` (you are in `web` virtual machine box)
 2. on `web` box run cmd `cd /estiwork/web-ui/assets` and run `npm install`
