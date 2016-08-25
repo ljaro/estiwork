@@ -27,10 +27,21 @@ App consists of such components:
    - `rabbitmqctl add_user user1 user1`
    - `rabbitmqctl set_permissions -p / user1 ".*" ".*" ".*"`
    - `rabbitmq-plugins enable rabbitmq_management`
-   - go to admin page [http://localhost:15672/#/]()
-4. MongoDB installed only copy files. To install service follow [https://github.com/zer0m/estiwork/blob/master/tools/vagrant32/README.txt]()
-5. add hosts to `/etc/hosts` or `C:\Windows\System32\drivers\etc\hosts`
    
+   go to admin page [http://localhost:15672/#/]()
+
+4. MongoDB installed only copy files. To install service follow [https://github.com/zer0m/estiwork/blob/master/tools/vagrant32/README.txt]()
+
+5. add hosts to `/etc/hosts` or `C:\Windows\System32\drivers\etc\hosts`
+    
+   put two lines in hosts file
+    ```
+    127.0.0.1   mq
+    127.0.0.1   db
+    ```
+6. clone this repo
+7. go to `web-ui` and run `npm install`
+8. go to `web-ui\assets` and run `npm install`
 
 
 **Docker installation**
