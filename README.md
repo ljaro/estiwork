@@ -98,3 +98,4 @@ See http://sailsjs.org/documentation/reference/command-line-interface/sails-debu
 
 
 test1
+test2
