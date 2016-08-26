@@ -11,7 +11,7 @@ App consists of such components:
 - npm 2.15.9
 
 1. install above components
-2. all of them should be in PATH env variable, so you can run directly run them from command line console
+2. all of them should be in PATH env variable, so you can directly run them from command line console
    
   open console (with administrator rights on windows) and run each command to check if exists 
    - `node` <enter>
@@ -30,7 +30,7 @@ App consists of such components:
    
    go to admin page [http://localhost:15672/#/]()
 
-4. MongoDB installed only copy files. To install service follow [https://github.com/zer0m/estiwork/blob/master/tools/vagrant32/README.txt]()
+4. MongoDB installation only copy files. To install service follow [https://github.com/zer0m/estiwork/blob/master/tools/vagrant32/README.txt]()
 
 5. add hosts to `/etc/hosts` or `C:\Windows\System32\drivers\etc\hosts`
     
