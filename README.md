@@ -93,3 +93,9 @@ you should see data on web application -> `http://localhost:1337`
 2. goto `http://127.0.0.1:8080/?port=5858` on Chrome Browser
 
 See http://sailsjs.org/documentation/reference/command-line-interface/sails-debug
+
+
+
+
+test1
+test2
