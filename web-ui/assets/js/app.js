@@ -22,6 +22,7 @@ angular.module('myApp', [
   'myApp.myFilters',
   'myApp.testgen',
   'myApp.blinky',
+  'myApp.feedback',
   'ui.bootstrap',
   'ui.router',
   'ui.grid',

@@ -5,10 +5,18 @@
  */
 
 angular.module('myApp.feedback', ['ngResource'])
-  .controller('historyviewController',
-  ['$scope', '$resource', function ($scope, $resource){
+  .controller('feedbackController',
+  ['$scope', '$resource', '$timeout', function ($scope, $resource, $timeout){
+  	
+  	$scope.isClicked = false;
 
+  	$scope.submitFeedback = function(){
+  		if ($scope.isClicked === false){
+  			$scope.isClicked = true;
+  			$timeout(function() {
+  				$scope.isClicked = false;
+		    }, 5000);
+  		}
+  	};
 
   }]);
-
-
