@@ -2,16 +2,13 @@
 	<div class="col-md-10">
 	  <div class="form-group">
 	    <from role="form">
-	        <textarea class="form-control feedback" rows="3" placeholder="Nieustannie pracujemy nad ulepszeniem funkcjonalnści programu, dlatego jeśli masz jakieś sugestie lub spostrzeżenia, wyslij do nas wiadomość."></textarea>
+	        <textarea class="form-control feedback" ng-model="feedback" rows="3" placeholder="Nieustannie pracujemy nad ulepszeniem funkcjonalnści programu, dlatego jeśli masz jakieś sugestie lub spostrzeżenia, wyslij do nas wiadomość."></textarea>
 	    </from>
 	  </div>
 	</div>
 
 	<div class="col-md-2">
 	  <button type="button" class="btn btn-default" ng-disabled="isClicked" ng-click="submitFeedback()">Wyslij sugestie</button>
-	  <div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Sugestie wysyłane są
-	    anonimowo.</div>
+	  <div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Sugestie wysyłane są anonimowo.</div>
 	</div>
 </div>
-
-
