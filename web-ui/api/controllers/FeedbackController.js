@@ -11,6 +11,7 @@
  */
 var ObjectId = require('mongodb').ObjectId;
 var assert = require('assert');
+var startTimer = false;
 
 
 module.exports = {
@@ -18,24 +19,36 @@ module.exports = {
 
   post: function (req, res) {
 
-    var data = req.body;
-    var newdata = [];
+    if (!startTimer) {
 
-    var newentry = {};
-    newentry.text = data['text'];
-    newdata.push(newentry);
-    
-    Event.native(function(err, collection){
-      if (err) return res.serverError(err);
+      startTimer = true;
+      
+      var data = req.body;
+      var newdata = [];
 
-      collection.remove({});
+      var newentry = {};
+      newentry.text = data['text'];
+      newdata.push(newentry);
+      
+      Event.native(function(err, collection){
+        if (err) return res.serverError(err);
 
-      collection.insert(newdata, function(err, data){
-        assert.equal(err, null);
-        res.send(data);
+        collection.remove({});
+
+        collection.insert(newdata, function(err, data){
+          assert.equal(err, null);
+          res.send(data);
+        });
+
       });
 
-    });
+      setTimeout(function(){startTimer = false}, 5000);
+
+    } else {
+
+      res.send("Your feedback was not added. Wait for 5 seconds and add it again.");
+      
+    }; 
 
   }
 };
