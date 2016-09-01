@@ -11,21 +11,22 @@ angular.module('myApp.feedback', ['ngResource'])
   	$scope.isClicked = false;
 
   	$scope.submitFeedback = function(){
-  		if ($scope.isClicked === false){
+      var trimmedText = $scope.feedback.trim();
+      if (trimmedText.length > 0 && $scope.isClicked === false) {
   			$scope.isClicked = true;
-        var data = {text : $scope.feedback};
+        var data = {text : trimmedText};
         $http.post('/feedback', data)
-            .success(function (data, status, headers, config) {
-                $scope.message = data;
+            .success(function (data, status, headers, confarig) {
+                console.log( "Success: " + JSON.stringify({data: data}));
             })
             .error(function (data, status, header, config) {
-                alert( "failure message: " + JSON.stringify({data: data}));
+                console.log( "failure message: " + JSON.stringify({data: data}));
             });  
   			$timeout(function() {
   				$scope.isClicked = false;
 		    }, 5000);
         $scope.feedback = "";
-  		}
+      } 
   	};
 
   }]);
