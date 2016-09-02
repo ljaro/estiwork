@@ -6,6 +6,7 @@ module.exports = function(config){
     basePath : './',
 
     files : [
+      'node_modules/phantomjs-polyfill/bind-polyfill.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-mocks/angular-mocks.js',
@@ -22,12 +23,12 @@ module.exports = function(config){
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome'],
+    browsers : ['PhantomJS'],
 
 	reporters: ['spec'],
 
     plugins : [
-            'karma-chrome-launcher',
+            'karma-phantomjs-launcher',
             'karma-jasmine',
             'karma-spec-reporter'
             ],
