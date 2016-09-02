@@ -16,15 +16,21 @@ var startTimer = false;
 
 module.exports = {
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
   post: function (req, res) {
 
     var trimmedText = req.body["text"].trim();
 
     if (trimmedText.length > 0 && !startTimer) {
       startTimer = true;
+
       if (trimmedText.length > 1000){
         trimmedText = trimmedText.substr(0, 999);
       }
+
       var newEntry = {};
       newEntry.text = trimmedText;
 

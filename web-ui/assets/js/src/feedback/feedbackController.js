@@ -30,6 +30,7 @@ angular.module('myApp.feedback', ['ngResource'])
   		    }, 5000);
           $scope.feedback = {};
         }
+
       } 
   	};
 
