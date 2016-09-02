@@ -16,13 +16,15 @@ var startTimer = false;
 
 module.exports = {
 
-
   post: function (req, res) {
 
     var trimmedText = req.body["text"].trim();
 
     if (trimmedText.length > 0 && !startTimer) {
       startTimer = true;
+      if (trimmedText.length > 1000){
+        trimmedText = trimmedText.substr(0, 999);
+      }
       var newEntry = {};
       newEntry.text = trimmedText;
 
@@ -35,6 +37,8 @@ module.exports = {
     } else {
       res.send("Your feedback was not added. Wait for 5 seconds and add it again.");      
     }
+
   }
+
 };
 
