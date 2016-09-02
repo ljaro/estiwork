@@ -16,10 +16,6 @@ var startTimer = false;
 
 module.exports = {
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
   post: function (req, res) {
 
     var trimmedText = req.body["text"].trim();
