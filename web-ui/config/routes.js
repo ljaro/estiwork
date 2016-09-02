@@ -55,6 +55,8 @@ module.exports.routes = {
   'PUT /worker/:id/login': 'WorkerController.setWorkerLogin',
   'PUT /worker/:id/fullname': 'WorkerController.setWorkerFullname',
 
+  'POST /feedback': 'FeedbackController.post',
+
   'POST /testgen':'TestgenController.post',
 
   'GET /debug/test1': 'debug/TestController.test1'
