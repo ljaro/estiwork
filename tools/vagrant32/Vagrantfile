@@ -33,6 +33,7 @@ Vagrant.configure(2) do |config|
         sudo apt-get install -y git
         sudo npm -g install bower
         sudo npm -g install sails
+        sudo npm -g install karma-cli
         
         #dependencies for simulator
         sudo npm install -g moment
@@ -49,13 +50,13 @@ Vagrant.configure(2) do |config|
     SHELL
      
     #
-	# mongodb rabbit host names
-	#
-	web.vm.provision "shell", inline: <<-SHELL
-		sudo echo "10.0.2.2     db" >> /etc/hosts
-		sudo echo "127.0.0.1     mq" >> /etc/hosts
-	SHELL
-		
+    # mongodb rabbit host names
+    #
+    web.vm.provision "shell", inline: <<-SHELL
+        sudo echo "10.0.2.2     db" >> /etc/hosts
+        sudo echo "127.0.0.1     mq" >> /etc/hosts
+    SHELL
+        
     web.vm.provision "shell", inline: <<-SHELL
         echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee --append /etc/apt/sources.list.d/rabbitmq.list
         wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
@@ -73,7 +74,7 @@ Vagrant.configure(2) do |config|
         rabbitmqctl set_permissions -p / user1 ".*" ".*" ".*"
         service rabbitmq-server restart      
     SHELL
-	
+    
     web.vm.network :forwarded_port, guest: 1337, host: 1337
     web.vm.network :forwarded_port, guest: 5858, host: 5858
     web.vm.network :forwarded_port, guest: 8080, host: 8080

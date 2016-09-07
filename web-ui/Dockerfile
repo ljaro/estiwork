@@ -10,6 +10,7 @@ RUN npm -g install moment
 RUN npm -g install chance
 RUN npm -g install amqplib
 RUN npm -g install nodemon
+RUN npm -g install karma-cli
 
 
 ADD package.json /tmp/estiwork/web-ui/package.json
