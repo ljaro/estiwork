@@ -20,12 +20,12 @@ Vagrant.configure(2) do |config|
     web.vm.hostname = "web"
     web.vm.network "private_network", ip: "192.168.1.10", virtualbox__intnet: true
     web.vm.synced_folder "../../web-ui", "/estiwork/web-ui"
-	web.vm.synced_folder "../../tools", "/estiwork/tools"
+    web.vm.synced_folder "../../tools", "/estiwork/tools"
     web.vm.provision "shell", inline: <<-SHELL
-	
-	#
-	# nodejs, angular etc.
-	#
+    
+    #
+    # nodejs, angular etc.
+    #
         sudo apt-get update
         sudo apt-get install -y curl
         curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
@@ -35,30 +35,31 @@ Vagrant.configure(2) do |config|
         sudo apt-get install -y git
         sudo npm -g install bower
         sudo npm -g install sails
-		
-	#dependencies for simulator
-		sudo npm install -g moment
-		sudo npm install -g chance
-		sudo npm install -g amqplib
+        sudo npm -g install karma-cli
+        
+    #dependencies for simulator
+        sudo npm install -g moment
+        sudo npm install -g chance
+        sudo npm install -g amqplib
 
-	#	
-	# npm installations
-	#
+    #   
+    # npm installations
+    #
         cd /estiwork/web-ui
-		npm install
+        npm install
         cd /estiwork/web-ui/assets
-		npm install
-		cd /estiwork/web-ui
+        npm install
+        cd /estiwork/web-ui
 
-	#
-	# mongodb rabbit host names
-	#
-		sudo echo "127.0.0.1     db" >> /etc/hosts
-		sudo echo "127.0.0.1     mq" >> /etc/hosts
-		
-	#
-	# mongodb
-	#
+    #
+    # mongodb rabbit host names
+    #
+        sudo echo "127.0.0.1     db" >> /etc/hosts
+        sudo echo "127.0.0.1     mq" >> /etc/hosts
+        
+    #
+    # mongodb
+    #
         sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
         #Ubuntu 12.04
         echo "deb http://repo.mongodb.org/apt/ubuntu precise/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
@@ -73,11 +74,11 @@ Vagrant.configure(2) do |config|
         #echo "mongodb-org-tools hold" | sudo dpkg --set-selections
 
         sudo sed -i 's/bindIp.*/bindIp\\: [127.0.0.1, 192.168.1.20]/' /etc/mongod.conf
-        sudo service mongod restart		
+        sudo service mongod restart     
 
-	#
-	# rabbitmq
-	#
+    #
+    # rabbitmq
+    #
         echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee --append /etc/apt/sources.list.d/rabbitmq.list
         wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
         sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6B73A36E6026DFCA
@@ -90,11 +91,11 @@ Vagrant.configure(2) do |config|
         rabbitmqctl set_user_tags admin administrator
         rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
         rabbitmqctl delete_user guest
-		rabbitmqctl add_user user1 user1
-		rabbitmqctl set_permissions -p / user1 ".*" ".*" ".*"
-        service rabbitmq-server restart		
+        rabbitmqctl add_user user1 user1
+        rabbitmqctl set_permissions -p / user1 ".*" ".*" ".*"
+        service rabbitmq-server restart     
     SHELL
-	
+    
 
      web.vm.network :forwarded_port, guest: 1337, host: 1337
      web.vm.network :forwarded_port, guest: 5858, host: 5858
