@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "description": "Estiwork angular frontend",
   "devDependencies": {
+    "angular-smart-table": "~2.1.4",
     "bootstrap": "^3.3.5",
     "bower": "^1.4.1",
     "chance": "^0.8.0",
@@ -17,11 +18,13 @@
     "karma-chrome-launcher": "^0.2.0",
     "karma-jasmine": "^0.3.6",
     "karma-junit-reporter": "^0.3.3",
+    "karma-phantomjs-launcher": "^1.0.2",
     "karma-spec-reporter": "0.0.20",
     "moment": "^2.10.6",
     "numeral": "^1.5.3",
-    "shelljs": "^0.5.3",
-    "angular-smart-table": "~2.1.4"
+    "phantomjs-polyfill": "0.0.2",
+    "phantomjs-prebuilt": "^2.1.12",
+    "shelljs": "^0.5.3"
   },
   "scripts": {
     "postinstall": "bower install --allow-root",
