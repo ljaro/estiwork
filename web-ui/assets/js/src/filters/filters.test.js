@@ -10,16 +10,16 @@
 //var assert = require("assert");
 //require("moment-duration-format");
 
-var customMatchers = {
-  toEqualData: function(util, customTester){
-
-    return {
-      compare: function(actual, expected) {
-        return angular.equals(actual, expected);
-      }
-    }
-  }
-}
+// var customMatchers = {
+//   toEqualData: function(util, customTester){
+//
+//     return {
+//       compare: function(actual, expected) {
+//         return angular.equals(actual, expected);
+//       }
+//     }
+//   }
+// }
 
 //
 //tryby
@@ -32,17 +32,16 @@ var customMatchers = {
 
 describe('myApp.myFilters', function() {
 
-  beforeEach(function(){
-    jasmine.addMatchers(customMatchers);
-  });
-
-  beforeEach(module('myApp.myFilters'));
-
 
   describe('seconds to hours', function(){
-    it('has sec2h filter', function($filter){
-      expect($filter('sec2h')).not.toBeNull();
+
+    beforeEach(function(){
+      module('myApp.myFilters')
     });
+
+    it('has sec2h filter', inject(function($filter){
+      expect($filter('sec2h')).not.toBeNull();
+    }));
 
     it('0 sec should return \"0h\"', inject(function ($filter) {
       expect($filter('sec2h')(0)).toEqual("0h");
@@ -67,11 +66,17 @@ describe('myApp.myFilters', function() {
   });
 
   describe('seconds to minutes', function(){
-    it('has sec2m filter', function($filter){
-      expect($filter('sec2m')).not.toBeNull();
+
+    beforeEach(function(){
+      module('myApp.myFilters');
     });
 
+    it('has sec2m filter', inject(function($filter){
+      expect($filter('sec2m')).not.toBeNull();
+    }));
+
     it('0 sec should return \"0m\"', inject(function ($filter) {
+      var res = $filter('sec2m')(0);
       expect($filter('sec2m')(0)).toEqual("0m");
     }));
 
@@ -94,9 +99,15 @@ describe('myApp.myFilters', function() {
   });
 
   describe('seconds to minutes and hours', function(){
-    it('has sec2hm filter', function($filter){
-      expect($filter('sec2hm')).not.toBeNull();
+
+    beforeEach(function(){
+      module('myApp.myFilters')
     });
+
+
+    it('has sec2hm filter', inject(function($filter){
+      expect($filter('sec2hm')).not.toBeNull();
+    }));
 
     it('0 sec should return \"0h 0m\"', inject(function ($filter) {
       var res = $filter('sec2hm')(0);
@@ -119,9 +130,15 @@ describe('myApp.myFilters', function() {
 
 
   describe('seconds to days and hours', function(){
-    it('has sec2dh filter', function($filter){
-      expect($filter('sec2dh')).not.toBeNull();
+
+    beforeEach(function(){
+      module('myApp.myFilters')
     });
+
+
+    it('has sec2dh filter', inject(function($filter){
+      expect($filter('sec2dh')).not.toBeNull();
+    }));
 
     it('0 sec should return \"0d 0h\"', inject(function ($filter) {
       expect($filter('sec2dh')(0)).toEqual("0d 0h");
@@ -144,9 +161,15 @@ describe('myApp.myFilters', function() {
 
 
   describe('seconds to days, hours, minutes', function(){
-    it('has sec2dhm filter', function($filter){
-      expect($filter('sec2dhm')).not.toBeNull();
+
+    beforeEach(function(){
+      module('myApp.myFilters')
     });
+
+
+    it('has sec2dhm filter', inject(function($filter){
+      expect($filter('sec2dhm')).not.toBeNull();
+    }));
 
     it('0 sec should return \"0d 0h\"', inject(function ($filter) {
       expect($filter('sec2dhm')(0)).toEqual("0d 0h 0m");
@@ -169,9 +192,15 @@ describe('myApp.myFilters', function() {
   });
 
   describe('truncDots', function(){
-    it('has truncDots filter', function($filter){
-      expect($filter('truncDots')).not.toBeNull();
+
+    beforeEach(function(){
+      module('myApp.myFilters')
     });
+
+
+    it('has truncDots filter', inject(function($filter){
+      expect($filter('truncDots')).not.toBeNull();
+    }));
 
     it('should not modify short names', inject(function ($filter) {
       expect($filter('truncDots')('short name')).toEqual("short name");
@@ -185,9 +214,15 @@ describe('myApp.myFilters', function() {
 
 
   describe('cut exe', function(){
-    it('has truncDots filter', function($filter){
-      expect($filter('cutExe')).not.toBeNull();
+
+    beforeEach(function(){
+      module('myApp.myFilters')
     });
+
+
+    it('has truncDots filter', inject(function($filter){
+      expect($filter('cutExe')).not.toBeNull();
+    }));
 
     it('should cut exe from long file name', inject(function ($filter) {
       expect($filter('cutExe')('long_file_name.exe')).toEqual("long_file_name");
