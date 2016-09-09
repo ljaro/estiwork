@@ -1,5 +1,5 @@
-web-ui/assets/js/dependencies/* linguist-vendored
-dependencies/* linguist-vendored
+web-ui/assets/js/dependencies/* linguist-vendored=true
+
 
 
 
