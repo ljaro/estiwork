@@ -58,7 +58,7 @@ var AppsCacheService = {
     // };
 
 
-
+/*
     var cats = [
 
       {
@@ -295,13 +295,30 @@ var AppsCacheService = {
       }
     ];
 
-    return Q.fcall(function () {
-      return cats;
+*/
+
+    var cats = new Promise(function(resolve, reject){
+      Apps.native(function(err, collection) {
+        if (err) reject(err);
+
+        collection.find({}, {
+          name: true,
+          type: true, 
+          group: true, 
+          signatures: []
+        }).toArray(function (err, results) {
+          if (err) reject(err);
+          return resolve(results);
+          
+        });
+      });
     });
 
-    //return Apps.find({});
+    return cats;
+
   }
 
 }
 
 module.exports = AppsCacheService;
+  

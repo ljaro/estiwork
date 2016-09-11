@@ -23,6 +23,7 @@ var AppCategoryService = {
       }
 
       cats.forEach(function (cat) {
+
         cat.signatures.forEach(function (sig) {
           if (sample[sig.name] !== undefined) {
             if (rank[cat.id] === undefined) rank[cat.id] = 0;
