@@ -296,11 +296,12 @@ var AppsCacheService = {
     ];
 
 */
+    var cats;
 
-    var cats = new Promise(function(resolve, reject){
+    return cats = Q.promise(function(resolve, reject){
+
       Apps.native(function(err, collection) {
         if (err) reject(err);
-
         collection.find({}, {
           name: true,
           type: true, 
@@ -308,13 +309,11 @@ var AppsCacheService = {
           signatures: []
         }).toArray(function (err, results) {
           if (err) reject(err);
-          return resolve(results);
-          
+          return resolve(results);          
         });
       });
-    });
 
-    return cats;
+    });
 
   }
 
