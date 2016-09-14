@@ -78,7 +78,6 @@ var AppCategoryService = {
       });
 
       var result = cats.filter(function (x) {
-        console.log(x.name);
         return x._id == max_id;
       });
 

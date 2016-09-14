@@ -143,7 +143,7 @@ var DefaultDocsService = {
             "name" : "window_caption",
             "weight" : 8.0000000000000000,
             "func" : "returnTest",
-            "value": "/.*RabbitMQ Management - Mozilla Firefox/"             
+            "value": ".*RabbitMQ Management - Mozilla Firefox"             
           },
           {
             "name" : "image_fs_name",
@@ -223,7 +223,7 @@ var DefaultDocsService = {
             "name" : "window_caption",
             "weight" : 8.0000000000000000,
             "func" : "returnTest",
-            "value": "/.*?Prod. app on Opera - Opera/"   
+            "value": ".*?Prod. app on Opera - Opera"   
           },
           {
             "name" : "image_fs_name",
