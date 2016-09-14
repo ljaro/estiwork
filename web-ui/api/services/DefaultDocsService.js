@@ -54,37 +54,31 @@ var DefaultDocsService = {
             "hash" : [
               "056781731eaf223c799bebe04c60353ea73d60cb"
             ],
-            "func" : function (str) {
-              return this.hash.indexOf(str) != -1;
-            }
+            "func" : "strContains"
           },
           {
             "name" : "resource_image_name",
             "weight" : 7.0000000000000000,
-            "func" : function (str) {
-              return str === "chrome.exe";
-            }
+            "func" : "strEquals",
+            "value": "chrome.exe"
           },
           {
             "name" : "window_caption",
             "weight" : 5.0000000000000000,
-            "func" : function (str) {
-              return str.endsWith("- Google Chrome");
-            }
+            "func" : "strEndsWith",
+            "value": "- Google Chrome"
           },
           {
             "name" : "image_fs_name",
             "weight" : 2.0000000000000000,
-            "func" : function (str) {
-              return str === "chrome.exe";
-            }
+            "func" : "strEquals",
+            "value": "chrome.exe"
           },
           {
             "name" : "image_full_path",
             "weight" : 2.0000000000000000,
-            "func" : function (str) {
-              return str.endsWith("chrome.exe");
-            }
+            "func" : "strEndsWith",
+            "value": "chrome.exe"
           }
         ]
       }, 
@@ -99,37 +93,30 @@ var DefaultDocsService = {
             "hash" : [
               "10e596c10b5364d13a8b89a68f0ee14a27626554"
             ],
-            "func" : function (str) {
-              return this.hash.indexOf(str) != -1;
-            }
-          },
+            "func" : "strContains"          },
           {
             "name" : "resource_image_name",
             "weight" : 7.0000000000000000,
-            "func" : function (str) {
-              return str === "firefox.exe";
-            }
+            "func" : "strEquals",
+            "value": "firefox.exe"
           },
           {
             "name" : "window_caption",
             "weight" : 5.0000000000000000,
-            "func" : function (str) {
-              return str.endsWith("- Mozilla Firefox");
-            }
+            "func" : "strEndsWith",
+            "value": "- Mozilla Firefox"
           },
           {
             "name" : "image_fs_name",
             "weight" : 2.0000000000000000,
-            "func" : function (str) {
-              return str === "firefox.exe";
-            }
+            "func" : "strEquals",
+            "value": "firefox.exe"
           },
           {
             "name" : "image_full_path",
             "weight" : 2.0000000000000000,
-            "func" : function (str) {
-              return str.endsWith("firefox.exe");
-            }
+            "func" : "strEndsWith",
+            "value": "firefox.exe"
           }
         ]
       },
@@ -144,37 +131,31 @@ var DefaultDocsService = {
             "hash" : [
               "10e596c10b5364d13a8b89a68f0ee14a27626554"
             ],
-            "func" : function (str) {
-              return this.hash.indexOf(str) != -1;
-            }
+            "func" : "strContains"
           },
           {
             "name" : "resource_image_name",
             "weight" : 7.0000000000000000,
-            "func" : function (str) {
-              return str === "firefox.exe";
-            }
+            "func" : "strEquals",
+            "value": "firefox.exe"
           },
           {
             "name" : "window_caption",
             "weight" : 8.0000000000000000,
-            "func" : function (str) {
-              return /.*RabbitMQ Management - Mozilla Firefox/.test(str);
-            }
+            "func" : "returnTest",
+            "value": "/.*RabbitMQ Management - Mozilla Firefox/"             
           },
           {
             "name" : "image_fs_name",
             "weight" : 2.0000000000000000,
-            "func" : function (str) {
-              return str === "firefox.exe";
-            }
+            "func" : "strEquals",
+            "value": "firefox.exe"
           },
           {
             "name" : "image_full_path",
             "weight" : 2.0000000000000000,
-            "func" : function (str) {
-              return str.endsWith("firefox.exe");
-            }
+            "func" : "strEndsWith",
+            "value": "firefox.exe"            
           }
         ]
       },
@@ -190,37 +171,31 @@ var DefaultDocsService = {
               "333333",
               "33333"
             ],
-            "func" : function (str) {
-              return this.hash.indexOf(str) != -1;
-            }
+            "func" : "strContains"
           },
           {
             "name" : "resource_image_name",
             "weight" : 7.0000000000000000,
-            "func" : function (str) {
-              return str === "opera.exe";
-            }
+            "func" : "strEquals",
+            "value": "opera.exe"
           },
           {
             "name" : "window_caption",
             "weight" : 5.0000000000000000,
-            "func" : function (str) {
-              return str.endsWith("- Opera");
-            }
+            "func" : "strEndsWith",
+            "value": "- Opera"            
           },
           {
             "name" : "image_fs_name",
             "weight" : 2.0000000000000000,
-            "func" : function (str) {
-              return str === "opera.exe";
-            }
+            "func" : "strEquals",
+            "value": "opera.exe"
           },
           {
             "name" : "image_full_path",
             "weight" : 2.0000000000000000,
-            "func" : function (str) {
-              return str.endsWith("opera.exe");
-            }
+            "func" : "strEndsWith",
+            "value": "opera.exe"            
           }
         ]
       },
@@ -236,37 +211,31 @@ var DefaultDocsService = {
               "333333",
               "33333"
             ],
-            "func" : function (str) {
-              return this.hash.indexOf(str) != -1;
-            }
+            "func" : "strContains"
           },
           {
             "name" : "resource_image_name",
             "weight" : 7.0000000000000000,
-            "func" : function (str) {
-              return str === "opera.exe";
-            }
+            "func" : "strEquals",
+            "value": "opera.exe"
           },
           {
             "name" : "window_caption",
             "weight" : 8.0000000000000000,
-            "func" : function (str) {
-              return /.*?Prod. app on Opera - Opera/.test(str);
-            }
+            "func" : "returnTest",
+            "value": "/.*?Prod. app on Opera - Opera/"   
           },
           {
             "name" : "image_fs_name",
             "weight" : 2.0000000000000000,
-            "func" : function (str) {
-              return str === "opera.exe";
-            }
+            "func" : "strEquals",
+            "value": "opera.exe"
           },
           {
             "name" : "image_full_path",
             "weight" : 2.0000000000000000,
-            "func" : function (str) {
-              return str.endsWith("opera.exe");
-            }
+            "func" : "strEndsWith",
+            "value": "opera.exe"               
           }
         ]
       }

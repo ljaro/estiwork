@@ -309,7 +309,8 @@ var AppsCacheService = {
           signatures: []
         }).toArray(function (err, results) {
           if (err) reject(err);
-          return resolve(results);          
+          return resolve(results);    
+
         });
       });
 

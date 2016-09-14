@@ -5,11 +5,29 @@
  */
 
 var Q = require('q');
+var ObjectId = require('mongodb').ObjectId;
 
 var AppCategoryService = {
 
 
   get: function getService(sample) {
+    var strContains = function (str, hash) {
+      return hash.indexOf(str) != -1;
+    };
+    
+    var strEquals = function (str, value) {
+      return str === value;
+    };
+
+    var strEndsWith = function (str, value) {
+      return str.endsWith(value);
+    };
+
+    var returnTest = function (str, value) {
+      value = new RegExp(value);
+      return value.test(str);
+    };
+
     function __findAppSig(sample, cats) {
       var rank = {};
 
@@ -23,12 +41,27 @@ var AppCategoryService = {
       }
 
       cats.forEach(function (cat) {
-
         cat.signatures.forEach(function (sig) {
           if (sample[sig.name] !== undefined) {
-            if (rank[cat.id] === undefined) rank[cat.id] = 0;
-            rank[cat.id] += sig.func(sample[sig.name]) === true ? sig.weight : 0;
-
+            if (rank[cat._id] === undefined) rank[cat._id] = 0;
+              switch (sig.func) {
+                case "strContains":
+                  rank[cat._id] += strContains(sample[sig.name], sig.hash) === true ? sig.weight : 0;
+                  break;
+                case "strEquals":
+                  rank[cat._id] += strEquals(sample[sig.name], sig.value) === true ? sig.weight : 0;
+                  break;
+                case "strEndsWith":
+                  rank[cat._id] += strEndsWith(sample[sig.name], sig.value) === true ? sig.weight : 0;
+                  break;
+                case "returnTest":
+                  rank[cat._id] += returnTest(sample[sig.name], sig.value) === true ? sig.weight : 0;
+                  break;  
+                default:
+                  console.log("This signature has unknown func property");
+                  break
+              };
+            //rank[cat._id] += sig.func(sample[sig.name], sig.value) === true ? sig.weight : 0;
             //TODO add to logs important!
             // console.log(cat.name+' with id:'+cat.id+' has '+rank[cat.id]+' pts.');
           }
@@ -45,7 +78,8 @@ var AppCategoryService = {
       });
 
       var result = cats.filter(function (x) {
-        return x.id == max_id;
+        console.log(x.name);
+        return x._id == max_id;
       });
 
       if (result.length > 0) {
@@ -73,6 +107,7 @@ var AppCategoryService = {
     }
 
   }
+
 }
 
 module.exports = AppCategoryService;
