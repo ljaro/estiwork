@@ -80,7 +80,7 @@ angular.module('myApp', [
       });
 
       $translateProvider.useStaticFilesLoader({
-        prefix: '/language/locale-',
+        prefix: '/locales/locale-',
         suffix: '.json'
       })
       .preferredLanguage('pl')
