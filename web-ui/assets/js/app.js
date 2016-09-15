@@ -33,10 +33,11 @@ angular.module('myApp', [
   'isteven-multi-select',
   'smart-table',
   // 'ui.bootstrap.datetimepicker',
-  'ngResource'])
+  'ngResource',
+  'pascalprecht.translate'])
 
 
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $translateProvider, $translatePartialLoaderProvider) {
     //
     // For any unmatched url, redirect to /state1
     //$urlRouterProvider.otherwise("/quickview");
@@ -78,4 +79,10 @@ angular.module('myApp', [
         controller: 'testController'
       });
 
+      $translateProvider.useStaticFilesLoader({
+        prefix: '/language/locale-',
+        suffix: '.json'
+      })
+      .preferredLanguage('pl')
+      .useMissingTranslationHandlerLog()
   });

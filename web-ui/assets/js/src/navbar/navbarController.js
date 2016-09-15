@@ -5,9 +5,10 @@
  */
 
 angular.module('myApp.navbar')
-.controller('navbarController', ['$scope', '$resource', function($scope, $resource){
-	
-
+.controller('navbarController', ['$scope', '$resource', '$translate', function($scope, $resource, $translate){
+	$scope.changeLanguage = function (langKey) {
+    $translate.use(langKey);
+  };
 	
 
 
