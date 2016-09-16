@@ -37,7 +37,7 @@ angular.module('myApp', [
   'pascalprecht.translate'])
 
 
-  .config(function($stateProvider, $urlRouterProvider, $translateProvider, $translatePartialLoaderProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $translateProvider) {
     //
     // For any unmatched url, redirect to /state1
     //$urlRouterProvider.otherwise("/quickview");

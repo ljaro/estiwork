@@ -1,62 +1,84 @@
 {  
-    "menu_name_preview" : "PODGLĄD",
-    "menu_text_preview" : "W tej chwili",
-    "menu_name_history" : "HISTORIA",
-    "menu_text_history" : "Zobaczmy co było",
-    "menu_name_report" : "RAPORT",
-    "menu_text_report" : "Zaprezentuj wyniki",
-    "menu_name_employees" : "PRACOWNICY",
-    "menu_text_employees" : "Profile osobowe",
-    "menu_name_options" : "OPCJE",
-    "menu_text_options" : "Konfiguracja programu",
-    "group_table_row1" : "Osoba",
-    "group_table_row2" : "Godz. zalog.",
-    "group_table_row3" : "Godz. wylog.",
-    "group_table_row4" : "Czas zalogowania",
-    "group_table_row5" : "Przerwa",
-    "group_table_row6" : "Bezczynność",
-    "group_table_row7" : "Aplikacje",
-    "group_table_row8" : "Aplikacje prod.",
-    "group_table_row9" : "Aplikacje nieprod.",
-    "group_table_row10" : "Status 1",
-    "group_table_row11" : "Status 2",
-    "group_table_row12" : "Stanowisko",
-    "group_table_row13" : "Efektywność",
-    "group_table_row14" : "Czas pracy",
-    "group_table_row15" : "Czas przerwy",
-    "group_table_row16" : "Sr. czas przerwy",
-    "group_table_row17" : "Lider",
-    "group_table_row18" : "Czas aktywnosci",
-    "group_table_row19" : "Czas bezczynnosci",
-    "group_table_row20" : "Wydrukow",
-    "group_table_row21" : "Dane pakietowe",
-    "group_table_row22" : "Sr. dane pkt.",
-    "group_table_row23" : "Sr. il. wydr.",
-    "group_table_row24" : "Numer tel.",
-    "group_table_row25" : "Imię i Nazwisko",
-    "group_table_row26" : "Data",
-    "group_table_row27" : "Zalogowanie",
-    "group_table_row28" : "Wylogowanie",
-    "group_table_row29" : "Aktywność",
-    "group_table_row30" : "Wydruki",
-    "group_table_row31" : "Profil",
-
-
     "language_country": "Polska",
+
+    //---------------------------
+
+    "menu_name_preview" : "PODGLĄD",
+    "menu_name_options" : "OPCJE",
+    "menu_name_employees" : "PRACOWNICY",
+    "menu_name_report" : "RAPORT",
+    "menu_name_history" : "HISTORIA",
+
+    //----------------------------
+
+    "menu_text_preview" : "W tej chwili",
+    "menu_text_history" : "Zobaczmy co było",
+    "menu_text_report" : "Zaprezentuj wyniki",
+    "menu_text_employees" : "Profile osobowe",
+    "menu_text_options" : "Konfiguracja programu",
+
+    //----------------------------
+
+    "table_col_break1" : "Osoba",
+    "table_col_break2" : "Godz. zalog.",
+    "table_col_break3" : "Godz. wylog.",
+    "table_col_break4" : "Czas zalogowania",
+    "table_col_break5" : "Przerwa",
+    "table_col_break6" : "Bezczynność",
+    "table_col_break7" : "Aplikacje",
+    "table_col_break8" : "Aplikacje prod.",
+    "table_col_break9" : "Aplikacje nieprod.",
+    "table_col_break10" : "Status 1",
+    "table_col_break11" : "Status 2",
+    "table_col_break12" : "Stanowisko",
+    "table_col_break13" : "Efektywność",
+    "table_col_break14" : "Czas pracy",
+    "table_col_break15" : "Czas przerwy",
+    "table_col_break16" : "Sr. czas przerwy",
+    "table_col_break17" : "Lider",
+    "table_col_break18" : "Czas aktywnosci",
+    "table_col_break19" : "Czas bezczynnosci",
+    "table_col_break20" : "Wydrukow",
+    "table_col_break21" : "Dane pakietowe",
+    "table_col_break22" : "Sr. dane pkt.",
+    "table_col_break23" : "Sr. il. wydr.",
+    "table_col_break24" : "Numer tel.",
+    "table_col_break25" : "Imię i Nazwisko",
+    "table_col_break26" : "Data",
+    "table_col_break27" : "Zalogowanie",
+    "table_col_break28" : "Wylogowanie",
+    "table_col_break29" : "Aktywność",
+    "table_col_break30" : "Wydruki",
+    "table_col_break31" : "Profil",
+
+    //-------------------------
+
     "small_calender":"Maly kalendarz",
     "large_calender":"Duzy kalendarz",
+
+    //-------------------------
+
     "days": "Dni",
+    "week":"Tygodnie",
     "month": "Miesiące",
     "year": "Rok",
     "patch":"Lata",
+
+    //-------------------------
+
     "today":"Dziś",
-    "week":"Tygodnie",
     "yesterday":"Wczoraj",
     "last_seven_days": "Ostatnie 7 dni",
     "last_thirty_days": "Ostatnie 30 dni",
-    "all":"Wszystkie",
-    "activity":"Aktywność",
-    "other":"Inne",
+
+    //-------------------------
+
+    "all_tab":"Wszystkie",
+    "activity_tab":"Aktywność",
+    "other_tab":"Inne",
+
+    //-------------------------
+
     "suggestion": "Wyslij sugestie",
     "suggestion_msg" :"Sugestie wysyłane są anonimowo.",
     "suggestion_box_place":"Nieustannie pracujemy nad ulepszeniem funkcjonalnści programu,dlatego jeśli masz jakieś sugestie lub spostrzeżenia, wyslij do nas wiadomość."
