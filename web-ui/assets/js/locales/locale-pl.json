@@ -1,7 +1,6 @@
 {  
     "language_country": "Polska",
 
-    //---------------------------
 
     "menu_name_preview" : "PODGLĄD",
     "menu_name_options" : "OPCJE",
@@ -9,7 +8,6 @@
     "menu_name_report" : "RAPORT",
     "menu_name_history" : "HISTORIA",
 
-    //----------------------------
 
     "menu_text_preview" : "W tej chwili",
     "menu_text_history" : "Zobaczmy, co było",
@@ -17,7 +15,6 @@
     "menu_text_employees" : "Profile osobowe",
     "menu_text_options" : "Konfiguracja programu",
 
-    //----------------------------
 
     "table_col_break1" : "Osoba",
     "table_col_break2" : "Godz. zalog.",
@@ -51,12 +48,10 @@
     "table_col_break30" : "Wydruki",
     "table_col_break31" : "Profil",
 
-    //-------------------------
 
     "small_calender":"Mały kalendarz",
     "large_calender":"Duży kalendarz",
 
-    //-------------------------
 
     "days": "Dni",
     "week":"Tygodnie",
@@ -64,20 +59,17 @@
     "year": "Rok",
     "patch":"Lata",
 
-    //-------------------------
 
     "today":"Dziś",
     "yesterday":"Wczoraj",
     "last_seven_days": "Ostatnie 7 dni",
     "last_thirty_days": "Ostatnie 30 dni",
 
-    //-------------------------
 
     "all_tab":"Wszystkie",
     "activity_tab":"Aktywność",
     "other_tab":"Inne",
 
-    //-------------------------
 
     "suggestion": "Wyślij sugestie",
     "suggestion_msg" :"Sugestie wysyłane są anonimowo.",

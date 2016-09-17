@@ -1,7 +1,6 @@
 {  
     "language_country": "English",
 
-    //------------------------
 
     "menu_name_preview" : "PREVIEW",
     "menu_name_history" : "HISTORY",
@@ -9,7 +8,6 @@
     "menu_name_employees" : "EMPLOYEES",
     "menu_name_options" : "OPTIONS",
 
-    //--------------------------
 
     "menu_text_preview" : "Currently",
     "menu_text_history" : "Let's see what was",
@@ -17,7 +15,6 @@
     "menu_text_employees" : "Profile information",
     "menu_text_options" : "Configuration",
 
-    //---------------------------
 
     "table_col_break1" : "Person",
     "table_col_break2" : "Log in time",
@@ -51,12 +48,10 @@
     "table_col_break30" : "Prints",
     "table_col_break31" : "Profile",
 
-    //----------------------------
 
     "small_calender":"Small Calendar",
     "large_calender":"Large Calendar",
 
-    //-----------------------
 
     "days": "Days",
     "week":"Weeks",
@@ -64,20 +59,17 @@
     "year": "Year",
     "patch":"Patch",
 
-    //-----------------------
 
     "today":"Today",
     "yesterday":"Yesterday",
     "last_seven_days": "Last 7 days",
     "last_thirty_days": "Last 30 days",
 
-    //----------------------------
 
     "all_tab":"All",
     "activity_tab":"Activity",
     "other_tab":"Other",
 
-    //----------------------------
     
     "suggestion": "Send suggestions",
     "suggestion_msg" :"Suggestions are sent anonymously",
