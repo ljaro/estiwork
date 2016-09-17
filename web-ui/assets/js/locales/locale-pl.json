@@ -12,7 +12,7 @@
     //----------------------------
 
     "menu_text_preview" : "W tej chwili",
-    "menu_text_history" : "Zobaczmy co było",
+    "menu_text_history" : "Zobaczmy, co było",
     "menu_text_report" : "Zaprezentuj wyniki",
     "menu_text_employees" : "Profile osobowe",
     "menu_text_options" : "Konfiguracja programu",
@@ -34,27 +34,27 @@
     "table_col_break13" : "Efektywność",
     "table_col_break14" : "Czas pracy",
     "table_col_break15" : "Czas przerwy",
-    "table_col_break16" : "Sr. czas przerwy",
+    "table_col_break16" : "Śr. czas przerwy",
     "table_col_break17" : "Lider",
-    "table_col_break18" : "Czas aktywnosci",
-    "table_col_break19" : "Czas bezczynnosci",
-    "table_col_break20" : "Wydrukow",
+    "table_col_break18" : "Czas aktywności",
+    "table_col_break19" : "Czas bezczynności",
+    "table_col_break20" : "Wydruków",
     "table_col_break21" : "Dane pakietowe",
-    "table_col_break22" : "Sr. dane pkt.",
-    "table_col_break23" : "Sr. il. wydr.",
+    "table_col_break22" : "Śr. dane pkt.",
+    "table_col_break23" : "Śr. il. wydr.",
     "table_col_break24" : "Numer tel.",
     "table_col_break25" : "Imię i Nazwisko",
     "table_col_break26" : "Data",
-    "table_col_break27" : "Zalogowanie",
-    "table_col_break28" : "Wylogowanie",
+    "table_col_break27" : "Godz. zalog.",
+    "table_col_break28" : "Godz. wylog.",
     "table_col_break29" : "Aktywność",
     "table_col_break30" : "Wydruki",
     "table_col_break31" : "Profil",
 
     //-------------------------
 
-    "small_calender":"Maly kalendarz",
-    "large_calender":"Duzy kalendarz",
+    "small_calender":"Mały kalendarz",
+    "large_calender":"Duży kalendarz",
 
     //-------------------------
 
@@ -79,7 +79,7 @@
 
     //-------------------------
 
-    "suggestion": "Wyslij sugestie",
+    "suggestion": "Wyślij sugestie",
     "suggestion_msg" :"Sugestie wysyłane są anonimowo.",
-    "suggestion_box_place":"Nieustannie pracujemy nad ulepszeniem funkcjonalnści programu,dlatego jeśli masz jakieś sugestie lub spostrzeżenia, wyslij do nas wiadomość."
+    "suggestion_box_place":"Nieustannie pracujemy nad ulepszeniem funkcjonalności programu, dlatego jeśli masz jakieś sugestie lub spostrzeżenia, wyślij do nas wiadomość."
 }
