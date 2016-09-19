@@ -6,10 +6,10 @@
       {
         "name" : "hash",
         "weight" : 100.0000000000000000,
-        "hash" : [
+        "func" : "strContains",
+        "value" : [
           "056781731eaf223c799bebe04c60353ea73d60cb"
-        ],
-        "func" : "strContains"
+        ]
       },
       {
         "name" : "resource_image_name",
@@ -45,10 +45,10 @@
       {
         "name" : "hash",
         "weight" : 100.0000000000000000,
-        "hash" : [
+        "func" : "strContains",
+        "value" : [
           "10e596c10b5364d13a8b89a68f0ee14a27626554"
-        ],
-        "func" : "strContains"          
+        ]      
       },
       {
         "name" : "resource_image_name",
@@ -84,10 +84,10 @@
       {
         "name" : "hash",
         "weight" : 100.0000000000000000,
-        "hash" : [
+        "func" : "strContains",
+        "value" : [
           "10e596c10b5364d13a8b89a68f0ee14a27626554"
-        ],
-        "func" : "strContains"
+        ]
       },
       {
         "name" : "resource_image_name",
@@ -123,11 +123,11 @@
       {
         "name" : "hash",
         "weight" : 100.0000000000000000,
-        "hash" : [
+        "func" : "strContains",
+        "value" : [
           "333333",
           "33333"
-        ],
-        "func" : "strContains"
+        ]
       },
       {
         "name" : "resource_image_name",
@@ -163,11 +163,11 @@
       {
         "name" : "hash",
         "weight" : 100.0000000000000000,
-        "hash" : [
+        "func" : "strContains",
+        "value" : [
           "333333",
           "33333"
-        ],
-        "func" : "strContains"
+        ]
       },
       {
         "name" : "resource_image_name",
