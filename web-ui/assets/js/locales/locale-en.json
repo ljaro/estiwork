@@ -1,0 +1,74 @@
+{
+    "language_country": "English",
+
+
+    "menu_name_preview" : "PREVIEW",
+    "menu_name_history" : "HISTORY",
+    "menu_name_report" : "REPORT",
+    "menu_name_employees" : "EMPLOYEES",
+    "menu_name_options" : "OPTIONS",
+
+
+    "menu_text_preview" : "Currently",
+    "menu_text_history" : "Let's see what was",
+    "menu_text_report" : "Present the results",
+    "menu_text_employees" : "Profile information",
+    "menu_text_options" : "Configuration",
+
+
+    "table_col_person" : "Person",
+    "table_col_login_time" : "Log in time",
+    "table_col_logout_time" : "Log out time",
+    "table_col_log_on_period" : "Log on period",
+    "table_col_break" : "Break",
+    "table_col_Inactivity" : "Inactivity",
+    "table_col_apps" : "Apps",
+    "table_col_productive" : "Productive apps",
+    "table_col_non_productive" : "Non-productive apps",
+    "table_col_status1" : "Status 1",
+    "table_col_status2" : "Status 2",
+    "table_col_position" : "Workstation",
+    "table_col_efficiency" : "Efficiency",
+    "table_col_work_time" : "Work time",
+    "table_col_break_time" : "Break time",
+    "table_col_avg_break" : "Avg. break time",
+    "table_col_leader" : "Leader",
+    "table_col_activity_time" : "Activity time",
+    "table_col_inactivity_time" : "Inactivity time",
+    "table_col_printed" : "Printed",
+    "table_col_packet_data" : "Packet data",
+    "table_col_avg_packet" : "Avg. packed data",
+    "table_col_avg_numbers" : "Avg. numbers of prints",
+    "table_col_telephone" : "Telephone number.",
+    "table_col_first_last_name" : "First name and last name",
+    "table_col_data" : "Data",
+    "table_col_activity" : "Activity",
+    "table_col_prints" : "Prints",
+    "table_col_profile" : "Profile",
+
+
+    "small_calender":"Small Calendar",
+    "large_calender":"Large Calendar",
+
+
+    "button_mode_days": "Days",
+    "button_mode_weeks":"Weeks",
+    "button_mode_months": "Months",
+    "button_mode_years": "Years",
+
+
+    "button_today":"Today",
+    "button_yesterday":"Yesterday",
+    "button_last_seven_days": "Last 7 days",
+    "button_last_thirty_days": "Last 30 days",
+
+
+    "all_tab":"All",
+    "activity_tab":"Activity",
+    "other_tab":"Other",
+
+
+    "suggestion": "Send suggestions",
+    "suggestion_msg" :"Suggestions are sent anonymously",
+    "suggestion_box_place":"Constantly we are working on improving functionality program , so if you have any suggestions or remarks , please send us a message ."
+}

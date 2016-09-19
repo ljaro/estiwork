@@ -1,20 +1,29 @@
 
 
 
-<div class="navbar navbar-default navbar-static-top" role="navigation">
+<div class="navbar navbar-default navbar-static-top" role="navigation" ng-app="myApp" ng-controller="navbarController">
   <div class="container-fluid">
 
     <ul class="nav navbar-nav">
-      <li ui-sref-active="active"><a ui-sref="quickview"><div class="navbar-font">PODGLĄD</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">W tej chwili</div></a></li>
-      <li ui-sref-active="active"><a ui-sref="history"><div class="navbar-font">HISTORIA</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Zobaczmy co było</div></a></li>
-      <li ui-sref-active="active"><a ui-sref="reports"><div class="navbar-font">RAPORT</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Zaprezentuj wyniki</div></a></li>
-      <li ui-sref-active="active"><a ui-sref="worker"><div class="navbar-font">PRACOWNICY</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Profile osobowe</div></a></li>
-      <li ui-sref-active="active"><a ui-sref="configuration"><div class="navbar-font">OPCJE</div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999">Konfiguracja programu</div></a></li>
+      <li ui-sref-active="active"><a ui-sref="quickview"><div class="navbar-font" translate="menu_name_preview"></div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999" translate="menu_text_preview"></div></a></li>
+      <li ui-sref-active="active"><a ui-sref="history"><div class="navbar-font" translate="menu_name_history"></div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999" translate="menu_text_history"></div></a></li>
+      <li ui-sref-active="active"><a ui-sref="reports"><div class="navbar-font" translate="menu_name_report"></div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999" translate="menu_text_report"></div></a></li>
+      <li ui-sref-active="active"><a ui-sref="worker"><div class="navbar-font" translate="menu_name_employees"></div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999" translate="menu_text_employees"></div></a></li>
+      <li ui-sref-active="active"><a ui-sref="configuration"><div class="navbar-font" translate="menu_name_options"></div><div style="font-size: 10px; margin-top: 3px; margin-left: 3px; color: #999999" translate="menu_text_options"></div></a></li>
     </ul>
 
 
 
     <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" translate="language_country">
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#" ng-click="changeLanguage('pl')">Polska</a></li>
+          <li><a href="#" ng-click="changeLanguage('en')">English</a></li>
+        </ul>
+      </li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
           <img src="http://www.gravatar.com/avatar/3293f2350e18db0068c30b527edda33b?d=identicon&f=y&s=30"  border: 1px solid #ccc; border-radius: 2px; position: absolute; top: 12px; left: 15px">
@@ -22,8 +31,8 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <li><a href="#">Profile</a></li>
-          <li><a href="#">Log out</a></li>
+          <li><a href="#" translate="table_col_profile"></a></li>
+          <li><a href="#" translate="table_col_logout_time"></a></li>
         </ul>
       </li>
 

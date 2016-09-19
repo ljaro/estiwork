@@ -10,10 +10,10 @@
 
     <ul class="nav nav-tabs" role="tablist" ng-show="naviTabShow">
       <li role="presentation" style="margin-left: 15px;">
-        <div class="checkbox"><label><input type="checkbox" ng-model="varShowCalendar"> Duzy kalendarz</label></div>
+        <div class="checkbox"><label><input type="checkbox" ng-model="varShowCalendar" translate="large_calender"></label></div>
       </li>
       <li role="presentation" style="margin-left: 15px;">
-        <div class="checkbox"><label><input type="checkbox" ng-model="varShowSmallCalendar"> Maly kalendarz</label></div>
+        <div class="checkbox"><label><input type="checkbox" ng-model="varShowSmallCalendar" translate="small_calender"></label></div>
       </li>
     </ul>
 
@@ -36,16 +36,16 @@
 
                   <td>
                     <div class="btn-group-vertical nice-pad btn-block">
-                      <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeDays()" ng-class="{'active': interval == 'days'}">Dni</button>
-                      <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeMonths()" ng-class="{'active': interval == 'months'}">Miesiące</button>
-                      <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeYears()" ng-class="{'active': interval == 'years'}">Lata</button>
+                      <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeDays()" ng-class="{'active': interval == 'days'}" translate="button_mode_days"></button>
+                      <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeMonths()" ng-class="{'active': interval == 'months'}" translate="button_mode_months"></button>
+                      <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeYears()" ng-class="{'active': interval == 'years'}" translate="button_mode_years"></button>
                     </div>
 
                     <div class="btn-group-vertical nice-pad btn-block">
-                      <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetToday()">Dziś</button>
-                      <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetYesterday()">Wczoraj</button>
-                      <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetLast7days()">Ostatnie 7 dni</button>
-                      <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetLast30days()">Ostatnie 30 dni</button>
+                      <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetToday()" translate="button_today"></button>
+                      <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetYesterday()" translate="button_yesterday"></button>
+                      <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetLast7days()" translate="button_last_seven_days"></button>
+                      <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetLast30days()" translate="button_last_thirty_days"></button>
                     </div>
                   </td>
                 </tr>
@@ -77,9 +77,9 @@
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation"><a href="#all" aria-controls="home" role="tab" data-toggle="tab">Wszystkie</a></li>
-      <li role="presentation" class="active"><a href="#activity" aria-controls="profile" role="tab" data-toggle="tab">Aktywnosc</a></li>
-      <li role="presentation"><a href="#others" aria-controls="messages" role="tab" data-toggle="tab">Inne</a></li>
+      <li role="presentation"><a href="#all" aria-controls="home" role="tab" data-toggle="tab" translate="all_tab"></a></li>
+      <li role="presentation" class="active"><a href="#activity" aria-controls="profile" role="tab" data-toggle="tab" translate="activity_tab"></a></li>
+      <li role="presentation"><a href="#others" aria-controls="messages" role="tab" data-toggle="tab" translate="other_tab"></a></li>
     </ul>
     <div class="page page-white">
       <!-- Tab panes -->
