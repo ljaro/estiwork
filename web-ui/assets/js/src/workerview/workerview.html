@@ -12,15 +12,15 @@
 
                 <td>
                   <div class="btn-group-vertical nice-pad btn-block">
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeDays()"  ng-class="{'active': interval == 'days'}" translate="days"></button>
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeWeeks()" ng-class="{'active': interval == 'weeks'}" translate="week"></button>
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeMonths()" ng-class="{'active': interval == 'months'}" translate="month"></button>
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeYears()" ng-class="{'active': interval == 'years'}" translate="patch"></button>
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeDays()"  ng-class="{'active': interval == 'days'}" translate="button_mode_days"></button>
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeWeeks()" ng-class="{'active': interval == 'weeks'}" translate="button_mode_week"></button>
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeMonths()" ng-class="{'active': interval == 'months'}" translate="button_mode_month"></button>
+                    <button type="button" class="btn btn-primary btn-sm" ng-click="calendarModeYears()" ng-class="{'active': interval == 'years'}" translate="button_mode_patch"></button>
                   </div>
 
                   <div class="btn-group-vertical nice-pad btn-block">
-                    <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetToday()" translate="today"></button>
-                    <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetYesterday()" translate="yesterday"></button>
+                    <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetToday()" translate="button_mode_today"></button>
+                    <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetYesterday()" translate="button_mode_yesterday"></button>
                     <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetLast7days()" translate="last_seven_days"></button>
                     <button type="button" class="btn btn-success btn-sm" ng-click="calendarSetLast30days()" translate="last_thirty_days"></button>
                   </div>
@@ -43,22 +43,22 @@
                     <table class="table table-condensed">
                       <tbody style="font-size: 11px;">
                       <tr>
-                        <td class="col-sm-4"><label class="control-label" translate="table_col_break25"></label></td>
+                        <td class="col-sm-4"><label class="control-label" translate="table_col_first_last_name"></label></td>
                         <td>{{worker_info.first_name}} {{worker_info.second_name}}</td>
                       </tr>
 
                       <tr>
-                        <td class="col-sm-4"><label class="control-label" translate="table_col_break17"></label></td>
+                        <td class="col-sm-4"><label class="control-label" translate="table_col_leader"></label></td>
                         <td>{{worker_info.leader_name}}</td>
                       </tr>
 
                       <tr>
-                        <td class="col-sm-4"><label class="control-label" translate="table_col_break12"></label></td>
+                        <td class="col-sm-4"><label class="control-label" translate="table_col_position"></label></td>
                         <td>{{worker_info.position_name}}</td>
                       </tr>
 
                       <tr>
-                        <td class="col-sm-4"><label class="control-label" translate="table_col_break24"> .</label></td>
+                        <td class="col-sm-4"><label class="control-label" translate="table_col_telephone"> .</label></td>
                         <td>{{worker_info.phone}}</td>
                       </tr>
 

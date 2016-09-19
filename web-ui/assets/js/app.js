@@ -83,6 +83,5 @@ angular.module('myApp', [
         prefix: 'js/locales/locale-',
         suffix: '.json'
       })
-      .preferredLanguage('pl')
-      .useMissingTranslationHandlerLog()
+      .preferredLanguage('en')
   });
