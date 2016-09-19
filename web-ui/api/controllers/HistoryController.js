@@ -3,14 +3,14 @@
  * Copyright (C) Łukasz Jaroszewski, All Rights Reserved
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
- * 
+ *
  * HistoryController
  *
  * @description :: Server-side logic for managing histories
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-var ObjectId = require('mongodb').ObjectId;
+const ObjectId = require('sails-mongo').mongo.objectId;
 var assert = require('assert');
 
 

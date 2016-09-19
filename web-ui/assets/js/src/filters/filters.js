@@ -90,7 +90,6 @@ angular.module('myApp.myFilters', []).
   filter('sec2m', [function () {
 
     return function (sec) {
-
       return moment.duration(sec, 'seconds').format('m[m]', {trim: false});
     }
   }]).
