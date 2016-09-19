@@ -1,4 +1,4 @@
-{  
+{
     "language_country": "Polska",
 
 
@@ -52,16 +52,15 @@
 
 
     "button_mode_days": "Dni",
-    "button_mode_week":"Tygodnie",
-    "button_mode_month": "Miesiące",
-    "button_mode_year": "Rok",
-    "button_mode_patch":"Lata",
+    "button_mode_weeks":"Tygodnie",
+    "button_mode_months": "Miesiące",
+    "button_mode_years": "Lata",
 
 
-    "button_mode_today":"Dziś",
-    "button_mode_yesterday":"Wczoraj",
-    "last_seven_days": "Ostatnie 7 dni",
-    "last_thirty_days": "Ostatnie 30 dni",
+    "button_today":"Dziś",
+    "button_yesterday":"Wczoraj",
+    "button_last_seven_days": "Ostatnie 7 dni",
+    "button_last_thirty_days": "Ostatnie 30 dni",
 
 
     "all_tab":"Wszystkie",

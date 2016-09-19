@@ -1,4 +1,4 @@
-{  
+{
     "language_country": "English",
 
 
@@ -27,7 +27,7 @@
     "table_col_non_productive" : "Non-productive apps",
     "table_col_status1" : "Status 1",
     "table_col_status2" : "Status 2",
-    "table_col_position" : "Position",
+    "table_col_position" : "Workstation",
     "table_col_efficiency" : "Efficiency",
     "table_col_work_time" : "Work time",
     "table_col_break_time" : "Break time",
@@ -52,23 +52,22 @@
 
 
     "button_mode_days": "Days",
-    "button_mode_week":"Weeks",
-    "button_mode_month": "Month",
-    "button_mode_year": "Year",
-    "button_mode_patch":"Patch",
+    "button_mode_weeks":"Weeks",
+    "button_mode_months": "Months",
+    "button_mode_years": "Years",
 
 
-    "button_mode_today":"Today",
-    "button_mode_yesterday":"Yesterday",
-    "last_seven_days": "Last 7 days",
-    "last_thirty_days": "Last 30 days",
+    "button_today":"Today",
+    "button_yesterday":"Yesterday",
+    "button_last_seven_days": "Last 7 days",
+    "button_last_thirty_days": "Last 30 days",
 
 
     "all_tab":"All",
     "activity_tab":"Activity",
     "other_tab":"Other",
 
-    
+
     "suggestion": "Send suggestions",
     "suggestion_msg" :"Suggestions are sent anonymously",
     "suggestion_box_place":"Constantly we are working on improving functionality program , so if you have any suggestions or remarks , please send us a message ."
