@@ -9,7 +9,7 @@
  * @description :: Server-side logic for managing workers
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-var ObjectId = require('mongodb').ObjectId;
+const ObjectId = require('sails-mongo').mongo.objectId;
 var assert = require('assert');
 
 
