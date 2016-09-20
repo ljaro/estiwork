@@ -47,7 +47,7 @@ var DefaultDocsService = {
 
     var cats = testSignatures;
     
-    return Q.promise(function(resolve, reject){
+    return Q.fcall(function(){
       for (i = 0; i < cats.length; i++) {
         Apps.findOrCreate(cats[i]).exec(function createFindCB(error, createdOrFoundRecords){
   //        console.log('Not added '+createdOrFoundRecords.name+'!');
