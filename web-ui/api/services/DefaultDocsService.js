@@ -5,10 +5,10 @@
  */
 
 var Q = require('q');
+var testSignatures = require('../../test/test_signatures.json');
 
 var DefaultDocsService = {
   initializeDatabase: function initializeDatabaseService() {
-
 
     console.log('init database');
     var q1 =
@@ -36,10 +36,27 @@ var DefaultDocsService = {
         })
       ];
 
+    var appsPromise = this.populateAppSignatures();
+    q1.push(appsPromise);
+
     return Q.all(q1);
 
+  },
+
+  populateAppSignatures: function populateAppSignatures($resource) {
+
+    var cats = testSignatures;
+    
+    return Q.fcall(function(){
+      for (i = 0; i < cats.length; i++) {
+        Apps.findOrCreate(cats[i]).exec(function createFindCB(error, createdOrFoundRecords){
+  //        console.log('Not added '+createdOrFoundRecords.name+'!');
+        });
+      }
+    });
 
   }
+
 }
 
 module.exports = DefaultDocsService;

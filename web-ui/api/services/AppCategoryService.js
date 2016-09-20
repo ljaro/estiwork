@@ -5,11 +5,31 @@
  */
 
 var Q = require('q');
+var ObjectId = require('mongodb').ObjectId;
 
 var AppCategoryService = {
 
 
   get: function getService(sample) {
+
+    var comparator = {
+
+      "strContains" : function (str, value) {
+          return value.indexOf(str) != -1;
+        },    
+      "strEquals" : function (str, value) {
+          return str === value;
+        },
+      "strEndsWith" : function (str, value) {
+          return str.endsWith(value);
+        },
+      "returnTest": function (str, value) {
+          value = new RegExp(value);
+          return value.test(str);
+        }
+
+    }
+
     function __findAppSig(sample, cats) {
       var rank = {};
 
@@ -25,8 +45,13 @@ var AppCategoryService = {
       cats.forEach(function (cat) {
         cat.signatures.forEach(function (sig) {
           if (sample[sig.name] !== undefined) {
-            if (rank[cat.id] === undefined) rank[cat.id] = 0;
-            rank[cat.id] += sig.func(sample[sig.name]) === true ? sig.weight : 0;
+            rank[cat._id] = rank[cat._id] || 0;
+            if (sig.func) {
+              var func = comparator[sig.func];
+              rank[cat._id] += func(sample[sig.name], sig.value) === true ? sig.weight : 0;
+            } else {
+              console.log("This signature has unknown func property");
+            }
 
             //TODO add to logs important!
             // console.log(cat.name+' with id:'+cat.id+' has '+rank[cat.id]+' pts.');
@@ -44,7 +69,7 @@ var AppCategoryService = {
       });
 
       var result = cats.filter(function (x) {
-        return x.id == max_id;
+        return x._id == max_id;
       });
 
       if (result.length > 0) {
@@ -72,6 +97,7 @@ var AppCategoryService = {
     }
 
   }
+
 }
 
 module.exports = AppCategoryService;
