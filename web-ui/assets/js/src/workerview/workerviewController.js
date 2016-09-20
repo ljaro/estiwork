@@ -146,8 +146,8 @@ angular.module('myApp.workerview',
           angular.forEach(value.workers, function(value, key){
 
             var itm = {
-              'name' : value.fullname,
-              'id' : value.id,
+              'name': value.login,
+              'id': value.id,
               ticked: false
             };
             this.push(itm);

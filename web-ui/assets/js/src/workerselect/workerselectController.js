@@ -22,7 +22,7 @@ angular.module('myApp.workerselect')
 	    	angular.forEach(value.workers, function(value, key){
 
 	    		var itm = {
-		    			'name' : value.fullname,
+		    			'name' : value.login,
 		    			ticked: false
 		    			};
 	    		this.push(itm);
