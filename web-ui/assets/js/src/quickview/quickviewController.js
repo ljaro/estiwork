@@ -25,9 +25,11 @@ angular.module('myApp.quickview')
         });
         
         function startPulling() {
-          $interval(function () {
+          var intervalPromise = $interval(function () {
             $scope.loadData($scope.groupSelections);
-          }, 2000, false);
+          }, 2000, false)
+          $scope.$on('$destroy', function () { 
+            $interval.cancel(intervalPromise); 5000});
         }
 
         $scope.loadData = function (groups) {
