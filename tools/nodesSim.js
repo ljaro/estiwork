@@ -1,5 +1,5 @@
 var moment = require('moment');
-var chance = require('chance').Chance(1234);
+var chance = require('chance').Chance(Math.random);
 
 /***********************************************************
  ***********************************************************
