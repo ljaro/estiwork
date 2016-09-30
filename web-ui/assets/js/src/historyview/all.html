@@ -3,6 +3,10 @@
 		<!--<span class="label label-default">New{{group.name}} <i-->
 			<!--class="glyphicon glyphicon-remove" ng-click="unselectGroup(group._id)"></i></span>-->
 	<!--</h4>-->
+	<div class="alert alert-success" style="padding-top: 8px;padding-bottom: 8px; margin-bottom: 12px;">
+      <button type="button" class="close" ng-click="unselectGroup(group._id[0])">&times;</button>
+      <strong>{{group._id[0]}}</strong>
+    </div>
 
 	<table st-table="group.data" class="table table-striped table-condensed">
 		<thead>
