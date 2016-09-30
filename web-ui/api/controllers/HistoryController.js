@@ -59,8 +59,17 @@ module.exports = {
               }
             },
             {
+              $lookup:
+                {
+                  from: "group",
+                  localField: "group",
+                  foreignField: "_id",
+                  as: "groupNew"
+                }
+            },
+            {
               $group: {
-                _id: {worker_id: "$worker_id", group: "$group"},
+                _id: {worker_id: "$worker_id", group: "$groupNew"},
                 "total_logged_time": {$sum: "$duration"},
                 "total_break_time": {$sum: {$cond: [{$eq: ["$user.work_mode", 'BREAK']}, "$duration", 0]}},
                 "total_nonidle_duration": {$sum: {$cond: [{$eq: ["$user.presence", 'ACTIVE']}, "$duration", 0]}},
@@ -97,7 +106,7 @@ module.exports = {
             },
             {
               $group: {
-                _id: "$_id.group",
+                _id: "$_id.group.name",
                 data: {$push: "$$ROOT"}
               }
             }
@@ -114,6 +123,7 @@ module.exports = {
 
             Worker.find({_id: {$in: workers}})
               .populate('leader')
+              .populate('group')
               .exec(function (err, res) {
 
                 results.map(function (x, y) {
@@ -133,7 +143,6 @@ module.exports = {
 
                   })
                 });
-
 
                 return gres.ok(results);
               });

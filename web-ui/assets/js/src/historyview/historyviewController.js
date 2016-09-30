@@ -124,7 +124,21 @@ angular.module('myApp.historyview',
 					$scope.tabledata = {groups:[]};
 					$scope.tabledata.groups = data;
 				});
-			}
+			};
+
+      $scope.unselectGroup = function (grpName) {
+        console.log(checklistSelected);
+        checklistSelected.forEach(function (x) {
+          console.log(x);
+          console.log(grpName);
+          if (x === grpName) {
+            var grpIndex = checklistSelected.indexOf(x);
+            console.log(grpIndex);
+            checklistSelected.splice(grpIndex, 1);
+          };
+        });
+        console.log(checklistSelected);
+      };
 
 
 			//$scope.loadData($scope.groupSelections);
