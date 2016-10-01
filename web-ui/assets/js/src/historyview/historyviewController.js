@@ -135,6 +135,9 @@ angular.module('myApp.historyview',
         });
       };
 
+      $scope.filterSelection = function (x) {
+        return (checklistSelected.indexOf(x) >= 0) ? true : false;
+      };
 
 			//$scope.loadData($scope.groupSelections);
 

@@ -1,4 +1,4 @@
-<div ng-repeat="group in tabledata.groups">
+<div ng-repeat="group in tabledata.groups" ng-show="filterSelection(group._id[0])">
 	<!--<h4>-->
 		<!--<span class="label label-default">New{{group.name}} <i-->
 			<!--class="glyphicon glyphicon-remove" ng-click="unselectGroup(group._id)"></i></span>-->
