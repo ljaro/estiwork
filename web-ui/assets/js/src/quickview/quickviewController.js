@@ -32,7 +32,7 @@ angular.module('myApp.quickview')
         $scope.$watch('groupSelections', function(){
             $timeout(function() {
                 $scope.loadData($scope.groupSelections);
-            }, 3000);
+            });
         });
     
 
@@ -55,7 +55,9 @@ angular.module('myApp.quickview')
                 $resource('/quickview/group/:id').query({ id: groupsIds },
                 function(result) {
                     $scope.groups = result;
-                    $scope.loadData($scope.groupSelections);
+                    $timeout(function() {
+                        $scope.loadData($scope.groupSelections);
+                    }, 1000);
                 });
             }
             
