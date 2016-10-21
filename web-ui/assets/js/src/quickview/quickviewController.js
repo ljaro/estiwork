@@ -29,7 +29,13 @@ angular.module('myApp.quickview')
             isRun = false;
         });
 
+        $scope.$watch('groupSelections', function(){
+            $timeout(function() {
+                $scope.loadData($scope.groupSelections);
+            }, 3000);
+        });
     
+
         $scope.loadData = function(groups) {
 
             if (typeof groups === 'undefined') {
