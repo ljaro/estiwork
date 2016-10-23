@@ -29,10 +29,10 @@ angular.module('myApp.quickview')
             isRun = false;
         });
 
-        $scope.$watch('groupSelections', function(){
-            $timeout(function() {
+        $scope.$watch('groupSelections', function(newValue, oldValue){
+            if(typeof $scope.groups !== 'undefined' && oldValue.length == 0){
                 $scope.loadData($scope.groupSelections);
-            });
+            }
         });
     
 
@@ -57,7 +57,7 @@ angular.module('myApp.quickview')
                     $scope.groups = result;
                     $timeout(function() {
                         $scope.loadData($scope.groupSelections);
-                    }, 1000);
+                    }, 2000);
                 });
             }
             
