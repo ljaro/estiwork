@@ -23,18 +23,18 @@ angular.module('myApp.quickview')
             $scope.flatGroups = Utils.flatGroups(data);
         });
 
-        var isRun = true;
 
         $scope.$on('$destroy', function() {
-            isRun = false;
+            $timeout.cancel($scope.resourseTimer);
+            $timeout.cancel($scope.callTimer);
         });
 
-        $scope.$watch('groupSelections', function(newValue, oldValue){
-            if(typeof $scope.groups !== 'undefined' && oldValue.length == 0){
+        $scope.$watch('groupSelections', function(newValue, oldValue) {
+            if (typeof $scope.groups !== 'undefined' && oldValue.length == 0) {
                 $scope.loadData($scope.groupSelections);
             }
         });
-    
+
 
         $scope.loadData = function(groups) {
 
@@ -51,20 +51,17 @@ angular.module('myApp.quickview')
                 $scope.groups = null;
                 return;
             }
-            if(isRun){
-                $resource('/quickview/group/:id').query({ id: groupsIds },
+
+            $resource('/quickview/group/:id').query({ id: groupsIds },
                 function(result) {
                     $scope.groups = result;
-                    $timeout(function() {
+                    $scope.resourseTimer = $timeout(function() {
                         $scope.loadData($scope.groupSelections);
                     }, 2000);
                 });
-            }
-            
-
         }
 
-        $timeout(function() {
+        $scope.callTimer = $timeout(function() {
             $scope.loadData($scope.groupSelections);
         }, 2000);
 
