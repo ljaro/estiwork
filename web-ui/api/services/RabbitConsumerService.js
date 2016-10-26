@@ -41,6 +41,10 @@ var RabbitConsumerService = {
             }
           }, RECONNECT_T);
         });
+        conn.on('close', function(){
+          console.log("AMQP reconnecting");
+          return setTimeout(__connect, RECONNECT_T);
+        });
         __channel(conn);
       }, function (err) {
         console.log(err);
@@ -52,7 +56,13 @@ var RabbitConsumerService = {
     }
 
     var consume = function (channel) {
-      channel.assertQueue(q);
+      channel.on("error", function(err) {
+        console.error("AMQP channel error", err.message);
+      });
+      channel.on("close", function() {
+        console.log("AMQP channel closed");
+      });
+      channel.assertQueue(q, { durable: true });
       channel.consume(q, function (msg) {
         if (msg !== null) {
           perSrv.accept(msg).then(function () {
