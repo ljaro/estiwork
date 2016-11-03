@@ -83,10 +83,14 @@ var RabbitConsumerService = {
     }
 
     var __channel = function (conn) {
-      var ok = conn.createChannel();
-      ok.then(function (ch) {
-        //console.log('Channel opened');
-        consume(ch);
+      return conn.createChannel().then(function (ch) {
+
+        var ok = ch.assertQueue(q);
+        ok.then(function () {
+          consume(ch);
+        });
+
+        return ok;
       }, function (err) {
         console.log('still error');
         setTimeout(function () {
