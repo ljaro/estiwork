@@ -56,13 +56,6 @@ var RabbitConsumerService = {
     }
 
     var consume = function (channel) {
-      channel.on("error", function(err) {
-        console.error("AMQP channel error", err.message);
-      });
-      channel.on("close", function() {
-        console.log("AMQP channel closed");
-      });
-      channel.assertQueue(q, { durable: true });
       channel.consume(q, function (msg) {
         if (msg !== null) {
           perSrv.accept(msg).then(function () {
@@ -83,10 +76,14 @@ var RabbitConsumerService = {
     }
 
     var __channel = function (conn) {
-      var ok = conn.createChannel();
-      ok.then(function (ch) {
-        //console.log('Channel opened');
-        consume(ch);
+      return conn.createChannel().then(function (ch) {
+
+        var ok = ch.assertQueue(q);
+        ok.then(function () {
+          consume(ch);
+        });
+
+        return ok;
       }, function (err) {
         console.log('still error');
         setTimeout(function () {
