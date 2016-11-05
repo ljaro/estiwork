@@ -24,11 +24,6 @@ angular.module('myApp.quickview')
         });
 
 
-        $scope.$on('$destroy', function() {
-            $timeout.cancel($scope.resourseTimer);
-            $timeout.cancel($scope.callTimer);
-        });
-
         $scope.$watch('groupSelections', function(newValue, oldValue) {
             if (typeof $scope.groups !== 'undefined' && oldValue.length == 0) {
                 $scope.loadData($scope.groupSelections);
@@ -36,7 +31,7 @@ angular.module('myApp.quickview')
         });
 
 
-        $scope.loadData = function(groups) {
+        $scope.loadData = function(groups, callback) {
 
             if (typeof groups === 'undefined') {
                 $scope.groups = null;
@@ -55,15 +50,24 @@ angular.module('myApp.quickview')
             $resource('/quickview/group/:id').query({ id: groupsIds },
                 function(result) {
                     $scope.groups = result;
-                    $scope.resourseTimer = $timeout(function() {
-                        $scope.loadData($scope.groupSelections);
-                    }, 2000);
+
+                    if(typeof callback == typeof Function) {
+                      callback();
+                    }
                 });
         }
 
-        $scope.callTimer = $timeout(function() {
-            $scope.loadData($scope.groupSelections);
-        }, 2000);
+      var startPulling = function() {
+          var callTimer = $timeout(function() {
+            $scope.loadData($scope.groupSelections, startPulling);
+          }, 2000);
+
+          $scope.$on('$destroy', function() {
+            $timeout.cancel(callTimer);
+          });
+        }
+
+        startPulling();
 
         $scope.unselectGroup = function(grpId) {
             $scope.flatGroups.find(function(x) {
