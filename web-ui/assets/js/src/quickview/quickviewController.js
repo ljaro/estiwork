@@ -12,15 +12,15 @@ angular.module('myApp.quickview')
         $scope.groupSelections = [];
         $scope.flatGroups = [];
 
-        $scope.filterSelection = function(x) {
-            var res = $scope.flatGroups.find(function(xx) {
-                return xx.id === x && xx.ticked;
-            });
-            return res !== undefined;
+        $scope.filterSelection = function (x) {
+          var res = $scope.flatGroups.find(function (xx) {
+            return xx.id === x && xx.ticked;
+          });
+          return res !== undefined;
         }
 
-        GroupsService.all.query(function(data) {
-            $scope.flatGroups = Utils.flatGroups(data);
+        GroupsService.all.query(function (data) {
+          $scope.flatGroups = Utils.flatGroups(data);
         });
 
 
@@ -33,19 +33,19 @@ angular.module('myApp.quickview')
 
         $scope.loadData = function(groups, callback) {
 
-            if (typeof groups === 'undefined') {
-                $scope.groups = null;
-                return;
-            }
+          if (typeof groups === 'undefined') {
+            $scope.groups = null;
+            return;
+          }
 
-            var groupsIds = groups.map(function(x) {
-                return x.id;
-            });
+          var groupsIds = groups.map(function (x) {
+            return x.id;
+          });
 
-            if (typeof groupsIds === 'undefined' || groupsIds.length == 0) {
-                $scope.groups = null;
-                return;
-            }
+          if (typeof groupsIds === 'undefined' || groupsIds.length == 0) {
+            $scope.groups = null;
+            return;
+          }
 
             $resource('/quickview/group/:id').query({ id: groupsIds },
                 function(result) {
@@ -69,11 +69,11 @@ angular.module('myApp.quickview')
 
         startPulling();
 
-        $scope.unselectGroup = function(grpId) {
-            $scope.flatGroups.find(function(x) {
-                return x.id === grpId;
-            })['ticked'] = false;
+        $scope.unselectGroup = function (grpId) {
+          $scope.flatGroups.find(function (x) {
+            return x.id === grpId;
+          })['ticked'] = false;
         }
 
-    }
-]);
+      }]);
+
