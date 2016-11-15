@@ -53,6 +53,8 @@ var jsFilesToInject = [
   'bower_components/angular-translate/angular-translate.min.js',
   'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
 
+  'bower_components/angular-logger/dist/angular-logger.min.js',
+
   'bower_components/**/ui-bootstrap-tpls.js',
 
   'bower_components/angular-ui-grid/ui-grid.js',
