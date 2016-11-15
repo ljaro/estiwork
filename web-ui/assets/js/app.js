@@ -34,10 +34,11 @@ angular.module('myApp', [
   'smart-table',
   // 'ui.bootstrap.datetimepicker',
   'ngResource',
-  'pascalprecht.translate'])
+  'pascalprecht.translate',
+  'angular-logger'])
 
 
-  .config(function($stateProvider, $urlRouterProvider, $translateProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $translateProvider, logEnhancerProvider) {
     //
     // For any unmatched url, redirect to /state1
     //$urlRouterProvider.otherwise("/quickview");
@@ -84,4 +85,12 @@ angular.module('myApp', [
         suffix: '.json'
       })
       .preferredLanguage('en')
+
+      logEnhancerProvider.prefixPattern = '%s::[%s]> ';
+      logEnhancerProvider.logLevels = {
+          'a.b.c': logEnhancerProvider.LEVEL.TRACE
+      };
+      
+
+      
   });

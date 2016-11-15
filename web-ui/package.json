@@ -26,7 +26,8 @@
     "rc": "1.0.1",
     "sails": "~0.12.3",
     "sails-mongo": "^0.11.2",
-    "thrift": "^0.9.3"
+    "thrift": "^0.9.3",
+    "winston": "^2.3.0"
   },
   "scripts": {
     "debug": "node debug app.js",
