@@ -5,11 +5,23 @@
  */
 
 angular.module('myApp.navbar')
-.controller('navbarController', ['$scope', '$resource', '$translate', function($scope, $resource, $translate){
+.controller('navbarController', ['$scope', '$resource', '$translate', '$location', function($scope, $resource, $translate, $location){
 	$scope.changeLanguage = function (langKey) {
     $translate.use(langKey);
   };
-	
 
+  	var Socket = io.connect(window.location.protocol+'//'+window.location.host);
+		function bind_socket(Socket) {
+			
+		    Socket.on('connect', function()  {
+                $('.glyphicon-exclamation-sign').hide();
+		    });
+
+		    Socket.on('disconnect', function()  {
+		    	$('.glyphicon-exclamation-sign').show();
+		    });
+		}
+
+		bind_socket(Socket);
 
 }]);
