@@ -17,9 +17,20 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
-  // models: {
-  //   connection: 'someMysqlServer'
-  // },
+  models: {
+   connection: 'someMysqlServer'
+  },
+
+  connections: {
+    someMongodbServer: {
+      adapter: 'sails-mongo',
+      host: 'db',
+      port: 27017,
+      // user: 'username',
+      // password: 'password',
+      database: 'estiwork_dev'
+    }
+  }
 
   /***************************************************************************
    * Set the port in the production environment to 80                        *

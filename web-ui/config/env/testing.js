@@ -17,20 +17,14 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
-  models: {
-    connection: 'someMongodbServer',
-    migrate: 'alter'
-  }, 
+    models: {
+      connection: 'testing',
+      migrate: 'drop'
+    },
 
-  connections: {
-  	someMongodbServer: {
-  	  adapter: 'sails-mongo',
-  	  host: 'db',
-  	  port: 27017,
-  	  // user: 'username',
-  	  // password: 'password',
-  	  database: 'estiwork_dev'
-  	}
-  }
-
+    connections: {
+      testing: {
+        adapter: 'sails-disk'
+      }
+    }
 };
