@@ -5,13 +5,8 @@
  */
 
 angular.module('myApp.navbar')
-.controller('navbarController', ['$scope', '$resource', '$translate', '$log', function($scope, $resource, $translate, $log){
+.controller('navbarController', ['$scope', '$resource', '$translate', function($scope, $resource, $translate){
 	$scope.changeLanguage = function (langKey) {
     $translate.use(langKey);
   };
-
-	 function logTrace($log) {
-	   $log.logLevels['a.b.c'] = $log.LEVEL.TRACE;
-	}
-
 }]);

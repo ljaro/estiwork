@@ -6,7 +6,7 @@
 
 angular.module('myApp.feedback', ['ngResource'])
   .controller('feedbackController',
-  ['$scope', '$resource', '$timeout', '$http', function ($scope, $resource, $timeout, $http){
+  ['$scope', '$resource', '$timeout', '$http', '$log', function ($scope, $resource, $timeout, $http, $log){
   	
     $scope.feedback = {};
   	$scope.isClicked = false;
@@ -20,10 +20,10 @@ angular.module('myApp.feedback', ['ngResource'])
           var data = {text : trimmedText};
           $http.post('/feedback', data)
               .success(function (data, status, headers, confarig) {
-                  console.log( "Success: " + JSON.stringify({data: data}));
+                  $log.info( "Success: " + JSON.stringify({data: data}));
               })
               .error(function (data, status, header, config) {
-                  console.log( "failure message: " + JSON.stringify({data: data}));
+                  $log.error( "failure message: " + JSON.stringify({data: data}));
               });  
     			$timeout(function() {
     				$scope.isClicked = false;

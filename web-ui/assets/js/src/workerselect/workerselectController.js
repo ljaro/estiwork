@@ -5,7 +5,7 @@
  */
 
 angular.module('myApp.workerselect')
-.controller('workerselectController', ['$scope', 'GroupsService', function($scope, GroupsService) {
+.controller('workerselectController', ['$scope', 'GroupsService', '$log', function($scope, GroupsService, $log) {
 
 	var grps = GroupsService.all.query(function(data) {
 
@@ -32,7 +32,7 @@ angular.module('myApp.workerselect')
 
 	    $scope.flatGroups = flatGroups;
 
-      console.log($scope.flatGroups);
+      $log.info($scope.flatGroups);
 	  });
 
 }]);

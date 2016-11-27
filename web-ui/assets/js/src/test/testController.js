@@ -5,12 +5,12 @@
  */
 
 angular.module('myApp.test', ['ngResource','myApp.commonservices'])
-.controller('testController', ['$scope', '$resource', 'GroupsService','WorkersService', function($scope, $resource, GroupsService, WorkersService){
+.controller('testController', ['$scope', '$resource', 'GroupsService','WorkersService', '$log', function($scope, $resource, GroupsService, WorkersService, $log){
     GroupsService.all.query(function(res){
-      console.log(res);
+      $log.info(res);
     });
 
     WorkersService.all.query(function(res){
-      console.log(res);
+      $log.info(res);
     });
   }]);

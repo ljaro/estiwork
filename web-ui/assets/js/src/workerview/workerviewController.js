@@ -12,8 +12,8 @@ angular.module('myApp.workerview',
     'ngResource'
   ]
 ).controller('workerviewController',
-  ['$scope', '$http', '$resource', 'checklistSelected','GroupsService','WorkersService' ,
-    function ($scope, $http, $resource, checklistSelected, GroupsService, WorkersService){
+  ['$scope', '$http', '$resource', 'checklistSelected','GroupsService','WorkersService' ,'$log',
+    function ($scope, $http, $resource, checklistSelected, GroupsService, WorkersService, $log){
 
       $scope.datePicker = {date: {startDate:moment(), endDate:moment()} };
       $scope.groupSelections = {};
@@ -180,7 +180,7 @@ angular.module('myApp.workerview',
           else
           {
             //TODO: error handling
-            console.log('no data received');
+            $log.error('no data received');
           }
         });
       }
