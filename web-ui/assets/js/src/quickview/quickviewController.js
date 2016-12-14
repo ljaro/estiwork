@@ -11,6 +11,7 @@ angular.module('myApp.quickview')
 
       $scope.groupSelections = [];
       $scope.flatGroups = [];
+      $scope.flag = 1;
 
       $scope.filterSelection = function (x) {
         var res = $scope.flatGroups.find(function (xx) {
@@ -50,24 +51,22 @@ angular.module('myApp.quickview')
         $resource('/quickview/group/:id').query({id: groupsIds},
           function (result) {
             $scope.groups = result;
-
-            if (typeof callback == typeof Function) {
+            if ((typeof callback == typeof Function) && $scope.flag) {
               callback();
             }
           });
       }
 
-      var startPulling = function () {
-        var callTimer = $timeout(function () {
-          $scope.loadData($scope.groupSelections, startPulling);
-        }, 2000);
+      var callTimer = function () {
+        $scope.loadData($scope.groupSelections, callTimer);
+      };
 
-        $scope.$on('$destroy', function () {
-          $timeout.cancel(callTimer);
-        });
-      }
+      $timeout(callTimer, 200);
 
-      startPulling();
+      $scope.$on('$destroy', function () {
+        $timeout.cancel(callTimer);
+        $scope.flag = 0;
+      });
 
       $scope.unselectGroup = function (grpId) {
         $scope.flatGroups.find(function (x) {
